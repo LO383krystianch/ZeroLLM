@@ -187,12 +187,58 @@ def load_extractor(path: Path | None = None) -> "DocumentExtractor":
     return DocumentExtractor(load_rules(path))
 
 
+# Poniżej tej liczby znaków (po usunięciu białych) tekst z pypdf traktujemy
+# jako brak warstwy tekstowej (skan) i uruchamiamy OCR.
+_MIN_TEXT_CHARS = 40
+
+
 def extract_text_from_pdf(path: Path) -> str:
-    """Wyodrębnia tekst z PDF (pypdf) do dalszego parsowania."""
+    """Wyodrębnia tekst z PDF (pypdf); dla skanów bez warstwy tekstowej
+    uruchamia OCR (Tesseract, język polski)."""
     if PdfReader is None:
         raise RuntimeError("Brak biblioteki pypdf. Zainstaluj zależności z requirements.txt.")
     reader = PdfReader(str(path))
-    return "\n".join(page.extract_text() or "" for page in reader.pages)
+    text = "\n".join(page.extract_text() or "" for page in reader.pages)
+
+    # Skan bez warstwy tekstowej — spróbuj OCR.
+    if len(text.strip()) < _MIN_TEXT_CHARS:
+        ocr_text = _ocr_pdf(path)
+        if len(ocr_text.strip()) > len(text.strip()):
+            return ocr_text
+    return text
+
+
+def _ocr_pdf(path: Path) -> str:
+    """OCR zeskanowanego PDF-a (PyMuPDF renderuje strony, Tesseract czyta).
+
+    Zależności opcjonalne: ``pytesseract``, ``PyMuPDF`` i ``Pillow``.
+    Gdy ich brak (albo brak binarki Tesseract) — zwraca pusty tekst.
+    """
+    try:
+        import pymupdf
+    except ImportError:
+        try:
+            import fitz as pymupdf  # starsze wersje PyMuPDF
+        except ImportError:
+            return ""
+    try:
+        import pytesseract
+        from PIL import Image
+    except ImportError:
+        return ""
+    import io
+
+    pages: list[str] = []
+    try:
+        with pymupdf.open(str(path)) as doc:
+            for page in doc:
+                pix = page.get_pixmap(dpi=300)
+                img = Image.open(io.BytesIO(pix.tobytes("png")))
+                pages.append(pytesseract.image_to_string(img, lang="pol"))
+    except Exception:
+        # Brak binarki Tesseract / uszkodzona strona — zwracamy zebrane strony.
+        pass
+    return "\n".join(pages)
 
 
 def segment_text(text: str, sections: list[dict[str, Any]] | None) -> dict[str, str]:
