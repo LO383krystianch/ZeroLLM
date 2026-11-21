@@ -10,3 +10,10 @@ node_modules/
 prompty.txt
 data/
 dane/
+
+# Katalogi wejścia/wyjścia — dane użytkownika i wygenerowane wyniki (poza git),
+# z zachowaniem plików .gitkeep, by puste katalogi przetrwały w repozytorium.
+input/*
+!input/.gitkeep
+output/*
+!output/.gitkeep

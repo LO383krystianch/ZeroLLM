@@ -90,7 +90,13 @@ def count_metrics(output: dict[str, Any], reference: dict[str, Any]) -> tuple[in
 
 
 def compute_f1(tp: int, fp: int, fn: int) -> float:
-    """Oblicza wskaźnik F1 z TP/FP/FN."""
+    """Oblicza wskaźnik F1 z TP/FP/FN.
+
+    Przypadek ``tp == fp == fn == 0`` (pusty wynik ``{}`` vs pusty wzorzec ``{}``)
+    traktujemy jako idealne dopasowanie (dokument nierozpoznany — wymóg jury).
+    """
+    if tp == 0 and fp == 0 and fn == 0:
+        return 1.0
     precision = tp / (tp + fp) if (tp + fp) else 0.0
     recall = tp / (tp + fn) if (tp + fn) else 0.0
     if precision + recall == 0.0:

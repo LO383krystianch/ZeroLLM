@@ -70,7 +70,7 @@ REASON_CODES: list[tuple[str, int, str]] = [
     (r"zaniechaniu\s+wykluczen|nie\s+wyklucz", 8, "Zaniechanie wykluczenia wykonawcy"),
     (r"wykluczen", 3, "Decyzja o wykluczeniu wykonawcy"),
     (r"modyfikacj|zmodyfikowa", 5, "Modyfikacja treści SWZ"),
-    (r"udzieleni\w*\s+odpowiedzi|odpowiedzi\s+na\s+pytania|odpowiedzi\s+i\s+wyjaśnien|wyjaśnien\s+do\s+treści", 6, "Odpowiedzi i wyjaśnienia do SWZ"),
+    (r"udzieleni\w*\s+odpowiedzi|odpowiedzi\s+na\s+pytania|odpowiedzi(?:\s+i\s+|/)wyjaśnien|wyjaśnien\s+do\s+treści", 6, "Odpowiedzi/wyjaśnienia do SWZ"),
     (r"ustaleni\w*\s+treści|opublikowa\w*\s+Specyfikacj", 4, "Publikacja specyfikacji warunków zamówienia (SWZ)"),
     (r"opisani\w*\s+przedmiotu|Opis\s+Przedmiotu\s+Zamówienia|OPZ", 11, "Opis przedmiotu zamówienia (OPZ)"),
     (r"wyb[oó]r", 2, "Ogłoszenie wyboru oferty"),
@@ -283,6 +283,10 @@ class DocumentExtractor:
 
         Kolejność: najpierw reguły klasyfikacji oparte o nazwę pliku (``kind: filename``),
         potem reguły tekstowe (``kind: regex``).
+
+        Jeśli dokument nie pasuje do żadnego znanego typu, zwraca ``None`` —
+        wtedy ekstrakcja daje pusty obiekt ``{}`` (wymóg jury dla
+        nierozpoznanych dokumentów).
         """
         if filename:
             doc_type = self._classify(filename, kind="filename")
@@ -291,7 +295,7 @@ class DocumentExtractor:
         doc_type = self._classify(text, skip_kind="filename")
         if doc_type is not None:
             return doc_type
-        return self.default_document_type
+        return None
 
     def _classify(
         self,
