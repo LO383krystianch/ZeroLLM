@@ -53,6 +53,33 @@
           ],
           "source_text": "",
           "rule_used": null
+        },
+        "podpisujacy": {
+          "value": [
+            {
+              "imie_nazwisko": {
+                "value": "Iwona Rutkowska",
+                "source_text": "Iwona Rutkowska",
+                "rule_used": "regex:([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)+)\\s*$"
+              }
+            },
+            {
+              "imie_nazwisko": {
+                "value": "Sebastian Adamczyk",
+                "source_text": "Sebastian Adamczyk",
+                "rule_used": "regex:([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)+)\\s*$"
+              }
+            },
+            {
+              "imie_nazwisko": {
+                "value": "Damian Tomaszewski",
+                "source_text": "Damian Tomaszewski",
+                "rule_used": "regex:([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)+)\\s*$"
+              }
+            }
+          ],
+          "source_text": "",
+          "rule_used": null
         }
       },
       "source_text": "",

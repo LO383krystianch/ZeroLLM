@@ -219,6 +219,7 @@ class DocumentExtractor:
             "iso_date": self._normalize_iso_date,
             "bool_to_int": self._normalize_bool_to_int,
             "iban_clean": self._normalize_iban_clean,
+            "amount_float": self._normalize_amount_float,
         }
 
     @property
@@ -347,7 +348,7 @@ class DocumentExtractor:
         separator = spec.get("separator")
         if not separator:
             return [source]
-        return [part for part in re.split(str(separator), source, flags) if part.strip()]
+        return [part for part in re.split(str(separator), source, flags=flags) if part.strip()]
 
     def _extract_scalar(
         self,
@@ -447,3 +448,14 @@ class DocumentExtractor:
         if s[:2].upper() == "PL":
             s = s[2:]
         return re.sub(r"\s+", "", s)
+
+    def _normalize_amount_float(self, value: Any) -> Any:
+        """Usuwa spacje/nowe linie, zamienia przecinek na kropkę i rzutuje na float."""
+        if value is None:
+            return None
+        s = re.sub(r"\s+", "", str(value))
+        s = s.replace(",", ".")
+        try:
+            return float(s)
+        except (TypeError, ValueError):
+            return value

@@ -10,9 +10,9 @@
           "rule_used": null
         },
         "kwota": {
-          "value": "\n50,00",
+          "value": 50.0,
           "source_text": "Kwota\n50,00 PLN",
-          "rule_used": "regex:\\bkwota[ \\t]*[:.]?[ \\t]*([\\d\\s]+[.,]\\d{2})\\s*(?:PLN|zł)?"
+          "rule_used": "regex:\\bkwota\\s*[:.]?\\s*([\\d\\s]+[.,]\\d{2})\\s*(?:PLN|zł)?"
         },
         "na_rachunek": {
           "value": "29915400023241714372534330",
@@ -25,9 +25,9 @@
           "rule_used": null
         },
         "tytul": {
-          "value": "przelewu",
-          "source_text": "Tytuł przelewu",
-          "rule_used": "regex:\\btytuł(?:em|u)?[ \\t]*[:.]?[ \\t]*([^\\r\\n]+)"
+          "value": "opłata skarbowa od pełnomocnictwa dla Cezary Sikorski i Igor Majewski w postępowaniu przed KIO w przetargu ZZP-11/2026 CEN2607039744499",
+          "source_text": "Tytuł przelewu\nopłata skarbowa od pełnomocnictwa dla Cezary Sikorski i Igor Majewski w postępowaniu\nprzed KIO w przetargu ZZP-11/2026 CEN2607039744499",
+          "rule_used": "regex:\\btytuł\\s+przelewu\\s*[:.]?\\s*([\\s\\S]*?)(?=\\n\\s*Numer\\s+referencyjny)"
         },
         "z_rachunku": {
           "value": "87767998528637357156751729",

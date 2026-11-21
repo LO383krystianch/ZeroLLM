@@ -299,6 +299,21 @@ document_types:
                       pattern: '\bREGON\s*[:.]?\s*(\d{9}(?:\d{5})?)'
                       group: 1
                       flags: [IGNORECASE]
+          podpisujacy:
+            type: array
+            after: 'W\s+imieniu'
+            until: 'Pełnomocnictwo\s+przyjmuj'
+            separator: '\n\s*(?:Prokurent|Wiceprezes|Prezes|Członek)\b[^\n]*'
+            flags: [IGNORECASE]
+            items:
+              fields:
+                imie_nazwisko:
+                  type: string
+                  rules:
+                    - kind: regex
+                      pattern: '([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)+)\s*$'
+                      group: 1
+                      flags: [MULTILINE]
       pelnomocnicy:
         type: array
         after: 'udzielają\s+pełnomocnictwa\s*:'
@@ -340,9 +355,10 @@ document_types:
                 flags: [IGNORECASE, MULTILINE]
           kwota:
             type: number
+            normalize: amount_float
             rules:
               - kind: regex
-                pattern: '\bkwota[ \t]*[:.]?[ \t]*([\d\s]+[.,]\d{2})\s*(?:PLN|zł)?'
+                pattern: '\bkwota\s*[:.]?\s*([\d\s]+[.,]\d{2})\s*(?:PLN|zł)?'
                 group: 1
                 flags: [IGNORECASE]
           na_rachunek:
@@ -364,8 +380,9 @@ document_types:
             type: string
             rules:
               - kind: regex
-                pattern: '\btytuł(?:em|u)?[ \t]*[:.]?[ \t]*([^\r\n]+)'
+                pattern: '\btytuł\s+przelewu\s*[:.]?\s*([\s\S]*?)(?=\n\s*Numer\s+referencyjny)'
                 group: 1
+                normalize: whitespace
                 flags: [IGNORECASE]
           z_rachunku:
             type: string
