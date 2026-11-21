@@ -13,8 +13,14 @@ if errorlevel 1 (
     set "PYTHON=python"
 )
 
-rem 2) Zainstaluj zależności (idempotentne — pomija już zainstalowane).
+rem 2) Ostrzeżenie o braku Tesseract (OCR skanów).
+where tesseract >nul 2>nul
+if errorlevel 1 (
+    echo [UWAGA] Nie wykryto Tesseract — skany ^(PDF bez warstwy tekstowej^) nie zostaną odczytane i dadzą pusty wynik ^{}^.
+)
+
+rem 3) Zainstaluj zależności (idempotentne — pomija już zainstalowane).
 %PYTHON% -m pip install -r "%~dp0requirements.txt" --quiet --disable-pip-version-check 2>nul
 
-rem 3) Uruchom przetwarzanie.
+rem 4) Uruchom przetwarzanie.
 %PYTHON% "%~dp0src\main.py" %*

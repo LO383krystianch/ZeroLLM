@@ -73,16 +73,22 @@ def process(
     ex: extractor.DocumentExtractor,
 ) -> list[Path]:
     """Przetwarza wszystkie PDF-y i zwraca listę utworzonych plików wyjściowych."""
+    pdfs = find_pdfs(input_dir)
+    total = len(pdfs)
     outputs: list[Path] = []
-    for pdf in find_pdfs(input_dir):
+
+    for idx, pdf in enumerate(pdfs, start=1):
         relative = pdf.relative_to(input_dir)
         out = output_dir / output_name(relative)
+
+        # Postęp: [bieżący/razem] plik — ile zostało do końca.
+        print(f"[{idx}/{total}] {relative} — pozostało {total - idx}", file=sys.stderr)
 
         try:
             text = extractor.extract_text_from_pdf(pdf)
             result = build_result(relative, text, ex)
         except Exception as exc:  # nie przerywaj całego batcha na jednym pliku
-            print(f"Błąd przetwarzania {relative}: {exc}", file=sys.stderr)
+            print(f"  Błąd przetwarzania {relative}: {exc}", file=sys.stderr)
             result = {}
 
         out.parent.mkdir(parents=True, exist_ok=True)

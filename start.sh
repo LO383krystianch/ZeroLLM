@@ -15,8 +15,13 @@ else
     exit 1
 fi
 
-# 2) Zainstaluj zależności (idempotentne).
+# 2) Ostrzeżenie o braku Tesseract (OCR skanów).
+if ! command -v tesseract >/dev/null 2>&1; then
+    echo "[UWAGA] Nie wykryto Tesseract — skany (PDF bez warstwy tekstowej) nie zostaną odczytane i dadzą pusty wynik {}." >&2
+fi
+
+# 3) Zainstaluj zależności (idempotentne).
 "$PYTHON" -m pip install -r requirements.txt --quiet --disable-pip-version-check 2>/dev/null || true
 
-# 3) Uruchom przetwarzanie.
+# 4) Uruchom przetwarzanie.
 exec "$PYTHON" src/main.py "$@"
