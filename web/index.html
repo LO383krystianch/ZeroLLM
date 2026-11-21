@@ -3,105 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ODWOŁANIA2JSON — ekstrakcja PDF</title>
-  <style>
-    :root {
-      --bg: #f5f6f8;
-      --panel: #ffffff;
-      --border: #e0e3e8;
-      --text: #1c1e21;
-      --muted: #6b7280;
-      --accent: #1d4ed8;
-      --accent-hover: #1e40af;
-      --danger: #b91c1c;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-    }
-    header {
-      background: var(--panel);
-      border-bottom: 1px solid var(--border);
-      padding: 20px 24px;
-    }
-    header h1 { margin: 0 0 4px; font-size: 1.4rem; }
-    header p { margin: 0; color: var(--muted); }
-    main {
-      max-width: 960px;
-      margin: 24px auto;
-      padding: 0 24px 48px;
-      display: grid;
-      gap: 20px;
-    }
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
-    }
-    .panel h2 { margin: 0 0 12px; font-size: 1.05rem; }
-    .upload { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-    button {
-      border: 0;
-      border-radius: 8px;
-      padding: 10px 16px;
-      font-size: 0.95rem;
-      cursor: pointer;
-      background: var(--accent);
-      color: #fff;
-    }
-    button:hover:not(:disabled) { background: var(--accent-hover); }
-    button:disabled { opacity: 0.5; cursor: not-allowed; }
-    #download { background: #059669; }
-    #download:hover:not(:disabled) { background: #047857; }
-    #status { color: var(--muted); font-size: 0.9rem; }
-    #status.error { color: var(--danger); }
-    iframe {
-      width: 100%;
-      height: 480px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: #e9eaee;
-    }
-    pre {
-      margin: 0;
-      padding: 14px;
-      background: #0f172a;
-      color: #e2e8f0;
-      border-radius: 8px;
-      overflow: auto;
-      max-height: 520px;
-      font-size: 0.85rem;
-    }
-    pre:empty { display: none; }
-  </style>
+  <title>ODWOŁANIA2JSON / PODGLĄD DOKUMENTU</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>ODWOŁANIA2JSON</h1>
-    <p>Wgraj plik PDF, podejrzyj go i pobierz wynikowy JSON.</p>
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot dot-pink"></span>
+      <span class="dot dot-teal"></span>
+      <span class="dot dot-mint"></span>
+      <span class="title">ODWOŁANIA2JSON / PODGLĄD DOKUMENTU</span>
+    </div>
+    <nav class="view-switch" role="tablist">
+      <button id="view-case" class="view-btn active" data-view="case">Podgląd sprawy</button>
+      <button id="view-config" class="view-btn" data-view="config">Konfiguracja klas (YAML)</button>
+    </nav>
   </header>
 
   <main>
-    <section class="panel upload">
-      <input type="file" id="file" accept="application/pdf,.pdf">
-      <button id="extract" disabled>Ekstrahuj</button>
-      <button id="download" disabled>Pobierz JSON</button>
-      <span id="status"></span>
+    <section id="view-case-panel" class="workbench">
+      <aside id="docs-column" class="col col-docs">
+        <div class="col-head">DOKUMENTY</div>
+        <ul id="doc-list" class="doc-list"></ul>
+        <div class="upload-zone">
+          <button id="add-btn" class="add-btn">+ Wgraj kolejny PDF</button>
+          <input type="file" id="file" accept="application/pdf,.pdf" multiple hidden>
+        </div>
+      </aside>
+
+      <section class="col col-preview">
+        <div class="col-head">PODGLĄD PLIKU PDF</div>
+        <div class="col-body">
+          <iframe id="pdf-preview" title="Podgląd PDF"></iframe>
+          <div id="preview-empty" class="empty">Wybierz lub wgraj dokument.</div>
+        </div>
+      </section>
+
+      <section class="col col-result">
+        <div class="col-head">
+          <span>WYNIK / JSON</span>
+          <div class="tabs">
+            <button id="tab-json" class="tab active">JSON</button>
+            <button id="tab-trans" class="tab">Transparentność</button>
+          </div>
+        </div>
+        <div class="col-body">
+          <div id="json-pane" class="pane">
+            <div class="actions">
+              <button id="copy-btn">Kopiuj</button>
+              <button id="download-btn">Pobierz .json</button>
+              <span id="json-status" class="status"></span>
+            </div>
+            <pre id="result"></pre>
+          </div>
+          <div id="trans-pane" class="pane hidden">
+            <div class="trans-wrap">
+              <table class="trans-table">
+                <thead>
+                  <tr>
+                    <th>Pole</th>
+                    <th>Wartość</th>
+                    <th>Cytat źródłowy</th>
+                    <th>Reguła</th>
+                  </tr>
+                </thead>
+                <tbody id="trans-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
     </section>
 
-    <section class="panel">
-      <h2>Podgląd PDF</h2>
-      <iframe id="pdf-preview" title="Podgląd PDF"></iframe>
-    </section>
-
-    <section class="panel">
-      <h2>Wynik (JSON)</h2>
-      <pre id="result"></pre>
+    <section id="view-config-panel" class="col config-view hidden">
+      <div class="col-head">
+        <span>Konfiguracja klas (YAML)</span>
+        <div class="config-actions">
+          <button id="reload-btn" class="reload-btn">Przeładuj konfigurację</button>
+        </div>
+      </div>
+      <div class="col-body">
+        <div id="config-status" class="config-status"></div>
+        <pre id="config-raw" class="config-raw"></pre>
+      </div>
     </section>
   </main>
 

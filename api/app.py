@@ -1,7 +1,11 @@
 """Aplikacja FastAPI — ODWOŁANIA2JSON.
 
-Endpoint POST /api/extract przyjmuje plik PDF i zwraca wynik ekstrakcji
-wygenerowany przez silnik ``src/extractor.py`` (wzorzec Registry, reguły z YAML).
+Endpoints:
+- ``GET  /health``             — healthcheck Dockera/load balancera.
+- ``POST /api/extract``        — przyjmuje plik PDF, zwraca wynik ekstrakcji
+  (czysty JSON + metadane transparentności: source_text, rule_used).
+- ``GET  /api/config``         — aktualna konfiguracja (config/document_rules.yaml).
+- ``POST /api/config/reload``  — przeładowanie konfiguracji bez restartu.
 
 Frontend z katalogu ``web/`` jest serwowany statycznie pod ścieżką ``/``.
 """
@@ -20,6 +24,8 @@ from src import extractor
 
 ROOT = Path(__file__).resolve().parents[1]
 WEB_DIR = ROOT / "web"
+CONFIG_DIR = ROOT / "config"
+DEFAULT_RULES = CONFIG_DIR / "document_rules.yaml"
 
 app = FastAPI(title="ODWOŁANIA2JSON API")
 
@@ -32,7 +38,19 @@ app.add_middleware(
 )
 
 # Ekstraktor budowany raz, na podstawie config/document_rules.yaml.
-_extractor = extractor.load_extractor()
+_extractor = extractor.load_extractor(DEFAULT_RULES)
+
+
+def _load_rules() -> dict[str, Any]:
+    """Wczytuje aktualne reguły z pliku YAML."""
+    return extractor.load_rules(DEFAULT_RULES)
+
+
+def _read_rules_text() -> str:
+    """Zwraca surową treść pliku reguł YAML."""
+    if DEFAULT_RULES.exists():
+        return DEFAULT_RULES.read_text(encoding="utf-8")
+    return ""
 
 
 def _extract_from_pdf(pdf_bytes: bytes, filename: str) -> dict[str, Any]:
@@ -81,6 +99,24 @@ async def extract_pdf(file: UploadFile = File(...)) -> dict[str, Any]:
         raise HTTPException(
             status_code=500, detail=f"Ekstrakcja nie powiodła się: {exc}"
         ) from exc
+
+
+@app.get("/api/config")
+async def get_config() -> dict[str, Any]:
+    """Zwraca aktualną konfigurację klas dokumentów (YAML + sparsowaną postać)."""
+    return {
+        "source": DEFAULT_RULES.name,
+        "raw": _read_rules_text(),
+        "parsed": _load_rules(),
+    }
+
+
+@app.post("/api/config/reload")
+async def reload_config() -> dict[str, Any]:
+    """Przeładowuje reguły z pliku YAML bez restartu aplikacji."""
+    global _extractor
+    _extractor = extractor.load_extractor(DEFAULT_RULES)
+    return {"status": "ok", "document_types": _extractor.names}
 
 
 # Serwowanie frontendu (musi być po zarejestrowaniu tras API).

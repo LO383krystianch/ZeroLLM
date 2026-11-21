@@ -1,94 +1,353 @@
 "use strict";
 
-const fileInput = document.getElementById("file");
-const extractBtn = document.getElementById("extract");
-const downloadBtn = document.getElementById("download");
-const preview = document.getElementById("pdf-preview");
-const result = document.getElementById("result");
-const status = document.getElementById("status");
+const state = {
+  files: [], // { id, file, name, result, loading }
+  activeId: null,
+};
 
-let lastResult = null;
+let idCounter = 0;
+function nextId() {
+  idCounter += 1;
+  return "doc-" + idCounter;
+}
 
-fileInput.addEventListener("change", () => {
-  const file = fileInput.files[0];
-  if (!file) {
-    return;
+const els = {
+  fileInput: document.getElementById("file"),
+  addBtn: document.getElementById("add-btn"),
+  docsColumn: document.getElementById("docs-column"),
+  docList: document.getElementById("doc-list"),
+  uploadZone: document.querySelector(".upload-zone"),
+  preview: document.getElementById("pdf-preview"),
+  previewEmpty: document.getElementById("preview-empty"),
+  result: document.getElementById("result"),
+  transBody: document.getElementById("trans-body"),
+  copyBtn: document.getElementById("copy-btn"),
+  downloadBtn: document.getElementById("download-btn"),
+  jsonStatus: document.getElementById("json-status"),
+  viewCase: document.getElementById("view-case"),
+  viewConfig: document.getElementById("view-config"),
+  casePanel: document.getElementById("view-case-panel"),
+  configPanel: document.getElementById("view-config-panel"),
+  configRaw: document.getElementById("config-raw"),
+  configStatus: document.getElementById("config-status"),
+  reloadBtn: document.getElementById("reload-btn"),
+  tabJson: document.getElementById("tab-json"),
+  tabTrans: document.getElementById("tab-trans"),
+  jsonPane: document.getElementById("json-pane"),
+  transPane: document.getElementById("trans-pane"),
+};
+
+/* ---- Przełączanie widoków ---- */
+function setView(view) {
+  const isConfig = view === "config";
+  els.casePanel.classList.toggle("hidden", isConfig);
+  els.configPanel.classList.toggle("hidden", !isConfig);
+  els.viewCase.classList.toggle("active", !isConfig);
+  els.viewConfig.classList.toggle("active", isConfig);
+  if (isConfig) {
+    loadConfig();
   }
+}
+els.viewCase.addEventListener("click", () => setView("case"));
+els.viewConfig.addEventListener("click", () => setView("config"));
 
-  // Podgląd wybranego PDF (blob URL w iframe z wbudowaną przeglądarką PDF).
-  const url = URL.createObjectURL(file);
-  preview.src = url;
+/* ---- Zakładki wyniku ---- */
+function setTab(tab) {
+  const isTrans = tab === "trans";
+  els.tabJson.classList.toggle("active", !isTrans);
+  els.tabTrans.classList.toggle("active", isTrans);
+  els.jsonPane.classList.toggle("hidden", isTrans);
+  els.transPane.classList.toggle("hidden", !isTrans);
+}
+els.tabJson.addEventListener("click", () => setTab("json"));
+els.tabTrans.addEventListener("click", () => setTab("trans"));
 
-  extractBtn.disabled = false;
-  downloadBtn.disabled = true;
-  result.textContent = "";
-  setStatus("");
+/* ---- Wgrywanie plików ---- */
+els.addBtn.addEventListener("click", () => els.fileInput.click());
+els.fileInput.addEventListener("change", () => {
+  addFiles(els.fileInput.files);
+  els.fileInput.value = "";
 });
 
-extractBtn.addEventListener("click", async () => {
-  const file = fileInput.files[0];
-  if (!file) {
+function addFiles(fileList) {
+  const incoming = Array.from(fileList || []).filter((f) => /\.pdf$/i.test(f.name));
+  if (!incoming.length) {
     return;
   }
+  const ids = incoming.map((f) => {
+    const item = {
+      id: nextId(),
+      file: f,
+      name: f.name,
+      result: null,
+      loading: false,
+    };
+    state.files.push(item);
+    return item.id;
+  });
+  renderList();
+  selectFile(ids[0]);
+}
+
+/* ---- Drag & drop ---- */
+["dragenter", "dragover"].forEach((evt) => {
+  els.docsColumn.addEventListener(evt, (e) => {
+    e.preventDefault();
+    els.uploadZone.classList.add("dragover");
+  });
+});
+["dragleave", "drop"].forEach((evt) => {
+  els.docsColumn.addEventListener(evt, (e) => {
+    e.preventDefault();
+    els.uploadZone.classList.remove("dragover");
+  });
+});
+els.docsColumn.addEventListener("drop", (e) => {
+  e.preventDefault();
+  els.uploadZone.classList.remove("dragover");
+  if (e.dataTransfer && e.dataTransfer.files) {
+    addFiles(e.dataTransfer.files);
+  }
+});
+
+/* ---- Lista dokumentów ---- */
+function renderList() {
+  els.docList.innerHTML = "";
+  for (const item of state.files) {
+    const li = document.createElement("li");
+    li.className = "doc-item" + (item.id === state.activeId ? " active" : "");
+    li.dataset.id = item.id;
+
+    const sq = document.createElement("span");
+    sq.className = "doc-sq " + (item.id === state.activeId ? "active" : "inactive");
+
+    const name = document.createElement("span");
+    name.className = "doc-name";
+    name.textContent = item.name;
+    name.title = item.name;
+
+    const status = document.createElement("span");
+    status.className = "doc-status";
+    status.textContent = item.loading ? "przetwarzanie..." : item.result ? "gotowe" : "";
+
+    li.append(sq, name, status);
+    li.addEventListener("click", () => selectFile(item.id));
+    els.docList.appendChild(li);
+  }
+}
+
+function selectFile(id) {
+  const item = state.files.find((x) => x.id === id);
+  if (!item) {
+    return;
+  }
+  state.activeId = id;
+  renderList();
+  showPreview(item);
+  if (item.result) {
+    renderResult(item);
+  } else {
+    runExtract(item);
+  }
+}
+
+function showPreview(item) {
+  const url = URL.createObjectURL(item.file);
+  els.preview.src = url;
+  els.previewEmpty.style.display = "none";
+}
+
+/* ---- Ekstrakcja ---- */
+async function runExtract(item) {
+  item.loading = true;
+  renderList();
+  clearResult();
 
   const formData = new FormData();
-  formData.append("file", file);
-
-  setStatus("Ekstrakcja w toku...");
-  extractBtn.disabled = true;
+  formData.append("file", item.file);
 
   try {
-    const response = await fetch("/api/extract", {
-      method: "POST",
-      body: formData,
-    });
-
-    if (!response.ok) {
-      let detail = response.statusText;
+    const resp = await fetch("/api/extract", { method: "POST", body: formData });
+    if (!resp.ok) {
+      let detail = resp.statusText;
       try {
-        const body = await response.json();
-        detail = body.detail || detail;
+        detail = (await resp.json()).detail || detail;
       } catch (_) {
-        // ignoruj — użyjemy statusText
+        /* użyj statusText */
       }
       throw new Error(detail);
     }
-
-    lastResult = await response.json();
-    result.textContent = JSON.stringify(lastResult, null, 2);
-    downloadBtn.disabled = false;
-    setStatus("Gotowe.");
+    item.result = await resp.json();
   } catch (err) {
-    result.textContent = "";
-    setStatus("Błąd: " + err.message, true);
+    item.result = { error: String(err.message || err) };
   } finally {
-    extractBtn.disabled = false;
+    item.loading = false;
+    renderList();
   }
-});
 
-downloadBtn.addEventListener("click", () => {
-  if (!lastResult) {
+  if (state.activeId === item.id) {
+    renderResult(item);
+  }
+}
+
+function renderResult(item) {
+  const res = item.result || {};
+  els.result.textContent = JSON.stringify(res, null, 2);
+  renderTransparency(res);
+}
+
+function clearResult() {
+  els.result.textContent = "";
+  els.transBody.innerHTML = "";
+}
+
+/* ---- Transparentność ---- */
+function renderTransparency(res) {
+  const rows = [];
+  flattenRows(res.data || {}, "", rows);
+  els.transBody.innerHTML = "";
+
+  for (const r of rows) {
+    const tr = document.createElement("tr");
+
+    const tdPole = document.createElement("td");
+    tdPole.textContent = r.pole;
+
+    const tdVal = document.createElement("td");
+    tdVal.textContent = r.value;
+
+    const tdSrc = document.createElement("td");
+    tdSrc.textContent = r.source;
+
+    const tdRule = document.createElement("td");
+    const code = document.createElement("code");
+    code.textContent = r.rule;
+    tdRule.appendChild(code);
+
+    tr.append(tdPole, tdVal, tdSrc, tdRule);
+    els.transBody.appendChild(tr);
+  }
+}
+
+function flattenRows(node, path, out) {
+  if (Array.isArray(node)) {
+    node.forEach((item, i) => flattenRows(item, path + "[" + i + "]", out));
     return;
   }
+  if (node && typeof node === "object" && "value" in node) {
+    const v = node.value;
+    if (v && typeof v === "object") {
+      flattenRows(v, path, out);
+    } else {
+      out.push({
+        pole: path,
+        value: fmt(v),
+        source: node.source_text || "",
+        rule: node.rule_used || "",
+      });
+    }
+    return;
+  }
+  if (node && typeof node === "object") {
+    for (const [k, child] of Object.entries(node)) {
+      flattenRows(child, path ? path + "." + k : k, out);
+    }
+    return;
+  }
+  out.push({ pole: path, value: fmt(node), source: "", rule: "" });
+}
 
-  const baseName = (fileInput.files[0]?.name || "wynik").replace(/\.pdf$/i, "");
-  const fileName = baseName + ".json";
+function fmt(v) {
+  if (v === null || v === undefined || v === "") {
+    return "\u2014";
+  }
+  if (typeof v === "boolean") {
+    return String(v);
+  }
+  return String(v);
+}
 
-  const blob = new Blob([JSON.stringify(lastResult, null, 2)], {
+/* ---- Kopiuj / Pobierz ---- */
+els.copyBtn.addEventListener("click", async () => {
+  const text = els.result.textContent;
+  if (!text) {
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch (_) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    ta.remove();
+  }
+  flashStatus("Skopiowano.");
+});
+
+els.downloadBtn.addEventListener("click", () => {
+  const item = state.files.find((x) => x.id === state.activeId);
+  if (!item || !item.result) {
+    return;
+  }
+  const base = item.name.replace(/\.pdf$/i, "");
+  const blob = new Blob([JSON.stringify(item.result, null, 2)], {
     type: "application/json",
   });
   const url = URL.createObjectURL(blob);
-
-  const anchor = document.createElement("a");
-  anchor.href = url;
-  anchor.download = fileName;
-  document.body.appendChild(anchor);
-  anchor.click();
-  anchor.remove();
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = base + ".json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
   URL.revokeObjectURL(url);
 });
 
-function setStatus(message, isError = false) {
-  status.textContent = message;
-  status.classList.toggle("error", isError);
+function flashStatus(msg) {
+  els.jsonStatus.textContent = msg;
+  setTimeout(() => {
+    if (els.jsonStatus.textContent === msg) {
+      els.jsonStatus.textContent = "";
+    }
+  }, 1500);
 }
+
+/* ---- Konfiguracja (YAML) ---- */
+async function loadConfig() {
+  els.configStatus.textContent = "Ładowanie...";
+  try {
+    const resp = await fetch("/api/config");
+    if (!resp.ok) {
+      throw new Error(resp.statusText);
+    }
+    const data = await resp.json();
+    els.configRaw.textContent = data.raw || JSON.stringify(data.parsed || data, null, 2);
+    els.configStatus.textContent = data.source || "config/document_rules.yaml";
+  } catch (err) {
+    els.configRaw.textContent = "";
+    els.configStatus.textContent = "Błąd: " + err.message;
+  }
+}
+
+els.reloadBtn.addEventListener("click", async () => {
+  els.configStatus.textContent = "Przeładowywanie...";
+  try {
+    const resp = await fetch("/api/config/reload", { method: "POST" });
+    if (!resp.ok) {
+      throw new Error(resp.statusText);
+    }
+    const data = await resp.json();
+    await loadConfig();
+    els.configStatus.textContent =
+      "Przeładowano: " + (data.document_types || []).join(", ");
+  } catch (err) {
+    els.configStatus.textContent = "Błąd: " + err.message;
+  }
+});
+
+/* ---- Inicjalizacja ---- */
+setView("case");
+setTab("json");
+renderList();
