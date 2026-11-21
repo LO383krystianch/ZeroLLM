@@ -69,14 +69,32 @@ def _resolve_flags(spec: dict[str, Any]) -> int:
 
 @register("regex")
 def _regex_handler(rule: dict[str, Any], text: str) -> tuple[Any, str, str]:
-    """Reguła regex: zwraca grupę dopasowania lub flagę obecności wzorca."""
+    """Reguła regex: zwraca grupę dopasowania lub flagę obecności wzorca.
+
+    Opcjonalne sterowanie zakresem wyszukiwania:
+    - ``require``: wzorzec, który musi wystąpić w tekście (inaczej reguła pominięta),
+    - ``after``: marker — dopasowanie szukane dopiero po pierwszym jego wystąpieniu.
+    """
     pattern = str(rule.get("pattern", ""))
     rule_used = f"regex:{pattern}"
     if not pattern:
         return None, "", rule_used
 
-    compiled = re.compile(pattern, _resolve_flags(rule))
-    match = compiled.search(text)
+    flags = _resolve_flags(rule)
+
+    require = rule.get("require")
+    if require and re.search(str(require), text, flags) is None:
+        return None, "", rule_used
+
+    search_text = text
+    after = rule.get("after")
+    if after:
+        anchor = re.search(str(after), text, flags)
+        if anchor is None:
+            return None, "", rule_used
+        search_text = text[anchor.end():]
+
+    match = re.search(pattern, search_text, flags)
 
     if str(rule.get("output", "value")) == "boolean":
         if match:

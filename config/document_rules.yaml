@@ -18,7 +18,10 @@
 #
 # Reguła ekstrakcji (kind):
 #   regex -> pattern, group (nr grupy, domyślnie 0), flags [IGNORECASE, MULTILINE, DOTALL],
-#            output: value (domyślnie) | boolean (sama obecność wzorca)
+#            output: value (domyślnie) | boolean (sama obecność wzorca),
+#            require: wzorzec, który musi wystąpić w tekście (inaczej reguła pominięta),
+#            after: marker — dopasowanie szukane dopiero po jego wystąpieniu,
+#            normalize: whitespace — zbicie białych znaków w wartości
 #
 # Każde wyekstrahowane pole zwraca obiekt: {value, source_text, rule_used}.
 
@@ -101,12 +104,24 @@ document_types:
               type: string
               rules:
                 - kind: regex
+                  require: 'Konsorcjum'
+                  after: 'Lider\s+Konsorcjum\s*:'
+                  pattern: '\bKRS[ \t]*[:.]?[ \t]*(\d{10})'
+                  group: 1
+                  flags: [IGNORECASE]
+                - kind: regex
                   pattern: '\bKRS[ \t]*[:.]?[ \t]*(\d{10})'
                   group: 1
                   flags: [IGNORECASE]
             nazwa:
               type: string
               rules:
+                - kind: regex
+                  require: 'Konsorcjum'
+                  after: 'Lider\s+Konsorcjum\s*:'
+                  pattern: '^\s*([^\r\n]+)'
+                  group: 1
+                  flags: [IGNORECASE, MULTILINE]
                 - kind: regex
                   pattern: '\bOdwołując\w*[ \t]*[:.]?[ \t]*([^\r\n]+)'
                   group: 1
@@ -115,12 +130,24 @@ document_types:
               type: string
               rules:
                 - kind: regex
+                  require: 'Konsorcjum'
+                  after: 'Lider\s+Konsorcjum\s*:'
+                  pattern: '\bNIP[ \t]*[:.]?[ \t]*(\d{3}[- ]?\d{3}[- ]?\d{2}[- ]?\d{2})'
+                  group: 1
+                  flags: [IGNORECASE]
+                - kind: regex
                   pattern: '\bNIP[ \t]*[:.]?[ \t]*(\d{3}[- ]?\d{3}[- ]?\d{2}[- ]?\d{2})'
                   group: 1
                   flags: [IGNORECASE]
             regon:
               type: string
               rules:
+                - kind: regex
+                  require: 'Konsorcjum'
+                  after: 'Lider\s+Konsorcjum\s*:'
+                  pattern: '\bREGON[ \t]*[:.]?[ \t]*(\d{9}(?:\d{5})?)'
+                  group: 1
+                  flags: [IGNORECASE]
                 - kind: regex
                   pattern: '\bREGON[ \t]*[:.]?[ \t]*(\d{9}(?:\d{5})?)'
                   group: 1

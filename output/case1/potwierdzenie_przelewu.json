@@ -39,39 +39,16 @@
       "rule_used": null
     },
     "Zamawiajacy": {
-      "value": [
-        {
-          "nazwa": {
-            "value": null,
-            "source_text": "",
-            "rule_used": null
-          },
-          "nip": {
-            "value": null,
-            "source_text": "",
-            "rule_used": null
-          },
-          "regon": {
-            "value": null,
-            "source_text": "",
-            "rule_used": null
-          },
-          "adres": {
-            "value": "Kolejowa 61, 87-178 Toruń",
-            "source_text": "ul. Kolejowa 61, 87-178 Toruń",
-            "rule_used": "regex:\\b(?:adres|ul\\.)[ \\t]*[:.]?[ \\t]*([^\\r\\n]+)"
-          }
-        }
-      ],
+      "value": [],
       "source_text": "",
       "rule_used": null
     },
     "ZamowieniePubliczne": {
       "value": {
         "numer_postepowania": {
-          "value": "referencyjny",
-          "source_text": "Numer referencyjny",
-          "rule_used": "regex:\\b(?:numer|nr|znak)\\s+(?:postępowania|sprawy|zamówienia)?[ \\t]*[:.]?[ \\t]*([A-Za-z0-9/.\\-]+)"
+          "value": null,
+          "source_text": "",
+          "rule_used": null
         },
         "nazwa": {
           "value": null,
