@@ -55,7 +55,7 @@ function addFiles(fileList) {
   if (!incoming.length) {
     return;
   }
-  const ids = incoming.map((f) => {
+  const items = incoming.map((f) => {
     const item = {
       id: nextId(),
       file: f,
@@ -64,10 +64,17 @@ function addFiles(fileList) {
       loading: false,
     };
     state.files.push(item);
-    return item.id;
+    return item;
   });
   renderList();
-  selectFile(ids[0]);
+
+  // Pokaż pierwszy plik (podgląd) i rozpocznij jego przetwarzanie.
+  selectFile(items[0].id);
+
+  // Pozostałe pliki przetwarzaj od razu w tle (bez czekania na kliknięcie).
+  for (let i = 1; i < items.length; i++) {
+    runExtract(items[i]);
+  }
 }
 
 /* ---- Drag & drop ---- */
