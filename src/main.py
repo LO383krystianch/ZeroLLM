@@ -56,8 +56,14 @@ def build_result(
     text: str,
     ex: extractor.DocumentExtractor,
 ) -> dict[str, Any]:
-    """Buduje czysty wynik JSON zgodny ze schematem UZP (bez warstwy debugowania)."""
+    """Buduje czysty wynik JSON zgodny ze schematem UZP (bez warstwy debugowania).
+
+    Dokument nierozpoznany (obcy — niepasujący do żadnego z 3 typów) daje
+    pusty obiekt ``{}`` (wymóg jury), zapisywany pod nazwą oryginalnego pliku.
+    """
     document_type = ex.detect(text, relative.name)
+    if document_type is None:
+        return {}
     return ex.extract_clean(text, document_type)
 
 
