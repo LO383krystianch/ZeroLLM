@@ -43,18 +43,9 @@ def build_result(
     text: str,
     ex: extractor.DocumentExtractor,
 ) -> dict[str, Any]:
-    """Buduje wynik JSON z transparentnością dla pojedynczego dokumentu."""
+    """Buduje czysty wynik JSON zgodny ze schematem UZP (bez warstwy debugowania)."""
     document_type = ex.detect(text, relative.name)
-    data = ex.extract(text, document_type)
-    return {
-        "source": relative.as_posix(),
-        "document_type": document_type,
-        "data": data,
-        "transparency": {
-            "extracted_text_length": len(text),
-            "text_preview": text[:500],
-        },
-    }
+    return ex.extract_clean(text, document_type)
 
 
 def process(
@@ -72,13 +63,8 @@ def process(
             text = extractor.extract_text_from_pdf(pdf)
             result = build_result(relative, text, ex)
         except Exception as exc:  # nie przerywaj całego batcha na jednym pliku
-            result = {
-                "source": relative.as_posix(),
-                "document_type": None,
-                "data": {},
-                "error": str(exc),
-                "transparency": {"extracted_text_length": 0, "text_preview": ""},
-            }
+            print(f"Błąd przetwarzania {relative}: {exc}", file=sys.stderr)
+            result = {}
 
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")

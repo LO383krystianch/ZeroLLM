@@ -208,6 +208,22 @@ def _field(value: Any, source_text: str = "", rule_used: str | None = None) -> d
     return {"value": value, "source_text": source_text, "rule_used": rule_used}
 
 
+def flatten(node: Any) -> Any:
+    """Usuwa warstwę debugowania i spłaszcza obiekty pól do czystych wartości.
+
+    Obiekt ``{value, source_text, rule_used}`` jest zastępowany przez samą
+    wartość ``value`` (rekurencyjnie). Wynik jest zgodny ze schematem UZP —
+    bez metadanych transparentności.
+    """
+    if isinstance(node, dict):
+        if set(node.keys()) == {"value", "source_text", "rule_used"}:
+            return flatten(node.get("value"))
+        return {key: flatten(val) for key, val in node.items()}
+    if isinstance(node, list):
+        return [flatten(item) for item in node]
+    return node
+
+
 class DocumentExtractor:
     """Parsuje tekst zgodnie ze strukturą, sekcjami i regułami z config/document_rules.yaml."""
 
@@ -272,6 +288,10 @@ class DocumentExtractor:
         structure = spec.get("structure", {})
         blocks = segment_text(text, spec.get("sections"))
         return self._extract_structure(structure, text, blocks)
+
+    def extract_clean(self, text: str, document_type: str | None = None) -> dict[str, Any]:
+        """Ekstrahuje pola i zwraca czystą strukturę (bez warstwy debugowania)."""
+        return flatten(self.extract(text, document_type))
 
     # -- wewnętrzna, rekurencyjna ekstrakcja ----------------------------------
 
