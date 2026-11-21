@@ -12,4 +12,9 @@
 1. Sprawdź `git status`. Nigdy nie commituj `.env`, `*.db`, `*.sqlite*`, `__pycache__/`, `.venv/`, `venv/`, `node_modules/`.
 2. Pobierz zmiany: `git pull --rebase origin HEAD` (w razie konfliktu poza swoim folderem rozwiąż zachowując zmiany z `origin`).
 3. Wykonaj `git add .`, `git commit -m "feat: ..."` (lub `fix: ...`, `chore: ...`) i `git push origin HEAD`.
-4. Nigdy nie używaj `git push --force`.
+4. Nigdy nie używaj `git push --force`. 
+## Architektura i Rozbudowa (KRYTYCZNE) 
+- **Zero hardcodowania:** Nie wpisuj na sztywno nazw dokumentow ani pol do kodu Pythona. 
+- **Sterowanie konfiguracja:** Dodanie nowego typu dokumentu lub pola ma wymagac wylacznie edycji pliku np. config/document_types.yaml. 
+- **Interfejsy:** Kod glowny ma dynamicznie ladowac reguly z konfiguracji (wzorzec Registry). 
+- **Transparentnosc:** Kazde pole musi zwracac obiekt: value, source_text, rule_used, aby mozna to bylo wyswietlic w UI. 
