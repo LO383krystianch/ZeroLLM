@@ -1,8 +1,12 @@
 """CLI punktu wejścia projektu ODWOŁANIA2JSON.
 
 Użycie:
-    py -3.13 src/cli.py --input dokument.pdf --output wynik.json
+    run.bat --input dokument.pdf --output wynik.json
     python -m src.cli --input dokument.pdf --output wynik.json
+
+Przetwarza pojedynczy dokument (PDF lub TXT) i zapisuje czysty wynik JSON
+(zgodny ze schematem UZP — bez warstwy transparentności), identyczny jak
+wynik przetwarzania wsadowego (``start.bat``).
 """
 
 from __future__ import annotations
@@ -11,39 +15,23 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from typing import Any
-
-import yaml
 
 try:
-    from pypdf import PdfReader
-except ImportError:  # pragma: no cover
-    PdfReader = None
-
-CONFIG_DIR = Path(__file__).resolve().parents[1] / "config"
-DEFAULT_SCHEMA = CONFIG_DIR / "schemas.yaml"
+    from . import extractor
+except ImportError:  # uruchomienie jako skrypt: python src/cli.py
+    import extractor
 
 
-def load_schemas(path: Path | None = None) -> dict[str, Any]:
-    """Wczytuje konfigurację schematów dokumentów z pliku YAML."""
-    path = path or DEFAULT_SCHEMA
-    with path.open("r", encoding="utf-8") as fh:
-        return yaml.safe_load(fh) or {}
-
-
-def extract_text(path: Path) -> str:
-    """Wyodrębnia tekst z pliku PDF (przez pypdf) lub z pliku tekstowego."""
+def read_text(path: Path) -> str:
+    """Wyodrębnia tekst z PDF (pypdf + OCR) lub z pliku tekstowego."""
     if path.suffix.lower() == ".pdf":
-        if PdfReader is None:
-            raise RuntimeError("Brak biblioteki pypdf. Zainstaluj zależności z requirements.txt.")
-        reader = PdfReader(str(path))
-        return "\n".join(page.extract_text() or "" for page in reader.pages)
+        return extractor.extract_text_from_pdf(path)
     return path.read_text(encoding="utf-8", errors="replace")
 
 
 def build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Ekstrakcja danych z dokumentów (odwołań) do JSON."
+        description="Ekstrakcja danych z dokumentów (odwołań, pełnomocnictw, przelewów) do JSON."
     )
     parser.add_argument(
         "--input",
@@ -56,9 +44,9 @@ def build_arg_parser() -> argparse.ArgumentParser:
         help="Ścieżka do pliku wyjściowego JSON.",
     )
     parser.add_argument(
-        "--schemas",
-        default=str(DEFAULT_SCHEMA),
-        help="Ścieżka do pliku schematów YAML (domyślnie config/schemas.yaml).",
+        "--rules",
+        default=str(extractor.DEFAULT_RULES),
+        help="Plik reguł YAML (domyślnie config/document_rules.yaml).",
     )
     return parser
 
@@ -73,20 +61,12 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Błąd: plik wejściowy nie istnieje: {input_path}", file=sys.stderr)
         return 1
 
-    schemas = load_schemas(Path(args.schemas))
-    text = extract_text(input_path)
+    ex = extractor.load_extractor(Path(args.rules))
+    text = read_text(input_path)
+    document_type = ex.detect(text, input_path.name)
 
-    result = {
-        "document_type": schemas.get("default_document_type"),
-        "source": str(input_path),
-        "extracted_text_length": len(text),
-        "text_preview": text[:500],
-        "transparency": {
-            "rule": "skeleton",
-            "source_fragment": text[:200],
-        },
-        "schemas": schemas,
-    }
+    # Dokument nierozpoznany (obcy) -> pusty JSON {} (wymóg jury).
+    result = ex.extract_clean(text, document_type) if document_type is not None else {}
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(

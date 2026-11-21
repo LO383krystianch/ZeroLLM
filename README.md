@@ -76,8 +76,7 @@ podgląd go w przeglądarce, wywołanie ekstrakcji oraz pobranie wynikowego JSON
 │   ├── __init__.py
 │   └── app.py              # FastAPI + CORS + POST /api/extract
 ├── config/
-│   ├── document_rules.yaml # typy dokumentów, pola i reguły (główne źródło prawdy)
-│   └── schemas.yaml        # schematy pól dokumentów (używane przez CLI)
+│   └── document_rules.yaml # typy dokumentów, pola i reguły (główne źródło prawdy)
 ├── src/
 │   ├── __init__.py
 │   ├── extractor.py        # silnik ekstrakcji (wzorzec Registry)
