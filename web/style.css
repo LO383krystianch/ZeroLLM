@@ -183,6 +183,17 @@ main {
 }
 
 .doc-status { font-size: 10px; color: var(--muted); flex: 0 0 auto; }
+.doc-status.badge {
+  background: #E0F7F5;
+  color: #0F766E;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.doc-status.badge-error {
+  background: #FDE8E8;
+  color: #B91C1C;
+}
 
 .upload-zone {
   flex: 0 0 auto;

@@ -128,7 +128,15 @@ function renderList() {
 
     const status = document.createElement("span");
     status.className = "doc-status";
-    status.textContent = item.loading ? "przetwarzanie..." : item.result ? "gotowe" : "";
+    if (item.loading) {
+      status.textContent = "przetwarzanie...";
+    } else if (item.result && item.result.document_type) {
+      status.textContent = item.result.document_type;
+      status.classList.add("badge");
+    } else if (item.result && item.result.error) {
+      status.textContent = "błąd";
+      status.classList.add("badge", "badge-error");
+    }
 
     li.append(sq, name, status);
     li.addEventListener("click", () => selectFile(item.id));
@@ -192,8 +200,44 @@ async function runExtract(item) {
 
 function renderResult(item) {
   const res = item.result || {};
-  els.result.textContent = JSON.stringify(res, null, 2);
+  item.clean = buildCleanResult(res);
+  els.result.textContent = JSON.stringify(item.clean, null, 2);
   renderTransparency(res);
+}
+
+// Wyciąga same wartości z zagnieżdżonej struktury "data", usuwając obiekty
+// transparentności {value, source_text, rule_used} -> zostaje tylko value.
+function unwrapCleanJson(node) {
+  if (Array.isArray(node)) {
+    return node.map(unwrapCleanJson);
+  }
+  if (node && typeof node === "object") {
+    if ("value" in node) {
+      return unwrapCleanJson(node.value);
+    }
+    const out = {};
+    for (const [k, v] of Object.entries(node)) {
+      out[k] = unwrapCleanJson(v);
+    }
+    return out;
+  }
+  return node;
+}
+
+// Czysty wynik JSON (bez source_text / rule_used) przeznaczony do zakładki
+// "JSON", przycisków "Kopiuj" i "Pobierz .json".
+function buildCleanResult(res) {
+  if (!res) {
+    return {};
+  }
+  if (res.error) {
+    return { error: res.error };
+  }
+  return {
+    filename: res.filename,
+    document_type: res.document_type,
+    data: unwrapCleanJson(res.data || {}),
+  };
 }
 
 function clearResult() {
@@ -288,11 +332,11 @@ els.copyBtn.addEventListener("click", async () => {
 
 els.downloadBtn.addEventListener("click", () => {
   const item = state.files.find((x) => x.id === state.activeId);
-  if (!item || !item.result) {
+  if (!item || !item.clean) {
     return;
   }
   const base = item.name.replace(/\.pdf$/i, "");
-  const blob = new Blob([JSON.stringify(item.result, null, 2)], {
+  const blob = new Blob([JSON.stringify(item.clean, null, 2)], {
     type: "application/json",
   });
   const url = URL.createObjectURL(blob);
