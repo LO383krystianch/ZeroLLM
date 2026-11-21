@@ -70,8 +70,6 @@ body {
   text-overflow: ellipsis;
 }
 
-.view-switch { display: flex; gap: 4px; }
-
 .topbar-actions {
   display: flex;
   align-items: center;
@@ -100,21 +98,6 @@ body {
   cursor: not-allowed;
 }
 .download-all-btn svg { flex: 0 0 auto; }
-
-.view-btn {
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid transparent;
-  color: #8FA6B8;
-  padding: 6px 10px;
-  font-size: 12px;
-  cursor: pointer;
-}
-.view-btn:hover { color: #C9D8E4; }
-.view-btn.active {
-  color: #FFFFFF;
-  border-bottom-color: var(--mint);
-}
 
 /* ---- Główny obszar ---- */
 main {
@@ -352,39 +335,3 @@ main {
 .trans-table td:nth-child(3) { color: var(--muted); }
 .trans-table code { font-family: ui-monospace, Menlo, Consolas, monospace; color: var(--teal); font-size: 10px; word-break: break-all; }
 
-/* ---- Widok konfiguracji ---- */
-.config-view { flex: 1 1 auto; }
-
-.config-actions { margin-left: auto; display: flex; gap: 6px; }
-
-.reload-btn {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--teal);
-  padding: 4px 10px;
-  font-size: 11px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.reload-btn:hover { background: var(--panel); }
-
-.config-status {
-  flex: 0 0 auto;
-  padding: 8px 14px;
-  font-size: 11px;
-  color: var(--muted);
-  border-bottom: 1px solid var(--border);
-}
-
-.config-raw {
-  margin: 0;
-  flex: 1 1 auto;
-  overflow: auto;
-  padding: 14px;
-  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  font-size: 12px;
-  line-height: 1.6;
-  color: #1E293B;
-  background: #FFFFFF;
-  white-space: pre;
-}

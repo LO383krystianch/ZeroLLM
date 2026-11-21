@@ -24,34 +24,13 @@ const els = {
   copyBtn: document.getElementById("copy-btn"),
   downloadBtn: document.getElementById("download-btn"),
   jsonStatus: document.getElementById("json-status"),
-  viewCase: document.getElementById("view-case"),
-  viewConfig: document.getElementById("view-config"),
   downloadAllBtn: document.getElementById("download-all-btn"),
   downloadAllLabel: document.getElementById("download-all-label"),
-  casePanel: document.getElementById("view-case-panel"),
-  configPanel: document.getElementById("view-config-panel"),
-  configRaw: document.getElementById("config-raw"),
-  configStatus: document.getElementById("config-status"),
-  reloadBtn: document.getElementById("reload-btn"),
   tabJson: document.getElementById("tab-json"),
   tabTrans: document.getElementById("tab-trans"),
   jsonPane: document.getElementById("json-pane"),
   transPane: document.getElementById("trans-pane"),
 };
-
-/* ---- Przełączanie widoków ---- */
-function setView(view) {
-  const isConfig = view === "config";
-  els.casePanel.classList.toggle("hidden", isConfig);
-  els.configPanel.classList.toggle("hidden", !isConfig);
-  els.viewCase.classList.toggle("active", !isConfig);
-  els.viewConfig.classList.toggle("active", isConfig);
-  if (isConfig) {
-    loadConfig();
-  }
-}
-els.viewCase.addEventListener("click", () => setView("case"));
-els.viewConfig.addEventListener("click", () => setView("config"));
 
 /* ---- Zakładki wyniku ---- */
 function setTab(tab) {
@@ -422,40 +401,6 @@ function flashStatus(msg) {
   }, 1500);
 }
 
-/* ---- Konfiguracja (YAML) ---- */
-async function loadConfig() {
-  els.configStatus.textContent = "Ładowanie...";
-  try {
-    const resp = await fetch("/api/config");
-    if (!resp.ok) {
-      throw new Error(resp.statusText);
-    }
-    const data = await resp.json();
-    els.configRaw.textContent = data.raw || JSON.stringify(data.parsed || data, null, 2);
-    els.configStatus.textContent = data.source || "config/document_rules.yaml";
-  } catch (err) {
-    els.configRaw.textContent = "";
-    els.configStatus.textContent = "Błąd: " + err.message;
-  }
-}
-
-els.reloadBtn.addEventListener("click", async () => {
-  els.configStatus.textContent = "Przeładowywanie...";
-  try {
-    const resp = await fetch("/api/config/reload", { method: "POST" });
-    if (!resp.ok) {
-      throw new Error(resp.statusText);
-    }
-    const data = await resp.json();
-    await loadConfig();
-    els.configStatus.textContent =
-      "Przeładowano: " + (data.document_types || []).join(", ");
-  } catch (err) {
-    els.configStatus.textContent = "Błąd: " + err.message;
-  }
-});
-
 /* ---- Inicjalizacja ---- */
-setView("case");
 setTab("json");
 renderList();
