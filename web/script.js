@@ -220,11 +220,9 @@ function buildCleanResult(res) {
   if (!res.document_type) {
     return {};
   }
-  return {
-    filename: res.filename,
-    document_type: res.document_type,
-    data: unwrapCleanJson(res.data || {}),
-  };
+  // Dla rozpoznanych dokumentów zwróć same dane (bez wrappera
+  // {filename, document_type, data}) — wynik identyczny z plikiem batcha.
+  return unwrapCleanJson(res.data || {});
 }
 
 function clearResult() {
