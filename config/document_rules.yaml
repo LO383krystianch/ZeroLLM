@@ -1,4 +1,311 @@
-# Reguły klasyfikacji i ekstrakcji dokumentów.
-# Ten plik jest docelowym źródłem konfiguracji (wzorzec Registry).
-# Dodanie nowego typu dokumentu lub pola wymaga wyłącznie edycji tego pliku,
-# bez żadnych zmian w kodzie Pythona.
+# =============================================================================
+# Reguły klasyfikacji i ekstrakcji dokumentów — ODWOŁANIA2JSON
+# =============================================================================
+#
+# Ten plik jest jedynym źródłem prawdy dla typów dokumentów, pól i reguł.
+# Dodanie nowego typu dokumentu lub pola wymaga wyłącznie edycji tego pliku
+# (wzorzec Registry) — bez zmian w kodzie Pythona.
+#
+# Typ pola (type):
+#   string / date / number / boolean -> wartość skalarna + rules[]
+#   object -> zagnieżdżone pola w `fields`
+#   array  -> elementy opisane w `items.fields` (na razie ekstrahowany 1 element)
+#
+# Reguła ekstrakcji (kind):
+#   regex -> pattern, group (nr grupy, domyślnie 0), flags [IGNORECASE, MULTILINE, DOTALL],
+#            output: value (domyślnie) | boolean (sama obecność wzorca)
+#
+# Każde wyekstrahowane pole zwraca obiekt: {value, source_text, rule_used}.
+
+version: "2.0"
+
+document_types:
+  # ---------------------------------------------------------------------------
+  # 1. Odwołanie do KIO
+  # ---------------------------------------------------------------------------
+  odwolanie:
+    label: "Odwołanie do KIO"
+    classification:
+      - kind: regex
+        pattern: '\b(?:odwołanie|odwołuj|KIO|Krajowa Izba Odwoławcza)\b'
+        flags: [IGNORECASE]
+    structure:
+      OdwolanieKIO:
+        type: object
+        fields:
+          data:
+            type: date
+            rules:
+              - kind: regex
+                pattern: '\bdata[ \t]*[:.]?[ \t]*(\d{1,2}[./-]\d{1,2}[./-]\d{2,4})'
+                group: 1
+                flags: [IGNORECASE, MULTILINE]
+          czynnosc_dzien:
+            type: date
+            rules:
+              - kind: regex
+                pattern: '\bczynno(?:ść|sc)\w*\s*(?:w dniu|dnia|dniem)?[ \t]*[:.]?[ \t]*(\d{1,2}[./-]\d{1,2}[./-]\d{2,4})'
+                group: 1
+                flags: [IGNORECASE, MULTILINE]
+          czynnosc_powod_id:
+            type: string
+            rules:
+              - kind: regex
+                pattern: '\b(?:art\.?|artykuł)\s*(\d+\w{0,3})'
+                group: 1
+                flags: [IGNORECASE]
+          czynnosc_opis:
+            type: string
+            rules:
+              - kind: regex
+                pattern: '\bczynno(?:ść|sc)\w*[ \t]*[:.]?[ \t]*([^\r\n]+)'
+                group: 1
+                flags: [IGNORECASE]
+          miejscowosc:
+            type: string
+            rules:
+              - kind: regex
+                pattern: '\b(?:miejscowo(?:ść|sc)|sporządzono w)[ \t]*[:.]?[ \t]*([A-ZŻŹĆĄŚĘŁŃÓ][a-zżźćąśęłńó]+)'
+                group: 1
+                flags: [IGNORECASE, MULTILINE]
+
+      Odwolujacy:
+        type: array
+        items:
+          fields:
+            krs:
+              type: string
+              rules:
+                - kind: regex
+                  pattern: '\bKRS[ \t]*[:.]?[ \t]*(\d{10})'
+                  group: 1
+                  flags: [IGNORECASE]
+            nazwa:
+              type: string
+              rules:
+                - kind: regex
+                  pattern: '\b(?:nazwa|firma)[ \t]*[:.]?[ \t]*([^\r\n]+)'
+                  group: 1
+                  flags: [IGNORECASE]
+            nip:
+              type: string
+              rules:
+                - kind: regex
+                  pattern: '\bNIP[ \t]*[:.]?[ \t]*(\d{3}[- ]?\d{3}[- ]?\d{2}[- ]?\d{2})'
+                  group: 1
+                  flags: [IGNORECASE]
+            regon:
+              type: string
+              rules:
+                - kind: regex
+                  pattern: '\bREGON[ \t]*[:.]?[ \t]*(\d{9}(?:\d{5})?)'
+                  group: 1
+                  flags: [IGNORECASE]
+            "przez-pelnomocnika":
+              type: boolean
+              rules:
+                - kind: regex
+                  pattern: '\bprzez\s+pełnomocnika\b'
+                  output: boolean
+                  flags: [IGNORECASE]
+            pelnomocnik:
+              type: string
+              rules:
+                - kind: regex
+                  pattern: '\bpełnomocnik\w*[ \t]*[:.]?[ \t]*([^\r\n]+)'
+                  group: 1
+                  flags: [IGNORECASE]
+
+      Zamawiajacy:
+        type: array
+        items:
+          fields:
+            nazwa:
+              type: string
+              rules:
+                - kind: regex
+                  pattern: '\bZamawiając\w+[ \t]*[:.]?[ \t]*([^\r\n]+)'
+                  group: 1
+                  flags: [IGNORECASE]
+            nip:
+              type: string
+              rules:
+                - kind: regex
+                  pattern: '\bNIP[ \t]*[:.]?[ \t]*(\d{3}[- ]?\d{3}[- ]?\d{2}[- ]?\d{2})'
+                  group: 1
+                  flags: [IGNORECASE]
+            regon:
+              type: string
+              rules:
+                - kind: regex
+                  pattern: '\bREGON[ \t]*[:.]?[ \t]*(\d{9}(?:\d{5})?)'
+                  group: 1
+                  flags: [IGNORECASE]
+            adres:
+              type: string
+              rules:
+                - kind: regex
+                  pattern: '\b(?:adres|ul\.)[ \t]*[:.]?[ \t]*([^\r\n]+)'
+                  group: 1
+                  flags: [IGNORECASE]
+
+      ZamowieniePubliczne:
+        type: object
+        fields:
+          numer_postepowania:
+            type: string
+            rules:
+              - kind: regex
+                pattern: '\b(?:numer|nr|znak)\s+(?:postępowania|sprawy|zamówienia)?[ \t]*[:.]?[ \t]*([A-Za-z0-9/.\-]+)'
+                group: 1
+                flags: [IGNORECASE]
+          nazwa:
+            type: string
+            rules:
+              - kind: regex
+                pattern: '\b(?:nazwa|przedmiot)\s+zamówienia[ \t]*[:.]?[ \t]*([^\r\n]+)'
+                group: 1
+                flags: [IGNORECASE]
+          tryb:
+            type: string
+            rules:
+              - kind: regex
+                pattern: '\btryb[ \t]*[:.]?[ \t]*([^\r\n]+)'
+                group: 1
+                flags: [IGNORECASE]
+          data_ogloszenia:
+            type: date
+            rules:
+              - kind: regex
+                pattern: '\b(?:data\s+ogłoszenia|ogłoszon\w+)[ \t]*[:.]?[ \t]*(\d{1,2}[./-]\d{1,2}[./-]\d{2,4})'
+                group: 1
+                flags: [IGNORECASE, MULTILINE]
+
+  # ---------------------------------------------------------------------------
+  # 2. Pełnomocnictwo
+  # ---------------------------------------------------------------------------
+  pelnomocnictwo:
+    label: "Pełnomocnictwo"
+    classification:
+      - kind: regex
+        pattern: '\b(?:pełnomocnictwo|pełnomocnik|mocodawca)\b'
+        flags: [IGNORECASE]
+    structure:
+      mocodawca:
+        type: object
+        fields:
+          dane_osoby:
+            type: object
+            fields:
+              imie_nazwisko:
+                type: string
+                rules:
+                  - kind: regex
+                    pattern: '\b(?:imię i nazwisko|imie i nazwisko)[ \t]*[:.]?[ \t]*([^\r\n]+)'
+                    group: 1
+                    flags: [IGNORECASE]
+              pesel:
+                type: string
+                rules:
+                  - kind: regex
+                    pattern: '\bPESEL[ \t]*[:.]?[ \t]*(\d{11})'
+                    group: 1
+                    flags: [IGNORECASE]
+              adres:
+                type: string
+                rules:
+                  - kind: regex
+                    pattern: '\b(?:adres|zamieszkał\w*|zamieszkal\w*)[ \t]*[:.]?[ \t]*([^\r\n]+)'
+                    group: 1
+                    flags: [IGNORECASE]
+          podpisujacy:
+            type: object
+            fields:
+              imie_nazwisko:
+                type: string
+                rules:
+                  - kind: regex
+                    pattern: '\bpodpisując\w*[ \t]*[:.]?[ \t]*([^\r\n]+)'
+                    group: 1
+                    flags: [IGNORECASE]
+      pelnomocnicy:
+        type: array
+        items:
+          fields:
+            imie_nazwisko:
+              type: string
+              rules:
+                - kind: regex
+                  pattern: '\bpełnomocnik\w*[ \t]*[:.]?[ \t]*([^\r\n]+)'
+                  group: 1
+                  flags: [IGNORECASE]
+            pesel:
+              type: string
+              rules:
+                - kind: regex
+                  pattern: '\bPESEL[ \t]*[:.]?[ \t]*(\d{11})'
+                  group: 1
+                  flags: [IGNORECASE]
+            adres:
+              type: string
+              rules:
+                - kind: regex
+                  pattern: '\b(?:adres|zamieszkał\w*|zamieszkal\w*)[ \t]*[:.]?[ \t]*([^\r\n]+)'
+                  group: 1
+                  flags: [IGNORECASE]
+
+  # ---------------------------------------------------------------------------
+  # 3. Przelew bankowy
+  # ---------------------------------------------------------------------------
+  przelew:
+    label: "Przelew bankowy"
+    classification:
+      - kind: regex
+        pattern: '\b(?:przelew|potwierdzenie przelewu|dowód wpłaty)\b'
+        flags: [IGNORECASE]
+    structure:
+      przelew_bankowy:
+        type: object
+        fields:
+          data_operacji:
+            type: date
+            rules:
+              - kind: regex
+                pattern: '\bdata\s+operacji[ \t]*[:.]?[ \t]*(\d{1,2}[./-]\d{1,2}[./-]\d{2,4})'
+                group: 1
+                flags: [IGNORECASE, MULTILINE]
+          kwota:
+            type: number
+            rules:
+              - kind: regex
+                pattern: '\bkwota[ \t]*[:.]?[ \t]*([\d\s]+[.,]\d{2})\s*(?:PLN|zł)?'
+                group: 1
+                flags: [IGNORECASE]
+          na_rachunek:
+            type: string
+            rules:
+              - kind: regex
+                pattern: '\b(?:na\s+rachunek|rachunek\s+odbiorcy|odbiorca)[ \t]*[:.]?[ \t]*([A-Z]{2}[0-9\s]{18,30})'
+                group: 1
+                flags: [IGNORECASE]
+          numer_transakcji:
+            type: string
+            rules:
+              - kind: regex
+                pattern: '\b(?:numer|nr)\s+transakcji[ \t]*[:.]?[ \t]*([A-Za-z0-9/.\-]+)'
+                group: 1
+                flags: [IGNORECASE]
+          tytul:
+            type: string
+            rules:
+              - kind: regex
+                pattern: '\btytuł(?:em|u)?[ \t]*[:.]?[ \t]*([^\r\n]+)'
+                group: 1
+                flags: [IGNORECASE]
+          z_rachunku:
+            type: string
+            rules:
+              - kind: regex
+                pattern: '\b(?:z\s+rachunku|rachunek\s+nadawcy)[ \t]*[:.]?[ \t]*([A-Z]{2}[0-9\s]{18,30})'
+                group: 1
+                flags: [IGNORECASE]

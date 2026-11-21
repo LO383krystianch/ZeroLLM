@@ -8,8 +8,8 @@ Dla każdego pliku PDF w ./input/ (rekurencyjnie, z podfolderami) generowany
 jest wynikowy plik JSON w ./output/ z zachowaniem struktury katalogów,
 np. input/case1/doc.pdf -> output/case1/doc.json.
 
-Reguły klasyfikacji/ekstrakcji są ładowane dynamicznie z config/document_rules.yaml
-(wzorzec Registry) — żadne nazwy dokumentów ani pól nie są wpisane na sztywno.
+Ekstrakcja oparta o src/extractor.py (wzorzec Registry): typ dokumentu i pola
+pochodzą wyłącznie z config/document_rules.yaml.
 """
 
 from __future__ import annotations
@@ -20,26 +20,15 @@ import sys
 from pathlib import Path
 from typing import Any
 
-import yaml
-
 try:
-    from pypdf import PdfReader
-except ImportError:  # pragma: no cover
-    PdfReader = None
+    from . import extractor
+except ImportError:  # uruchomienie jako skrypt: python src/main.py
+    import extractor
 
 ROOT = Path(__file__).resolve().parents[1]
 INPUT_DIR = ROOT / "input"
 OUTPUT_DIR = ROOT / "output"
-CONFIG_DIR = ROOT / "config"
-DEFAULT_RULES = CONFIG_DIR / "document_rules.yaml"
-
-
-def load_rules(path: Path) -> dict[str, Any]:
-    """Wczytuje reguły z pliku YAML (pusty/brak pliku -> {})."""
-    if not path.exists():
-        return {}
-    with path.open("r", encoding="utf-8") as fh:
-        return yaml.safe_load(fh) or {}
+DEFAULT_RULES = ROOT / "config" / "document_rules.yaml"
 
 
 def find_pdfs(input_dir: Path) -> list[Path]:
@@ -49,34 +38,30 @@ def find_pdfs(input_dir: Path) -> list[Path]:
     return sorted(p for p in input_dir.rglob("*.pdf") if p.is_file())
 
 
-def extract_text(path: Path) -> str:
-    """Wyodrębnia tekst z pliku PDF za pomocą pypdf."""
-    if PdfReader is None:
-        raise RuntimeError("Brak biblioteki pypdf. Zainstaluj zależności z requirements.txt.")
-    reader = PdfReader(str(path))
-    return "\n".join(page.extract_text() or "" for page in reader.pages)
-
-
-def build_result(relative: Path, text: str, rules: dict[str, Any]) -> dict[str, Any]:
-    """Buduje (na razie pusty/mockowany) wynik zgodny z regułami z konfiguracji.
-
-    Każde pole ma docelowo obiekt: {value, source_text, rule_used}.
-    Dopóki config/document_rules.yaml nie zawiera reguł, lista pól jest pusta.
-    """
-    document_type = rules.get("default_document_type") if isinstance(rules, dict) else None
+def build_result(
+    relative: Path,
+    text: str,
+    ex: extractor.DocumentExtractor,
+) -> dict[str, Any]:
+    """Buduje wynik JSON z transparentnością dla pojedynczego dokumentu."""
+    document_type = ex.detect(text)
+    data = ex.extract(text, document_type)
     return {
         "source": relative.as_posix(),
         "document_type": document_type,
-        "fields": [],
+        "data": data,
         "transparency": {
-            "rule_used": None,
-            "source_fragment": text[:500] if text else "",
             "extracted_text_length": len(text),
+            "text_preview": text[:500],
         },
     }
 
 
-def process(input_dir: Path, output_dir: Path, rules: dict[str, Any]) -> list[Path]:
+def process(
+    input_dir: Path,
+    output_dir: Path,
+    ex: extractor.DocumentExtractor,
+) -> list[Path]:
     """Przetwarza wszystkie PDF-y i zwraca listę utworzonych plików wyjściowych."""
     outputs: list[Path] = []
     for pdf in find_pdfs(input_dir):
@@ -84,19 +69,15 @@ def process(input_dir: Path, output_dir: Path, rules: dict[str, Any]) -> list[Pa
         out = output_dir / relative.with_suffix(".json")
 
         try:
-            text = extract_text(pdf)
-            result = build_result(relative, text, rules)
+            text = extractor.extract_text_from_pdf(pdf)
+            result = build_result(relative, text, ex)
         except Exception as exc:  # nie przerywaj całego batcha na jednym pliku
             result = {
                 "source": relative.as_posix(),
                 "document_type": None,
-                "fields": [],
+                "data": {},
                 "error": str(exc),
-                "transparency": {
-                    "rule_used": None,
-                    "source_fragment": "",
-                    "extracted_text_length": 0,
-                },
+                "transparency": {"extracted_text_length": 0, "text_preview": ""},
             }
 
         out.parent.mkdir(parents=True, exist_ok=True)
@@ -120,9 +101,9 @@ def main(argv: list[str] | None = None) -> int:
 
     input_dir = Path(args.input)
     output_dir = Path(args.output)
-    rules = load_rules(Path(args.rules))
 
-    outputs = process(input_dir, output_dir, rules)
+    ex = extractor.load_extractor(Path(args.rules))
+    outputs = process(input_dir, output_dir, ex)
 
     print(f"Przetworzono {len(outputs)} plików PDF.", file=sys.stderr)
     for out in outputs:
