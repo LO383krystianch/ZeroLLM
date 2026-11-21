@@ -32,11 +32,20 @@ Projekt zbudowany w całości w oparciu o **Python 3.13+**, działa lokalnie na
 
 ### 1. Przetwarzanie wsadowe (ocena automatyczna)
 
+Windows:
+
 ```bat
 start.bat
 ```
 
-Wczytuje wszystkie pliki `*.pdf` z `./input/` i zapisuje wyniki do `./output/`.
+Linux / macOS:
+
+```bash
+./start.sh
+```
+
+Skrypt sam znajduje Pythona, instaluje zależności (jeśli ich brak) i wczytuje
+wszystkie pliki `*.pdf` z `./input/`, zapisując wyniki do `./output/`.
 
 ### 2. Pojedynczy plik (CLI)
 
@@ -182,7 +191,8 @@ pobranie wynikowego JSON (pojedynczo lub zbiorczo jako ZIP).
 ├── docker-compose.yml
 ├── requirements.txt
 ├── run.bat                 # CLI — pojedynczy plik
-├── start.bat               # wsadowe przetwarzanie input/ -> output/
+├── start.bat               # wsadowe przetwarzanie input/ -> output/ (Windows)
+├── start.sh                # wsadowe przetwarzanie (Linux/macOS)
 └── README.md
 ```
 
@@ -214,12 +224,22 @@ pip install -r requirements.txt
 
 ## Uruchomienie
 
-### 1. Przetwarzanie wsadowe — `start.bat` (ocena automatyczna)
+### 1. Przetwarzanie wsadowe — `start.bat` / `start.sh` (ocena automatyczna)
+
+Windows:
 
 ```bat
 start.bat
 ```
 
+Linux / macOS:
+
+```bash
+./start.sh
+```
+
+- Skrypt **sam znajduje Pythona** i **instaluje zależności** (jeśli ich brak),
+  więc wystarczy go uruchomić po sklonowaniu repozytorium.
 - Rekurencyjnie wyszukuje `*.pdf` w `./input/` (także w podfolderach).
 - Dla każdego PDF: wyciąga tekst (pypdf/OCR), klasyfikuje i ekstrahuje pola.
 - Zapisuje JSON do `./output/`, odtwarzając strukturę podfolderów.
