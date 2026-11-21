@@ -30,7 +30,7 @@ document_types:
     label: "Odwołanie do KIO"
     classification:
       - kind: regex
-        pattern: '\b(?:Odwołując\w*|O\s*D\s*W\s*O\s*Ł\s*A\s*N\s*I\s*E)\b'
+        pattern: '\bOdwołując\w*\s*[:;]'
         flags: [IGNORECASE]
     structure:
       OdwolanieKIO:
@@ -275,7 +275,7 @@ document_types:
     label: "Pełnomocnictwo"
     classification:
       - kind: regex
-        pattern: '\b(?:P\s*E\s*Ł\s*N\s*O\s*M\s*O\s*C\s*N\s*I\s*C\s*T\s*W\s*O|mocodawc\w*|pełnomocnik\w*)\b'
+        pattern: '\b(?:Mocodawc\w*|udziel\w*\s+pełnomocnictw\w*|ustanawi\w*\s+pełnomocniki\w*|upoważni\w*\s+(?:adw\.|r\.\s*pr\.))'
         flags: [IGNORECASE]
     structure:
       mocodawca:
@@ -405,11 +405,8 @@ document_types:
   przelew:
     label: "Przelew bankowy"
     classification:
-      - kind: filename
-        pattern: 'przelew'
-        flags: [IGNORECASE]
       - kind: regex
-        pattern: '\b(?:przelew\w*|potwierdzenie\s+wykonania\s+przelewu|dowód\s+wpłaty|polecenie\s+przelewu)\b'
+        pattern: '\b(?:polecenie\s+przelewu|potwierdzenie\s+(?:przelewu(?:\s+krajowego)?|transakcji|realizacji(?:\s+(?:polecenia\s+)?przelewu)?|wykonania\s+przelewu)|przelew\s+(?:krajowy|bankowy|natychmiastowy)|dowód\s+wpłaty|rachunek\s+(?:obciążany|odbiorcy|beneficjenta|nadawcy|zleceniodawcy|uznawany)|adresat\s+przelewu|płatnik|beneficjent|dane\s+(?:nadawcy|odbiorcy)|kwota\s+(?:operacji|przelewu))\b'
         flags: [IGNORECASE]
     structure:
       przelew_bankowy:
