@@ -14,7 +14,7 @@
       "regon": "999066287",
       "przez-pelnomocnika": 1,
       "pelnomocnik": {
-        "imie_nazwisko": "Marek Sikorski\nadres do korespondencji",
+        "imie_nazwisko": "Marek Sikorski",
         "nazwa": "Kancelaria Prawna i Partnerzy",
         "mail": "biuro@kontakt.example"
       }
@@ -32,7 +32,7 @@
   "ZamowieniePubliczne": {
     "numer_bzp": "2026/BZP00999180",
     "numer_postepowania": "SWZ.429.2026",
-    "numer_ted": null,
+    "numer_ted": "999431-2026",
     "tytul": "Zakup i dostawa sprzętu komputerowego wraz z oprogramowaniem oraz usługą wdrożenia"
   }
 }

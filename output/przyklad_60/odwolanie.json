@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9999233530",
-      "nazwa": "Helvix Eko-Serwis sp.k. ul. Jagiellońska 48",
+      "nazwa": "Helvix Eko-Serwis sp.k.",
       "nip": "9995558958",
       "regon": "999054443",
       "przez-pelnomocnika": 1,
@@ -30,9 +30,9 @@
     }
   ],
   "ZamowieniePubliczne": {
-    "numer_bzp": null,
+    "numer_bzp": "2026/BZP00999740",
     "numer_postepowania": "SZP-46/2026",
-    "numer_ted": null,
+    "numer_ted": "999599-2026",
     "tytul": "Prowadzenie Punktu Selektywnej Zbiórki Odpadów Komunalnych w latach 2027–2029"
   }
 }

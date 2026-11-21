@@ -4,7 +4,7 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9999405188",
-        "nazwa": "Łódź",
+        "nazwa": "Belmoria Rozwiązania S.A.",
         "nip": "9999284065",
         "typ": "osoba_prawna"
       },
@@ -22,10 +22,6 @@
     },
     {
       "imie_nazwisko": "Jolanta\nZajkowski",
-      "pesel": null
-    },
-    {
-      "imie_nazwisko": "Aleksandra Marciniak",
       "pesel": null
     }
   ]

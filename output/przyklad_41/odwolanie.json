@@ -9,12 +9,12 @@
   "Odwolujacy": [
     {
       "krs": "9995540127",
-      "nazwa": "Torvex Budownictwo sp. z o.o. ul. Przemysłowa 8",
+      "nazwa": "Torvex Budownictwo sp. z o.o.",
       "nip": "9992284611",
       "regon": "999473016",
       "przez-pelnomocnika": 1,
       "pelnomocnik": {
-        "imie_nazwisko": "Piotr Zalewski\nadres do korespondencji",
+        "imie_nazwisko": "Piotr Zalewski",
         "nazwa": "Kancelaria Adwokacka adw. Piotr Zalewski",
         "mail": "p.zalewski@adwokat.example"
       }
@@ -32,7 +32,7 @@
   "ZamowieniePubliczne": {
     "numer_bzp": null,
     "numer_postepowania": "IR.271.14.2026",
-    "numer_ted": null,
+    "numer_ted": "999327-2026",
     "tytul": "Budowa sali gimnastycznej wraz z zapleczem sanitarno-szatniowym i infrastrukturą towarzyszącą przy Szkole Podstawowej nr 3 w Brzozowie Pomorskim"
   }
 }

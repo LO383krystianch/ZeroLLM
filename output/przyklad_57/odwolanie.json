@@ -1,10 +1,10 @@
 {
   "OdwolanieKIO": {
-    "data": null,
+    "data": "2026-06-16",
     "czynnosc_dzien": "2026-06-09",
     "czynnosc_powod_id": 9,
     "czynnosc_opis": "Decyzja o unieważnieniu postępowania",
-    "miejscowosc": null
+    "miejscowosc": "Koszalin"
   },
   "Odwolujacy": [
     {
@@ -14,7 +14,7 @@
       "regon": "999424319",
       "przez-pelnomocnika": 1,
       "pelnomocnik": {
-        "imie_nazwisko": "Barbara Włodarczyk\nadres do korespondencji",
+        "imie_nazwisko": "Barbara Włodarczyk",
         "nazwa": "Kancelaria Radcy Prawnego Barbara Włodarczyk",
         "mail": "kancelaria@wlodarczyk.example"
       }
@@ -30,7 +30,7 @@
     }
   ],
   "ZamowieniePubliczne": {
-    "numer_bzp": null,
+    "numer_bzp": "2026/BZP00999236",
     "numer_postepowania": "ZP.50.2026",
     "numer_ted": null,
     "tytul": "Dostawa sprzętu do sterylizacji wraz z serwisem gwarancyjnym"

@@ -41,7 +41,7 @@ document_types:
             normalize: iso_date
             rules:
               - kind: regex
-                pattern: '^\s*[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+\s*,\s*dnia\s*(\d{1,2}\s+(?:stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|września|października|listopada|grudnia)\s+\d{4})'
+                pattern: '^\s*[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)*\s*,\s*(?:dnia\s*)?(\d{4}-\d{2}-\d{2}|\d{1,2}[./-]\d{1,2}[./-]\d{2,4}|\d{1,2}\s+(?:stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|września|października|listopada|grudnia)\s+\d{4})'
                 group: 1
                 flags: [IGNORECASE, MULTILINE]
           czynnosc_dzien:
@@ -81,14 +81,14 @@ document_types:
             type: string
             rules:
               - kind: regex
-                pattern: '^\s*([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)\s*,\s*dnia\b'
+                pattern: '^\s*([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)*)\s*,\s*(?:dnia\b|\d)'
                 group: 1
                 flags: [MULTILINE]
 
       Odwolujacy:
         type: array
         after: '^\s*Odwołujący\s*:'
-        until: '^\s*(?:Zamawiający|dotyczy|ODWOŁANIE)\b'
+        until: '^\s*(?:Zamawiający|dotyczy|ODWOŁANIE|Wykonawca\s+wybrany)\b'
         flags: [IGNORECASE, MULTILINE]
         items:
           fields:
@@ -111,7 +111,7 @@ document_types:
                 - kind: regex
                   require: 'Konsorcjum'
                   after: 'Lider\s+Konsorcjum\s*:'
-                  pattern: '^\s*([\s\S]*?)(?=\s*,)'
+                  pattern: '^\s*([^\r\n]+)'
                   group: 1
                   normalize: whitespace
                   flags: [MULTILINE]
@@ -160,6 +160,10 @@ document_types:
                   type: string
                   rules:
                     - kind: regex
+                      pattern: '\breprezentowan\w*\s+przez\s*:\s*(?:r\.\s*pr\.|adw\.)\s*([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)+?)(?=\s*(?:adres|tel|e-mail|@)\b)'
+                      group: 1
+                      flags: [IGNORECASE]
+                    - kind: regex
                       pattern: '\breprezentowan\w*\s+przez\s*:\s*(?:r\.\s*pr\.|adw\.)\s*([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)+)'
                       group: 1
                       flags: [IGNORECASE]
@@ -167,7 +171,7 @@ document_types:
                   type: string
                   rules:
                     - kind: regex
-                      pattern: '\badres\s+do\s+korespondencji\s*:\s*([\s\S]*?)(?=\s*,\s*ul\.)'
+                      pattern: '\badres\s+do\s+korespondencji\s*:\s*([\s\S]*?)(?=\s*,\s*(?:ul\.|al\.|pl\.|os\.|ulica|aleja|plac|osiedle|skwer|rondo))'
                       group: 1
                       normalize: whitespace
                       flags: [IGNORECASE]
@@ -181,8 +185,10 @@ document_types:
 
       Zamawiajacy:
         type: array
-        after: '^\s*Zamawiający\s*:'
-        until: '^\s*(?:Odwołujący|dotyczy|ODWOŁANIE)\b'
+        after: '^\s*Zamawiający[^:]*:'
+        until: '^\s*(?:Odwołujący|dotyczy|ODWOŁANIE|O\s*D\s*W\s*O\s*Ł\s*A\s*N\s*I\s*E)\b'
+        require: 'wspólnie|Lider|Partner'
+        separator: '\d+\)\s*'
         flags: [IGNORECASE, MULTILINE]
         items:
           fields:
@@ -197,7 +203,7 @@ document_types:
               type: string
               rules:
                 - kind: regex
-                  pattern: '^\s*([^\r\n]+)'
+                  pattern: '^\s*(?:Zamawiający\s*[–—-]\s*(?:Lider|Partner)[^\n]*\s*\n\s*)?([^\r\n]+)'
                   group: 1
                   flags: [MULTILINE]
             nip:
@@ -216,12 +222,11 @@ document_types:
                   flags: [IGNORECASE]
             prowadzacy_postepowanie:
               type: integer
-              normalize: bool_to_int
+              normalize: prowadzacy_flag
               rules:
                 - kind: regex
-                  require: 'prowadząc\w*\s+postępowanie|lider\w*\s+postępowania'
-                  pattern: '\b(prowadząc\w*\s+postępowanie|lider\w*\s+postępowania)\b'
-                  output: boolean
+                  pattern: '([\s\S]*)'
+                  group: 1
                   flags: [IGNORECASE]
 
       ZamowieniePubliczne:
@@ -229,9 +234,12 @@ document_types:
         fields:
           numer_bzp:
             type: string
+            normalize: compact
             rules:
               - kind: regex
-                pattern: '\b(\d{4}/BZP\d{6,10})'
+                after: 'dotyczy'
+                until: 'Działając|ODWOŁANIE'
+                pattern: '\b(\d{4}/BZP\s*\d{6,10})'
                 group: 1
                 flags: [IGNORECASE]
           numer_postepowania:
@@ -246,7 +254,9 @@ document_types:
             normalize: ted_number
             rules:
               - kind: regex
-                pattern: '\b(?:TED|ogłoszenia\s+TED)\s*:?\s*(\d{6}-\d{4}|\d{4}/S\d{3}-\d{6})'
+                after: 'dotyczy'
+                until: 'Działając|ODWOŁANIE'
+                pattern: '\b(\d{6}-\d{4}|\d{4}/S\s*\d{3}-\d{6})'
                 group: 1
                 flags: [IGNORECASE]
           tytul:
@@ -287,6 +297,10 @@ document_types:
                       pattern: '\b(?:imię i nazwisko|imie i nazwisko)\s*[:.]?\s*([^\r\n]+)'
                       group: 1
                       flags: [IGNORECASE]
+                    - kind: regex
+                      pattern: '\b(?:Ja\s*,?\s*niżej\s+podpisany\w*|niżej\s+podpisany\w*)\s+([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)+)'
+                      group: 1
+                      flags: [IGNORECASE]
                 krs:
                   type: string
                   rules:
@@ -298,7 +312,32 @@ document_types:
                   type: string
                   rules:
                     - kind: regex
-                      pattern: '^\s*(?:P\s*E\s*Ł\s*N\s*O\s*M\s*O\s*C\s*N\s*I\s*C\s*T\s*W\s*O(?:\s+PROCESOWE)?\s*\n\s*)?([\s\S]*?)(?=\s+z\s+siedzibą|\s*\(KRS|\s*,|\s+\bul\.|\s*\n\s*(?:KRS|NIP|ul\.))'
+                      pattern: '\bpod\s+firmą\s*([\s\S]*?)(?=\s*,\s*ul\.|\s*,\s*NIP|\s+ul\.|\s+NIP)'
+                      group: 1
+                      normalize: whitespace
+                      flags: [IGNORECASE]
+                    - kind: regex
+                      pattern: '\bMocodawc[ąa]\s+jest\s*([\s\S]*?)(?=\s*,\s*ul\.|\s*,\s*KRS|\s*,\s*NIP|\s+ul\.|\s+KRS|\s+NIP)'
+                      group: 1
+                      normalize: whitespace
+                      flags: [IGNORECASE]
+                    - kind: regex
+                      pattern: '\bMocodawc[ąa][ \t]+(?!jest\b|ustanawi\w*|upoważni\w*|udziel\w*|zobowiązuj\w*)([A-ZĄĆĘŁŃÓŚŹŻ][^\n]*?)(?=\s+ul\.|\s*,\s*ul\.|\s+KRS|\s*,\s*KRS|\s+NIP|\s*,\s*NIP|\s+REGON|\s*,\s*REGON)'
+                      group: 1
+                      normalize: whitespace
+                      flags: [IGNORECASE]
+                    - kind: regex
+                      pattern: '\bDziałając\s+w\s+imieniu\s+([A-ZĄĆĘŁŃÓŚŹŻ][\s\S]*?)(?=\s*\(dalej|\s*\(zwany|\s*\(zwaną|\s*\(zwanego)'
+                      group: 1
+                      normalize: whitespace
+                      flags: [IGNORECASE]
+                    - kind: regex
+                      pattern: '^\s*M\s*O\s*C\s*O\s*D\s*A\s*W\s*C\s*A\s*\n\s*([\s\S]*?)(?=\s*\n\s*(?:ul\.|KRS|NIP|REGON))'
+                      group: 1
+                      normalize: whitespace
+                      flags: [IGNORECASE]
+                    - kind: regex
+                      pattern: '^\s*(?:[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)*\s*,\s*[^\n]*\n\s*)?(?:P\s*E\s*Ł\s*N\s*O\s*M\s*O\s*C\s*N\s*I\s*C\s*T\s*W\s*O[^\n]*\n\s*)?([\s\S]*?)(?=\s+z\s+siedzibą|\s*\(KRS|\s*,|\s+\bul\.|\s*\n\s*(?:KRS|NIP|ul\.))'
                       group: 1
                       normalize: whitespace
                       flags: [IGNORECASE]
@@ -314,9 +353,8 @@ document_types:
                   normalize: typ_podmiotu
                   rules:
                     - kind: regex
-                      pattern: '\bKRS\s*\d{10}'
-                      group: 0
-                      flags: [IGNORECASE]
+                      pattern: '([\s\S]*)'
+                      group: 1
             podpisujacy:
               type: array
               select_parent_block: true
@@ -336,15 +374,19 @@ document_types:
                         flags: [MULTILINE]
       pelnomocnicy:
         type: array
-        after: 'udzielają\s+pełnomocnictwa\s*:'
-        until: 'Pełnomocnictwo\s+udzielone'
-        separator: ',\s*'
+        after: 'udziel\w*\s+pełnomocnictw\w*|ustanawiam\s+pełnomocniki\w*|upoważniam\s+|Pełnomocnicy|PEŁNOMOCNIK'
+        until: 'Mocodawca\s*:|Pełnomocnictwo\s+przyjmuj|^\s*W\s+imieniu'
+        separator: '(?:,\s*|\n\s*)(?=(?:r\.\s*pr\.|adw\.))'
         flags: [IGNORECASE]
         items:
           fields:
             imie_nazwisko:
               type: string
               rules:
+                - kind: regex
+                  pattern: '(?:r\.\s*pr\.|adw\.)\s*([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)+?)(?=\s*(?:nr\s+wpisu|PESEL|\())'
+                  group: 1
+                  flags: [IGNORECASE]
                 - kind: regex
                   pattern: '(?:r\.\s*pr\.|adw\.)\s*([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)+)'
                   group: 1
@@ -367,7 +409,7 @@ document_types:
         pattern: 'przelew'
         flags: [IGNORECASE]
       - kind: regex
-        pattern: '\b(?:przelew\w*|potwierdzenie\s+wykonania\s+przelewu|dowód\s+wpłaty)\b'
+        pattern: '\b(?:przelew\w*|potwierdzenie\s+wykonania\s+przelewu|dowód\s+wpłaty|polecenie\s+przelewu)\b'
         flags: [IGNORECASE]
     structure:
       przelew_bankowy:
@@ -378,7 +420,7 @@ document_types:
             normalize: iso_date
             rules:
               - kind: regex
-                pattern: '\bdata\s+operacji\s*[:.]?\s*(\d{1,2}[./-]\d{1,2}[./-]\d{2,4})'
+                pattern: '\b(?:data\s+(?:operacji|transakcji|realizacji|wykonania)|w\s+dniu)\s*[\s.:]*(\d{4}-\d{2}-\d{2}|\d{1,2}[./-]\d{1,2}[./-]\d{2,4}|\d{1,2}\s+(?:stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|września|października|listopada|grudnia)\s+\d{4})'
                 group: 1
                 flags: [IGNORECASE]
           kwota:
@@ -386,7 +428,7 @@ document_types:
             normalize: amount_float
             rules:
               - kind: regex
-                pattern: '\bkwota\s*[:.]?\s*([\d\s]+[.,]\d{2})\s*(?:PLN|zł)?'
+                pattern: '\b(?:kwota(?:\s+(?:operacji|przelewu))?|wartość|w\s+kwocie)\s*[\s.:]*(?:PLN|zł)?\s*(\d[\d\s]*[.,]\d{2})\s*(?:PLN|zł)?'
                 group: 1
                 flags: [IGNORECASE]
           na_rachunek:
@@ -394,21 +436,22 @@ document_types:
             normalize: iban_clean
             rules:
               - kind: regex
-                pattern: '\b(?:rachunek\s+odbiorcy|na\s+rachunek)\s*[:.]?\s*([A-Z]{2}\s*\d{2}(?:\s*\d{4}){6})'
+                after: '\b(?:Beneficjent|Adresat\s+przelewu|Odbiorca|Dane\s+odbiorcy|Rachunek\s+(?:odbiorcy|uznawany|beneficjenta)|na\s+rachun\w*(?:\s+nr)?)\b'
+                pattern: '(?:[A-Z]{2}\s*)?(\d{2}(?:\s*\d{4}){6})'
                 group: 1
                 flags: [IGNORECASE]
           numer_transakcji:
             type: string
             rules:
               - kind: regex
-                pattern: '\b(?:numer\s+referencyjny|numer\s+transakcji|nr\s+transakcji)\s*[:.]?\s*([A-Za-z0-9/.\-]+)'
+                pattern: '\b(?:Nr\s+ref(?:\.\s*operacji)?|Numer\s+(?:referencyjny|transakcji)(?:\s+operacji)?|Identyfikator\s+operacji)\s*[\s.:]*([A-Za-z0-9][A-Za-z0-9/.\-]*)'
                 group: 1
                 flags: [IGNORECASE]
           tytul:
             type: string
             rules:
               - kind: regex
-                pattern: '\btytuł\s+przelewu\s*[:.]?\s*([\s\S]*?)(?=\n\s*(?:Numer|Status|Opłata)\b)'
+                pattern: '\b(?:tytuł\s+przelewu|tytuł(?:em)?|opis)\s*[:.]?\s*([\s\S]*?)(?=\n\s*(?:Nr\s+ref|Numer\s+referencyjny|Numer\s+transakcji|Identyfikator|Status|Typ\s+operacji|Kanał|Waluta|Tryb|Opłata|ZREALIZOWANO|Wartość|Data\s+transakcji|Data\s+realizacji|Płatnik|Adresat|Rachunek|Z\s+rachunku)\b)'
                 group: 1
                 normalize: whitespace
                 flags: [IGNORECASE]
@@ -417,6 +460,7 @@ document_types:
             normalize: iban_clean
             rules:
               - kind: regex
-                pattern: '\b(?:rachunek\s+zleceniodawcy|z\s+rachunku|rachunek\s+nadawcy)\s*[:.]?\s*([A-Z]{2}\s*\d{2}(?:\s*\d{4}){6})'
+                after: '\b(?:Płatnik|Nadawca|Zleceniodawca|Dane\s+(?:nadawcy|zleceniodawcy)|Rachunek\s+(?:obciążany|nadawcy|zleceniodawcy)|Z\s+rachunku(?:\s+nr)?)\b'
+                pattern: '(?:[A-Z]{2}\s*)?(\d{2}(?:\s*\d{4}){6})'
                 group: 1
                 flags: [IGNORECASE]

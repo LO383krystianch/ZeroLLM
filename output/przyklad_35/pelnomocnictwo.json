@@ -4,7 +4,7 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9995695391",
-        "nazwa": "MOCODAWCA Rubiconis Automatyka sp. k.",
+        "nazwa": "Rubiconis Automatyka sp. k.",
         "nip": "9997232058",
         "typ": "osoba_prawna"
       },
@@ -17,7 +17,11 @@
   ],
   "pelnomocnicy": [
     {
-      "imie_nazwisko": "Klaudia Szymanski\nnr wpisu WA",
+      "imie_nazwisko": "Klaudia Szymanski",
+      "pesel": null
+    },
+    {
+      "imie_nazwisko": "Norbert Sadowski",
       "pesel": null
     }
   ]

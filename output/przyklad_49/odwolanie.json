@@ -1,15 +1,15 @@
 {
   "OdwolanieKIO": {
-    "data": null,
+    "data": "2026-07-03",
     "czynnosc_dzien": "2026-06-28",
     "czynnosc_powod_id": 10,
     "czynnosc_opis": "Zaniechanie unieważnienia postępowania",
-    "miejscowosc": null
+    "miejscowosc": "Gdańsk"
   },
   "Odwolujacy": [
     {
       "krs": "9998920417",
-      "nazwa": "Altrona Farmacja sp.k. ul. Kolejowa 61",
+      "nazwa": "Altrona Farmacja sp.k.",
       "nip": "9994895854",
       "regon": "999640601",
       "przez-pelnomocnika": 1,
@@ -30,9 +30,9 @@
     }
   ],
   "ZamowieniePubliczne": {
-    "numer_bzp": null,
+    "numer_bzp": "2026/BZP00999201",
     "numer_postepowania": "ZZP-11/2026",
-    "numer_ted": null,
+    "numer_ted": "999983-2026",
     "tytul": "Dostawa sprzętu do sterylizacji wraz z serwisem gwarancyjnym"
   }
 }

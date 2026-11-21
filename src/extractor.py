@@ -132,6 +132,12 @@ def _regex_handler(rule: dict[str, Any], text: str) -> tuple[Any, str, str]:
             return None, "", rule_used
         search_text = text[anchor.end():]
 
+    until = rule.get("until")
+    if until:
+        stop = re.search(str(until), search_text, flags)
+        if stop is not None:
+            search_text = search_text[:stop.start()]
+
     match = re.search(pattern, search_text, flags)
 
     if str(rule.get("output", "value")) == "boolean":
@@ -264,6 +270,8 @@ class DocumentExtractor:
             "reason_opis": self._normalize_reason_opis,
             "ted_number": self._normalize_ted_number,
             "typ_podmiotu": self._normalize_typ_podmiotu,
+            "compact": self._normalize_compact,
+            "prowadzacy_flag": self._normalize_prowadzacy_flag,
         }
 
     @property
@@ -389,7 +397,7 @@ class DocumentExtractor:
         # ``require``: jeśli wzorzec nie występuje, nie dziel tablicy (jeden element).
         require = spec.get("require")
         if require and re.search(str(require), source, _resolve_flags(spec)) is None:
-            parts = [source]
+            parts = [self._scope_source(source, spec)]
         else:
             parts = self._split_items(source, spec)
         if spec.get("select_parent_block") and parent_index is not None:
@@ -417,8 +425,8 @@ class DocumentExtractor:
         return [p for p in re.split(str(sub), source, flags=_resolve_flags(spec)) if p.strip()]
 
     @staticmethod
-    def _split_items(source: str, spec: dict[str, Any]) -> list[str]:
-        """Dzieli źródło tablicy na fragmenty (bloki elementów)."""
+    def _scope_source(source: str, spec: dict[str, Any]) -> str:
+        """Zawęża źródło wg markerów ``after``/``until`` (bez dzielenia)."""
         flags = _resolve_flags(spec)
         after = spec.get("after")
         if after:
@@ -430,10 +438,16 @@ class DocumentExtractor:
             stop = re.search(str(until), source, flags)
             if stop is not None:
                 source = source[:stop.start()]
+        return source
+
+    @staticmethod
+    def _split_items(source: str, spec: dict[str, Any]) -> list[str]:
+        """Dzieli źródło tablicy na fragmenty (bloki elementów)."""
+        source = DocumentExtractor._scope_source(source, spec)
         separator = spec.get("separator")
         if not separator:
             return [source]
-        return [part for part in re.split(str(separator), source, flags=flags) if part.strip()]
+        return [part for part in re.split(str(separator), source, flags=_resolve_flags(spec)) if part.strip()]
 
     def _extract_scalar(
         self,
@@ -564,14 +578,31 @@ class DocumentExtractor:
         return mapped[1] if mapped else value
 
     def _normalize_ted_number(self, value: Any) -> Any:
-        """Normalizuje numer TED: 'YYYY/S ###-NNNNNN' -> 'NNNNNN-YYYY'."""
+        """Normalizuje numer TED: 'YYYY/S ###-NNNNNN' (także 'S ###') -> 'NNNNNN-YYYY'."""
         if value is None:
             return None
         s = str(value).strip()
-        m = re.match(r"(\d{4})/S\d{3}-(\d{6})", s)
+        m = re.match(r"(\d{4})/S\s*(\d{3})-(\d{6})", s)
         if m:
-            return f"{m.group(2)}-{m.group(1)}"
+            return f"{m.group(3)}-{m.group(1)}"
         return s
+
+    def _normalize_compact(self, value: Any) -> Any:
+        """Usuwa wszystkie białe znaki (spacje, nowe linie)."""
+        if value is None:
+            return None
+        return re.sub(r"\s+", "", str(value))
+
+    def _normalize_prowadzacy_flag(self, value: Any) -> Any:
+        """Flaga prowadzącego postępowanie: 1 (lider), 0 (partner), null (jeden zamawiający)."""
+        if value is None:
+            return None
+        s = str(value)
+        if re.search(r"Lider|prowadząc\w*\s+postępowanie", s, re.IGNORECASE):
+            return 1
+        if re.search(r"Partner", s, re.IGNORECASE):
+            return 0
+        return None
 
     def _normalize_typ_podmiotu(self, value: Any) -> Any:
         """Określa typ mocodawcy: 'osoba_prawna' lub 'osoba_fizyczna'."""

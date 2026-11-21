@@ -14,7 +14,7 @@
       "regon": "999992367",
       "przez-pelnomocnika": 1,
       "pelnomocnik": {
-        "imie_nazwisko": "Aleksandra Wierzbicki\nadres do korespondencji",
+        "imie_nazwisko": "Aleksandra Wierzbicki",
         "nazwa": "Kancelaria Radców Prawnych Spółka z ograniczoną odpowiedzialnością",
         "mail": "biuro@kontakt.example"
       }
@@ -32,7 +32,7 @@
   "ZamowieniePubliczne": {
     "numer_bzp": "2026/BZP00999371",
     "numer_postepowania": "DI.578.2026",
-    "numer_ted": null,
+    "numer_ted": "999927-2026",
     "tytul": "Zakup i dostawa systemów telematycznych do obsługi zgłoszeń obywateli"
   }
 }

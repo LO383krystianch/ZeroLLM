@@ -2,11 +2,11 @@
   "mocodawca": [
     {
       "data": {
-        "imie_nazwisko": null,
+        "imie_nazwisko": "Sebastian Tomaszewski",
         "krs": null,
-        "nazwa": "Szczecin",
+        "nazwa": "RAVELO-BUD Sebastian Tomaszewski",
         "nip": "9997975723",
-        "typ": null
+        "typ": "osoba_fizyczna"
       },
       "podpisujacy": [
         {

@@ -14,7 +14,7 @@
       "regon": "999692205",
       "przez-pelnomocnika": 1,
       "pelnomocnik": {
-        "imie_nazwisko": "Grzegorz Rutkiewicz\nadres do korespondencji",
+        "imie_nazwisko": "Grzegorz Rutkiewicz",
         "nazwa": "Kancelaria Prawna i Partnerzy",
         "mail": "biuro@poczta.example"
       }
@@ -32,7 +32,7 @@
   "ZamowieniePubliczne": {
     "numer_bzp": "2026/BZP00999748",
     "numer_postepowania": "DI.123.2026",
-    "numer_ted": null,
+    "numer_ted": "999486-2026",
     "tytul": "Świadczenie usług utrzymania infrastruktury sieciowej w budynkach administracyjnych"
   }
 }

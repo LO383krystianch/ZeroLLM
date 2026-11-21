@@ -4,7 +4,7 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9999063951",
-        "nazwa": "Warszawa",
+        "nazwa": "Zarendel Automatyka sp. j.",
         "nip": "9995283985",
         "typ": "osoba_prawna"
       },
@@ -19,10 +19,6 @@
     }
   ],
   "pelnomocnicy": [
-    {
-      "imie_nazwisko": "Cezary Walczak",
-      "pesel": null
-    },
     {
       "imie_nazwisko": "Cezary Walczak",
       "pesel": null

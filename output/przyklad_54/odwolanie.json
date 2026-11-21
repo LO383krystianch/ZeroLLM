@@ -1,10 +1,10 @@
 {
   "OdwolanieKIO": {
-    "data": null,
+    "data": "2026-05-11",
     "czynnosc_dzien": "2026-05-06",
     "czynnosc_powod_id": 4,
     "czynnosc_opis": "Publikacja specyfikacji warunków zamówienia (SWZ)",
-    "miejscowosc": null
+    "miejscowosc": "Łódź"
   },
   "Odwolujacy": [
     {
@@ -30,9 +30,9 @@
     }
   ],
   "ZamowieniePubliczne": {
-    "numer_bzp": null,
+    "numer_bzp": "2026/BZP00999561",
     "numer_postepowania": "SZP.17.2026",
-    "numer_ted": null,
+    "numer_ted": "999353-2026",
     "tytul": "Odbiór i zagospodarowanie odpadów komunalnych z nieruchomości zamieszkałych"
   }
 }

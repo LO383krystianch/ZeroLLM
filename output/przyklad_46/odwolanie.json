@@ -1,15 +1,15 @@
 {
   "OdwolanieKIO": {
-    "data": null,
+    "data": "2026-06-17",
     "czynnosc_dzien": "2026-06-12",
     "czynnosc_powod_id": 5,
     "czynnosc_opis": "Modyfikacja treści SWZ",
-    "miejscowosc": null
+    "miejscowosc": "Tarnów"
   },
   "Odwolujacy": [
     {
       "krs": "9997450782",
-      "nazwa": "Korvel Serwis sp. z o.o. sp.k. ul. Armii Krajowej 101",
+      "nazwa": "Korvel Serwis sp. z o.o. sp.k.",
       "nip": "9996998288",
       "regon": "999873715",
       "przez-pelnomocnika": 1,
@@ -32,7 +32,7 @@
   "ZamowieniePubliczne": {
     "numer_bzp": "2026/BZP00999242",
     "numer_postepowania": "IR.271.99.2026",
-    "numer_ted": null,
+    "numer_ted": "999626-2026",
     "tytul": "Usługa ochrony osób i mienia w obiektach Zamawiającego w latach 2026–2028"
   }
 }

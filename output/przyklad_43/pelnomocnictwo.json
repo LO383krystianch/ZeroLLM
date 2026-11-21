@@ -4,7 +4,7 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9992671408",
-        "nazwa": "Wrocław",
+        "nazwa": "Elmontex Energetyka sp. z o.o.",
         "nip": "9996380214",
         "typ": "osoba_prawna"
       },
@@ -21,10 +21,6 @@
   "pelnomocnicy": [
     {
       "imie_nazwisko": "Katarzyna Michalak",
-      "pesel": null
-    },
-    {
-      "imie_nazwisko": null,
       "pesel": "85071204278"
     }
   ]

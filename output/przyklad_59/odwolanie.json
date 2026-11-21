@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": null,
+    "data": "2026-06-07",
     "czynnosc_dzien": "2026-06-02",
     "czynnosc_powod_id": 8,
     "czynnosc_opis": "Zaniechanie wykluczenia wykonawcy",
@@ -23,16 +23,23 @@
   "Zamawiajacy": [
     {
       "krs": "9993399776",
-      "nazwa": "Bydgoszcz, dnia 07.06.2026 roku",
+      "nazwa": "Samodzielny Publiczny Zakład Opieki Zdrowotnej w Dębogórze",
       "nip": "9992054702",
       "regon": "999803274",
       "prowadzacy_postepowanie": 1
+    },
+    {
+      "krs": "9997092068",
+      "nazwa": "Szpital Specjalistyczny im. dr. Władysława Biegańskiego w Białowicach",
+      "nip": "9992642441",
+      "regon": "999764975",
+      "prowadzacy_postepowanie": 0
     }
   ],
   "ZamowieniePubliczne": {
-    "numer_bzp": null,
+    "numer_bzp": "2026/BZP00999976",
     "numer_postepowania": "SZP/PN/66/26",
-    "numer_ted": null,
+    "numer_ted": "999449-2026",
     "tytul": "Sukcesywna dostawa produktów leczniczych w podziale na 12 pakietów"
   }
 }

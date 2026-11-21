@@ -2,11 +2,11 @@
   "mocodawca": [
     {
       "data": {
-        "imie_nazwisko": null,
+        "imie_nazwisko": "Jarosław Dudek",
         "krs": null,
-        "nazwa": "Lublin",
+        "nazwa": "DUDEK-TECH Jarosław Dudek",
         "nip": "9994150873",
-        "typ": null
+        "typ": "osoba_fizyczna"
       },
       "podpisujacy": [
         {

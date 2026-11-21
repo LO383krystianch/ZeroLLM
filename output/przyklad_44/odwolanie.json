@@ -1,10 +1,10 @@
 {
   "OdwolanieKIO": {
-    "data": null,
+    "data": "2026-03-18",
     "czynnosc_dzien": "2026-03-09",
     "czynnosc_powod_id": 6,
     "czynnosc_opis": "Odpowiedzi i wyjaśnienia do SWZ",
-    "miejscowosc": null
+    "miejscowosc": "Lublin"
   },
   "Odwolujacy": [
     {
@@ -30,7 +30,7 @@
     }
   ],
   "ZamowieniePubliczne": {
-    "numer_bzp": null,
+    "numer_bzp": "2026/BZP00999731",
     "numer_postepowania": "LPWiK/ZP/2026/09",
     "numer_ted": null,
     "tytul": "Dostawa i wdrożenie systemu telemetrii i monitoringu sieci wodociągowej wraz z dostawą przepływomierzy elektromagnetycznych"

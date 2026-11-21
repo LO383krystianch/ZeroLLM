@@ -4,7 +4,7 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9996325136",
-        "nazwa": "MOCODAWCA Wexford Systemy sp. z o.o.",
+        "nazwa": "Wexford Systemy sp. z o.o.",
         "nip": "9991432253",
         "typ": "osoba_prawna"
       },
@@ -20,7 +20,11 @@
   ],
   "pelnomocnicy": [
     {
-      "imie_nazwisko": "Halina Walczak\nnr wpisu WA",
+      "imie_nazwisko": "Halina Walczak",
+      "pesel": null
+    },
+    {
+      "imie_nazwisko": "Bartosz Bartoszewicz",
       "pesel": null
     }
   ]

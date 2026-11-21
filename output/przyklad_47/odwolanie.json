@@ -1,10 +1,10 @@
 {
   "OdwolanieKIO": {
-    "data": null,
+    "data": "2026-08-28",
     "czynnosc_dzien": "2026-08-23",
     "czynnosc_powod_id": 8,
     "czynnosc_opis": "Zaniechanie wykluczenia wykonawcy",
-    "miejscowosc": null
+    "miejscowosc": "Poznań"
   },
   "Odwolujacy": [
     {
@@ -30,9 +30,9 @@
     }
   ],
   "ZamowieniePubliczne": {
-    "numer_bzp": null,
+    "numer_bzp": "2026/BZP00999143",
     "numer_postepowania": "ZP.271/130/2026",
-    "numer_ted": null,
+    "numer_ted": "999583-2026",
     "tytul": "Świadczenie usług przewozu uczniów do szkół w roku szkolnym 2026/2027"
   }
 }

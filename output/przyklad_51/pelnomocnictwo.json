@@ -2,11 +2,11 @@
   "mocodawca": [
     {
       "data": {
-        "imie_nazwisko": null,
+        "imie_nazwisko": "Olga Baran",
         "krs": null,
-        "nazwa": "Radom",
+        "nazwa": "BOMARK-BUD Olga Baran",
         "nip": "9996203312",
-        "typ": null
+        "typ": "osoba_fizyczna"
       },
       "podpisujacy": [
         {

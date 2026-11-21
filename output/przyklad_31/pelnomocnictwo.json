@@ -4,7 +4,7 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9997648224",
-        "nazwa": "Kraków",
+        "nazwa": "Zorina Rozwiązania S.A.",
         "nip": "9996669445",
         "typ": "osoba_prawna"
       },
@@ -22,10 +22,6 @@
     },
     {
       "imie_nazwisko": "Grzegorz\nDudek",
-      "pesel": null
-    },
-    {
-      "imie_nazwisko": "Halina Ostrowczyk",
       "pesel": null
     }
   ]
