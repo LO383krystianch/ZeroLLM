@@ -63,6 +63,10 @@ def _extract_from_pdf(pdf_bytes: bytes, filename: str) -> dict[str, Any]:
     try:
         text = extractor.extract_text_from_pdf(tmp_path)
         document_type = _extractor.detect(text, filename)
+        if document_type is None:
+            # Dokument nierozpoznany (obcy) — zwróć sam pusty obiekt {}
+            # (wymóg jury: brak klasyfikacji do żadnego z 3 typów -> {}).
+            return {}
         data = _extractor.extract(text, document_type)
         return {
             "filename": filename,
