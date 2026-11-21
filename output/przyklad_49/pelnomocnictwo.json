@@ -10,7 +10,7 @@
       },
       "podpisujacy": [
         {
-          "imie_nazwisko": "Altrona Farmacja"
+          "imie_nazwisko": "Iwona Rutkowska"
         }
       ]
     },
@@ -22,7 +22,14 @@
         "nip": "9994023484",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Sebastian Adamczyk"
+        },
+        {
+          "imie_nazwisko": "Damian Tomaszewski"
+        }
+      ]
     }
   ],
   "pelnomocnicy": [

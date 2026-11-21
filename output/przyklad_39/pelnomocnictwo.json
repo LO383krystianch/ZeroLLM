@@ -8,7 +8,14 @@
         "nip": "9995704079",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Weronika Sikorski"
+        },
+        {
+          "imie_nazwisko": "Grzegorz Borkowski"
+        }
+      ]
     },
     {
       "data": {

@@ -8,7 +8,11 @@
         "nip": "9998884068",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Natalia Mazur"
+        }
+      ]
     },
     {
       "data": {

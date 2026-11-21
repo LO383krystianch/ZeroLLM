@@ -8,7 +8,14 @@
         "nip": "9998966348",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Bartosz Zajkowski"
+        },
+        {
+          "imie_nazwisko": "Oliwia Gajewski"
+        }
+      ]
     },
     {
       "data": {

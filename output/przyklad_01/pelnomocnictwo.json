@@ -8,7 +8,11 @@
         "nip": "9999284065",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Oliwia Kaczmarek"
+        }
+      ]
     },
     {
       "data": {
@@ -28,11 +32,7 @@
         "nip": null,
         "typ": null
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Oliwia Kaczmarek"
-        }
-      ]
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

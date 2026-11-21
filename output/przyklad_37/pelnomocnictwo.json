@@ -8,7 +8,14 @@
         "nip": "9998805059",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Jolanta Dobrowolski"
+        },
+        {
+          "imie_nazwisko": "Ignacy Cieślak"
+        }
+      ]
     },
     {
       "data": {
@@ -18,11 +25,7 @@
         "nip": null,
         "typ": null
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Corvantis Serwis"
-        }
-      ]
+      "podpisujacy": []
     },
     {
       "data": {
@@ -32,11 +35,7 @@
         "nip": null,
         "typ": null
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Krajowej Izby"
-        }
-      ]
+      "podpisujacy": []
     },
     {
       "data": {
@@ -56,14 +55,7 @@
         "nip": null,
         "typ": null
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Jolanta Dobrowolski"
-        },
-        {
-          "imie_nazwisko": "Ignacy Cieślak"
-        }
-      ]
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

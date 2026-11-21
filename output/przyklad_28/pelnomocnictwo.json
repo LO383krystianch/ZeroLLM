@@ -8,7 +8,14 @@
         "nip": "9997550083",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Aleksandra Walczak"
+        },
+        {
+          "imie_nazwisko": "Weronika Pawlak"
+        }
+      ]
     },
     {
       "data": {

@@ -8,7 +8,14 @@
         "nip": "9997683341",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Weronika Siedlecki"
+        },
+        {
+          "imie_nazwisko": "Cezary Lipowczyk"
+        }
+      ]
     },
     {
       "data": {

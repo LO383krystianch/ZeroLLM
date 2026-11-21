@@ -8,7 +8,14 @@
         "nip": "9998174794",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Zbigniew Mazurkiewicz"
+        },
+        {
+          "imie_nazwisko": "Patrycja Marciniak"
+        }
+      ]
     },
     {
       "data": {

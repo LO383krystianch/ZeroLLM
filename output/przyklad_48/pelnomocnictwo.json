@@ -10,7 +10,10 @@
       },
       "podpisujacy": [
         {
-          "imie_nazwisko": "Prestal Dystrybucja"
+          "imie_nazwisko": "Kamil Tomaszewski"
+        },
+        {
+          "imie_nazwisko": "Marta Mazur"
         }
       ]
     },
@@ -22,7 +25,14 @@
         "nip": "9993439623",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Wojciech Wysocki"
+        },
+        {
+          "imie_nazwisko": "Iwona Grabowska"
+        }
+      ]
     }
   ],
   "pelnomocnicy": [

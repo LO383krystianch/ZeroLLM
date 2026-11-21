@@ -8,7 +8,14 @@
         "nip": "9995986745",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Natalia Kowalczyk"
+        },
+        {
+          "imie_nazwisko": "Leszek Piotrowski"
+        }
+      ]
     },
     {
       "data": {

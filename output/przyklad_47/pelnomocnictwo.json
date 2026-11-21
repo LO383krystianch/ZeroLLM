@@ -8,7 +8,11 @@
         "nip": "9997975723",
         "typ": null
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Sebastian Tomaszewski"
+        }
+      ]
     },
     {
       "data": {

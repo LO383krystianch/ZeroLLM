@@ -8,7 +8,14 @@
         "nip": "9994888947",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Oliwia Górnicki"
+        },
+        {
+          "imie_nazwisko": "Jolanta Kaczmarek"
+        }
+      ]
     },
     {
       "data": {
@@ -58,14 +65,7 @@
         "nip": null,
         "typ": null
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Oliwia Górnicki"
-        },
-        {
-          "imie_nazwisko": "Jolanta Kaczmarek"
-        }
-      ]
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

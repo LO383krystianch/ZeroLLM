@@ -8,7 +8,11 @@
         "nip": "9993124780",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Sebastian Baran"
+        }
+      ]
     },
     {
       "data": {

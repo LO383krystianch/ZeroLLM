@@ -8,7 +8,11 @@
         "nip": "9995501241",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Sławomir Jabłoński"
+        }
+      ]
     },
     {
       "data": {

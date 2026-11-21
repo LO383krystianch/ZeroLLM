@@ -8,7 +8,11 @@
         "nip": "9998701536",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Grzegorz Malinowski"
+        }
+      ]
     },
     {
       "data": {

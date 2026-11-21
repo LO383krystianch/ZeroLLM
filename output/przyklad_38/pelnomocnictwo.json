@@ -8,7 +8,14 @@
         "nip": "9993373158",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Ryszard Nowakowicz"
+        },
+        {
+          "imie_nazwisko": "Jolanta Tomaszewski"
+        }
+      ]
     },
     {
       "data": {
@@ -48,14 +55,7 @@
         "nip": null,
         "typ": null
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Ryszard Nowakowicz"
-        },
-        {
-          "imie_nazwisko": "Jolanta Tomaszewski"
-        }
-      ]
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

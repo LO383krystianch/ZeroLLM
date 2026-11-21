@@ -8,7 +8,11 @@
         "nip": "9999988004",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Cezary Dudziewicz"
+        }
+      ]
     },
     {
       "data": {

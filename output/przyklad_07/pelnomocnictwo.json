@@ -8,7 +8,14 @@
         "nip": "9995283985",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Halina Mazurkiewicz"
+        },
+        {
+          "imie_nazwisko": "Sławomir Szulc"
+        }
+      ]
     },
     {
       "data": {
@@ -58,14 +65,7 @@
         "nip": null,
         "typ": null
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Halina Mazurkiewicz"
-        },
-        {
-          "imie_nazwisko": "Sławomir Szulc"
-        }
-      ]
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

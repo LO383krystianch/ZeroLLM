@@ -8,7 +8,11 @@
         "nip": "9994150873",
         "typ": null
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Jarosław Dudek"
+        }
+      ]
     },
     {
       "data": {

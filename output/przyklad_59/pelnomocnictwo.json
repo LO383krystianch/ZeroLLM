@@ -8,7 +8,11 @@
         "nip": "9996715327",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Felicja Wiśniewska"
+        }
+      ]
     },
     {
       "data": {

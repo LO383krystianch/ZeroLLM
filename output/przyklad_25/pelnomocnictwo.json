@@ -8,7 +8,14 @@
         "nip": "9992160970",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Patrycja Głowacz"
+        },
+        {
+          "imie_nazwisko": "Oliwia Jabłończyk"
+        }
+      ]
     },
     {
       "data": {
@@ -28,14 +35,7 @@
         "nip": null,
         "typ": null
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Patrycja Głowacz"
-        },
-        {
-          "imie_nazwisko": "Oliwia Jabłończyk"
-        }
-      ]
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

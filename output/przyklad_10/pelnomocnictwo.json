@@ -8,7 +8,14 @@
         "nip": "9992049237",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Halina Przybylski"
+        },
+        {
+          "imie_nazwisko": "Ignacy Milewski"
+        }
+      ]
     },
     {
       "data": {

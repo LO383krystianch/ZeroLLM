@@ -315,7 +315,7 @@ class DocumentExtractor:
         spec = self.document_types[doc_type]
         structure = spec.get("structure", {})
         blocks = segment_text(text, spec.get("sections"))
-        return self._extract_structure(structure, text, blocks)
+        return self._extract_structure(structure, text, blocks, full_text=text)
 
     def extract_clean(self, text: str, document_type: str | None = None) -> dict[str, Any]:
         """Ekstrahuje pola i zwraca czystą strukturę (bez warstwy debugowania)."""
@@ -329,10 +329,14 @@ class DocumentExtractor:
         text: str,
         blocks: dict[str, str],
         default_section: str | None = None,
+        parent_index: int | None = None,
+        full_text: str | None = None,
     ) -> dict[str, Any]:
         result: dict[str, Any] = {}
         for name, spec in structure.items():
-            result[name] = self._extract_field(spec, text, blocks, default_section)
+            result[name] = self._extract_field(
+                spec, text, blocks, default_section, parent_index, full_text
+            )
         return result
 
     def _extract_field(
@@ -341,15 +345,19 @@ class DocumentExtractor:
         text: str,
         blocks: dict[str, str],
         default_section: str | None = None,
+        parent_index: int | None = None,
+        full_text: str | None = None,
     ) -> dict[str, Any]:
         section = spec.get("section", default_section)
         # Obecność `fields`/`items` decyduje o strukturze (umożliwia typy jak
         # `object`, `array`, ale też własne etykiety, np. `osoba_prawna`).
         if "fields" in spec:
-            value = self._extract_structure(spec.get("fields", {}), text, blocks, section)
+            value = self._extract_structure(
+                spec.get("fields", {}), text, blocks, section, parent_index, full_text
+            )
             return _field(value)
         if "items" in spec:
-            value = self._extract_items(spec, text, blocks, section)
+            value = self._extract_items(spec, text, blocks, section, parent_index, full_text)
             return _field(value)
         return self._extract_scalar(spec, text, blocks, section)
 
@@ -359,25 +367,49 @@ class DocumentExtractor:
         text: str,
         blocks: dict[str, str],
         default_section: str | None = None,
+        parent_index: int | None = None,
+        full_text: str | None = None,
     ) -> list[dict[str, Any]]:
         """Ekstrahuje elementy tablicy (jedno- lub wieloelementowej).
 
         Opcje na poziomie tablicy:
         - ``after`` / ``until`` — zawężenie zakresu źródła,
-        - ``separator`` — regex dzielący tekst na pojedyncze elementy.
+        - ``separator`` — regex dzielący tekst na pojedyncze elementy,
+        - ``select_parent_block`` — wybór bloku o indeksie elementu nadrzędnego
+          (używane przy przypisywaniu podpisów do konsorcjantów),
+        - ``sub_separator`` — drugi poziom podziału (np. podpisy w bloku firmy).
         """
         section = spec.get("section", default_section)
-        source = self._resolve_source(section, text, blocks)
+        # Dla ``select_parent_block`` pracujemy na pełnym tekście (sekcja podpisów
+        # jest poza fragmentem konkretnego konsorcjanta).
+        base = full_text if (spec.get("select_parent_block") and full_text) else text
+        source = self._resolve_source(section, base, blocks)
         item_spec = spec.get("items", {})
+
+        parts = self._split_items(source, spec)
+        if spec.get("select_parent_block") and parent_index is not None:
+            parts = [parts[parent_index]] if 0 <= parent_index < len(parts) else []
+
         items: list[dict[str, Any]] = []
-        for part in self._split_items(source, spec):
-            item = self._extract_structure(item_spec.get("fields", {}), part, {})
-            has_value = any(
-                v.get("value") not in (None, "", False, []) for v in item.values()
-            )
-            if has_value:
-                items.append(item)
+        for idx, part in enumerate(parts):
+            for sub in self._split_sub_items(part, spec):
+                item = self._extract_structure(
+                    item_spec.get("fields", {}), sub, {}, parent_index=idx, full_text=full_text
+                )
+                has_value = any(
+                    v.get("value") not in (None, "", False, []) for v in item.values()
+                )
+                if has_value:
+                    items.append(item)
         return items
+
+    @staticmethod
+    def _split_sub_items(source: str, spec: dict[str, Any]) -> list[str]:
+        """Opcjonalny drugi poziom podziału (``sub_separator``)."""
+        sub = spec.get("sub_separator")
+        if not sub:
+            return [source]
+        return [p for p in re.split(str(sub), source, flags=_resolve_flags(spec)) if p.strip()]
 
     @staticmethod
     def _split_items(source: str, spec: dict[str, Any]) -> list[str]:

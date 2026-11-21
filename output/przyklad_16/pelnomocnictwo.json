@@ -8,7 +8,14 @@
         "nip": "9994524790",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Marek Dobrowolski"
+        },
+        {
+          "imie_nazwisko": "Ryszard Biernacki"
+        }
+      ]
     },
     {
       "data": {

@@ -8,7 +8,14 @@
         "nip": "9996380214",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Andrzej Wawrzyniak"
+        },
+        {
+          "imie_nazwisko": "Beata Sobczak"
+        }
+      ]
     },
     {
       "data": {

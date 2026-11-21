@@ -8,7 +8,14 @@
         "nip": "9994387323",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Natalia Czerwińska"
+        },
+        {
+          "imie_nazwisko": "Norbert Olszewski"
+        }
+      ]
     },
     {
       "data": {

@@ -8,7 +8,14 @@
         "nip": "9993380162",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Krzysztof Nowicki"
+        },
+        {
+          "imie_nazwisko": "Ewa Lis"
+        }
+      ]
     },
     {
       "data": {

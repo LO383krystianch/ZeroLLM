@@ -8,7 +8,11 @@
         "nip": "9996669445",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": []
+      "podpisujacy": [
+        {
+          "imie_nazwisko": "Patrycja Bartoszewicz"
+        }
+      ]
     },
     {
       "data": {
@@ -28,11 +32,7 @@
         "nip": null,
         "typ": null
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Patrycja Bartoszewicz"
-        }
-      ]
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [
