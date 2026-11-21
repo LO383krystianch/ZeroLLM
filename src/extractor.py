@@ -46,6 +46,20 @@ _FLAGS: dict[str, int] = {
     "DOTALL": re.DOTALL,
 }
 
+# Polskie nazwy miesięcy (dopełniacz) -> numer miesiąca, do normalizacji dat.
+_PL_MONTHS: dict[str, int] = {
+    "stycznia": 1, "lutego": 2, "marca": 3, "kwietnia": 4,
+    "maja": 5, "czerwca": 6, "lipca": 7, "sierpnia": 8,
+    "września": 9, "października": 10, "listopada": 11, "grudnia": 12,
+}
+
+_PL_DATE_RE = re.compile(
+    r"(\d{1,2})\s+"
+    r"(stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|września|października|listopada|grudnia)"
+    r"\s+(\d{4})",
+    re.IGNORECASE,
+)
+
 
 def register(kind: str) -> Callable[[RuleHandler], RuleHandler]:
     """Dekorator rejestrujący handler dla rodzaju reguły ``kind``."""
@@ -191,6 +205,10 @@ class DocumentExtractor:
         self.rules: dict[str, Any] = rules or {}
         self.document_types: dict[str, Any] = self.rules.get("document_types", {}) or {}
         self.default_document_type: str | None = self.rules.get("default_document_type")
+        self._normalizers: dict[str, Callable[[Any], Any]] = {
+            "iso_date": self._normalize_iso_date,
+            "bool_to_int": self._normalize_bool_to_int,
+        }
 
     @property
     def names(self) -> list[str]:
@@ -271,13 +289,18 @@ class DocumentExtractor:
         section: str | None = None,
     ) -> dict[str, Any]:
         source = self._resolve_source(section, text, blocks)
+        ftype = spec.get("type")
+        normalize = spec.get("normalize")
         for rule in spec.get("rules", []):
             handler = _REGISTRY.get(rule.get("kind"))
             if handler is None:
                 continue
             value, src, rule_used = handler(rule, source)
+            if str(rule.get("output")) == "boolean":
+                # Wynik logiczny: True/False jest prawidłową wartością pola.
+                return _field(self._postprocess(value, ftype, normalize), src, rule_used)
             if value not in (None, "", False):
-                return _field(self._cast(value, spec.get("type")), src, rule_used)
+                return _field(self._postprocess(value, ftype, normalize), src, rule_used)
         return _field(None)
 
     def _resolve_source(
@@ -305,4 +328,45 @@ class DocumentExtractor:
                 return int(str(value).strip())
             except (TypeError, ValueError):
                 return value
+        return value
+
+    def _postprocess(self, value: Any, ftype: str | None, normalize: str | None) -> Any:
+        """Rzutuje na typ docelowy, a następnie aplikuje wskazany normalizator."""
+        value = self._cast(value, ftype)
+        return self._normalize(value, normalize)
+
+    def _normalize(self, value: Any, name: str | None) -> Any:
+        """Aplikuje nazwany normalizator (``iso_date``, ``bool_to_int``)."""
+        if value is None or not name:
+            return value
+        normalizer = self._normalizers.get(name)
+        return normalizer(value) if normalizer else value
+
+    def _normalize_iso_date(self, value: Any) -> Any:
+        """Zamienia polską nazwę miesiąca (np. ``3 lipca 2026``) na ISO ``2026-07-03``."""
+        if value is None:
+            return None
+        match = _PL_DATE_RE.search(str(value).strip())
+        if not match:
+            return value
+        day = int(match.group(1))
+        month = _PL_MONTHS.get(match.group(2).lower())
+        if month is None:
+            return value
+        year = int(match.group(3))
+        return f"{year:04d}-{month:02d}-{day:02d}"
+
+    def _normalize_bool_to_int(self, value: Any) -> Any:
+        """Zamienia wartość logiczną (True/False, 'true'/'false') na 1/0."""
+        if isinstance(value, bool):
+            return int(value)
+        if isinstance(value, int):
+            return 1 if value else 0
+        if value is None:
+            return None
+        s = str(value).strip().lower()
+        if s in ("true", "1", "tak", "yes"):
+            return 1
+        if s in ("false", "0", "nie", "no"):
+            return 0
         return value

@@ -23,6 +23,10 @@
 #            after: marker — dopasowanie szukane dopiero po jego wystąpieniu,
 #            normalize: whitespace — zbicie białych znaków w wartości
 #
+# Normalizacja wartości (na poziomie pola, po ekstrakcji):
+#   normalize: iso_date    — '3 lipca 2026' -> '2026-07-03'
+#   normalize: bool_to_int — true/True -> 1, false/False -> 0
+#
 # Każde wyekstrahowane pole zwraca obiekt: {value, source_text, rule_used}.
 
 version: "2.0"
@@ -56,6 +60,7 @@ document_types:
         fields:
           data:
             type: date
+            normalize: iso_date
             section: Odwolujacy
             rules:
               - kind: regex
@@ -64,6 +69,7 @@ document_types:
                 flags: [IGNORECASE, MULTILINE]
           czynnosc_dzien:
             type: date
+            normalize: iso_date
             section: Zarzuty
             rules:
               - kind: regex
@@ -154,6 +160,7 @@ document_types:
                   flags: [IGNORECASE]
             "przez-pelnomocnika":
               type: boolean
+              normalize: bool_to_int
               rules:
                 - kind: regex
                   pattern: '\b(?:reprezentowan\w*\s+przez|przez\s+pełnomocnika)\b'

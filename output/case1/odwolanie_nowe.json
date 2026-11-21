@@ -1,0 +1,133 @@
+{
+  "source": "case1/odwolanie.pdf",
+  "document_type": "odwolanie",
+  "data": {
+    "OdwolanieKIO": {
+      "value": {
+        "data": {
+          "value": "3 lipca 2026",
+          "source_text": "3 lipca 2026",
+          "rule_used": "regex:\\b(\\d{1,2}\\s+(?:stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|września|października|listopada|grudnia)\\s+\\d{4})"
+        },
+        "czynnosc_dzien": {
+          "value": "28 czerwca 2026",
+          "source_text": "w dniu 28 czerwca 2026",
+          "rule_used": "regex:\\bw dniu\\s+(\\d{1,2}\\s+(?:stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|września|października|listopada|grudnia)\\s+\\d{4})"
+        },
+        "czynnosc_powod_id": {
+          "value": 505,
+          "source_text": "art. 505",
+          "rule_used": "regex:\\bart\\.?\\s*(\\d+)"
+        },
+        "czynnosc_opis": {
+          "value": "informacja przekazana wykonawcom.",
+          "source_text": "czynność Zamawiającego – informacja przekazana wykonawcom.",
+          "rule_used": "regex:\\bczynno(?:ść|sc)\\w*\\s+Zamawiającego\\s*[–—-]\\s*([^\\r\\n]+)"
+        },
+        "miejscowosc": {
+          "value": "Gdańsk",
+          "source_text": " Gdańsk, 3 lipca",
+          "rule_used": "regex:^\\s*([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)\\s*,\\s*\\d{1,2}\\s+[a-ząćęłńóśźż]+"
+        }
+      },
+      "source_text": "",
+      "rule_used": null
+    },
+    "Odwolujacy": {
+      "value": [
+        {
+          "krs": {
+            "value": "9998920417",
+            "source_text": "KRS: 9998920417",
+            "rule_used": "regex:\\bKRS[ \\t]*[:.]?[ \\t]*(\\d{10})"
+          },
+          "nazwa": {
+            "value": "Altrona Farmacja sp.k.",
+            "source_text": "\nAltrona Farmacja sp.k.",
+            "rule_used": "regex:^\\s*([^\\r\\n]+)"
+          },
+          "nip": {
+            "value": "9994895854",
+            "source_text": "NIP: 9994895854",
+            "rule_used": "regex:\\bNIP[ \\t]*[:.]?[ \\t]*(\\d{3}[- ]?\\d{3}[- ]?\\d{2}[- ]?\\d{2})"
+          },
+          "regon": {
+            "value": "999640601",
+            "source_text": "REGON: 999640601",
+            "rule_used": "regex:\\bREGON[ \\t]*[:.]?[ \\t]*(\\d{9}(?:\\d{5})?)"
+          },
+          "przez-pelnomocnika": {
+            "value": true,
+            "source_text": "reprezentowany przez",
+            "rule_used": "regex:\\b(?:reprezentowan\\w*\\s+przez|przez\\s+pełnomocnika)\\b"
+          },
+          "pelnomocnik": {
+            "value": "r. pr. Cezary Sikorski, adw. Igor Majewski",
+            "source_text": "reprezentowany przez: r. pr. Cezary Sikorski, adw. Igor Majewski",
+            "rule_used": "regex:\\breprezentowan\\w*\\s+przez[ \\t]*[:.]?[ \\t]*([^\\r\\n]+)"
+          }
+        }
+      ],
+      "source_text": "",
+      "rule_used": null
+    },
+    "Zamawiajacy": {
+      "value": [
+        {
+          "nazwa": {
+            "value": "Samodzielny Publiczny Zakład Opieki Zdrowotnej w Kamionnej",
+            "source_text": "Zamawiający:\nSamodzielny Publiczny Zakład Opieki Zdrowotnej w Kamionnej",
+            "rule_used": "regex:\\bZamawiając\\w*\\s*[:.]?\\s*([^\\r\\n]+)"
+          },
+          "nip": {
+            "value": "9994615677",
+            "source_text": "NIP: 9994615677",
+            "rule_used": "regex:\\bNIP[ \\t]*[:.]?[ \\t]*(\\d{3}[- ]?\\d{3}[- ]?\\d{2}[- ]?\\d{2})"
+          },
+          "regon": {
+            "value": "999520961",
+            "source_text": "REGON: 999520961",
+            "rule_used": "regex:\\bREGON[ \\t]*[:.]?[ \\t]*(\\d{9}(?:\\d{5})?)"
+          },
+          "adres": {
+            "value": "Krótka 2, 26-804 Kamionna",
+            "source_text": "ul. Krótka 2, 26-804 Kamionna",
+            "rule_used": "regex:\\b(?:adres|ul\\.)[ \\t]*[:.]?[ \\t]*([^\\r\\n]+)"
+          }
+        }
+      ],
+      "source_text": "",
+      "rule_used": null
+    },
+    "ZamowieniePubliczne": {
+      "value": {
+        "numer_postepowania": {
+          "value": "ZZP-11/2026",
+          "source_text": "nr referencyjny: ZZP-11/2026",
+          "rule_used": "regex:\\b(?:nr|numer)\\s+(?:referencyjny|postępowania|sprawy)[ \\t]*[:.]?[ \\t]*([A-Za-z0-9][A-Za-z0-9./\\-]*)"
+        },
+        "nazwa": {
+          "value": "Dostawa sprzętu do sterylizacji wraz z serwisem gwarancyjnym",
+          "source_text": "pn. „Dostawa sprzętu do sterylizacji wraz z serwisem\ngwarancyjnym”",
+          "rule_used": "regex:\\bpn\\.\\s*[„\"]?\\s*([\\s\\S]*?)\\s*[”\"]"
+        },
+        "tryb": {
+          "value": "negocjacji z ogłoszeniem",
+          "source_text": "trybie\nnegocjacji z ogłoszeniem",
+          "rule_used": "regex:\\btryb(?:ie|em|u)?\\s*[:.]?\\s*([^\\r\\n]+?)(?=\\s+pn\\.)"
+        },
+        "data_ogloszenia": {
+          "value": "11.03.2026",
+          "source_text": "11.03.2026\nPublikacja",
+          "rule_used": "regex:\\b(\\d{1,2}\\.\\d{1,2}\\.\\d{4})\\s*\\n?\\s*Publikacja"
+        }
+      },
+      "source_text": "",
+      "rule_used": null
+    }
+  },
+  "transparency": {
+    "extracted_text_length": 24611,
+    "text_preview": "Krajowa Izba Odwoławcza\nul. Postępu 17A\n02-676 Warszawa\nZamawiający:\nSamodzielny Publiczny Zakład Opieki Zdrowotnej w Kamionnej\nul. Krótka 2, 26-804 Kamionna\nKRS: 9997131107, NIP: 9994615677, REGON: 999520961\nprzetargi@kamionna.example\nOdwołujący: Konsorcjum wykonawców wspólnie ubiegających się o udzielenie\nzamówienia w składzie:\n1) Lider Konsorcjum:\nAltrona Farmacja sp.k.\nul. Kolejowa 61, 87-178 Toruń\nKRS: 9998920417, NIP: 9994895854, REGON: 999640601\n2) Partner Konsorcjum:\nPolvent Aparatura Me"
+  }
+}
