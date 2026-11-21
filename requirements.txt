@@ -1,0 +1,9 @@
+# ODWOŁANIA2JSON — zależności bazowe
+# Python 3.13+, uruchomienie lokalne na CPU (bez GPU, bez zewnętrznych/płatnych API LLM).
+
+pypdf>=5.0.0
+pydantic>=2.9.0
+PyYAML>=6.0.2
+fastapi>=0.115.0
+uvicorn>=0.30.0
+python-multipart>=0.0.9
