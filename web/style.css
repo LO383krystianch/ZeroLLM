@@ -72,6 +72,35 @@ body {
 
 .view-switch { display: flex; gap: 4px; }
 
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.download-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--mint);
+  color: #0B2533;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.download-all-btn:hover:not(:disabled) { filter: brightness(0.94); }
+.download-all-btn:disabled {
+  background: #2A4252;
+  color: #7C93A5;
+  cursor: not-allowed;
+}
+.download-all-btn svg { flex: 0 0 auto; }
+
 .view-btn {
   background: transparent;
   border: none;

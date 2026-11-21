@@ -26,6 +26,8 @@ const els = {
   jsonStatus: document.getElementById("json-status"),
   viewCase: document.getElementById("view-case"),
   viewConfig: document.getElementById("view-config"),
+  downloadAllBtn: document.getElementById("download-all-btn"),
+  downloadAllLabel: document.getElementById("download-all-label"),
   casePanel: document.getElementById("view-case-panel"),
   configPanel: document.getElementById("view-config-panel"),
   configRaw: document.getElementById("config-raw"),
@@ -142,6 +144,7 @@ function renderList() {
     li.addEventListener("click", () => selectFile(item.id));
     els.docList.appendChild(li);
   }
+  updateDownloadAllButton();
 }
 
 function selectFile(id) {
@@ -347,6 +350,67 @@ els.downloadBtn.addEventListener("click", () => {
   a.click();
   a.remove();
   URL.revokeObjectURL(url);
+});
+
+/* ---- Zbiorcze pobieranie ZIP (czysty JSON, tylko poprawne dokumenty) ---- */
+function getReadyItems() {
+  return state.files.filter((f) => f.result && !f.result.error);
+}
+
+function updateDownloadAllButton() {
+  const ready = getReadyItems();
+  els.downloadAllBtn.disabled = ready.length === 0;
+  els.downloadAllLabel.textContent =
+    "Pobierz wszystkie JSON (.zip)" +
+    (ready.length ? " [" + ready.length + "]" : "");
+}
+
+// Zamienia .pdf -> .json, zachowując podfolder z webkitRelativePath (jeśli jest).
+function entryNameFor(item) {
+  const rel = item.file && item.file.webkitRelativePath;
+  if (rel && rel.indexOf("/") !== -1) {
+    return rel.replace(/\.pdf$/i, ".json");
+  }
+  return item.name.replace(/\.pdf$/i, ".json");
+}
+
+// Unika duplikatów nazw: odwolanie.json -> odwolanie_2.json, odwolanie_3.json...
+function uniqueEntryName(name, used) {
+  if (!used.has(name)) {
+    used.add(name);
+    return name;
+  }
+  const dot = name.lastIndexOf(".");
+  const stem = dot > 0 ? name.slice(0, dot) : name;
+  const ext = dot > 0 ? name.slice(dot) : "";
+  let i = 2;
+  let candidate;
+  do {
+    candidate = stem + "_" + i + ext;
+    i += 1;
+  } while (used.has(candidate));
+  used.add(candidate);
+  return candidate;
+}
+
+els.downloadAllBtn.addEventListener("click", () => {
+  const ready = getReadyItems();
+  if (!ready.length) {
+    return;
+  }
+
+  const usedNames = new Set();
+  const entries = [];
+  for (const item of ready) {
+    // Wyłącznie czysty JSON zgodny ze schematem UZP: sama zawartość "data",
+    // bez wrappera {filename, document_type, data} i bez obiektów transparentności.
+    const cleanData = unwrapCleanJson(item.result.data || {});
+    const jsonText = JSON.stringify(cleanData, null, 2);
+    const bytes = new TextEncoder().encode(jsonText);
+    entries.push({ name: uniqueEntryName(entryNameFor(item), usedNames), data: bytes });
+  }
+
+  ZipExport.downloadZip("odwolania2json_wyniki.zip", entries);
 });
 
 function flashStatus(msg) {
