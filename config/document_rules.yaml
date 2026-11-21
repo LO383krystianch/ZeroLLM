@@ -162,10 +162,12 @@ document_types:
                     - kind: regex
                       pattern: '\breprezentowan\w*\s+przez\s*:\s*(?:r\.\s*pr\.|adw\.)\s*([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)+?)(?=\s*(?:adres|tel|e-mail|@)\b)'
                       group: 1
+                      normalize: whitespace
                       flags: [IGNORECASE]
                     - kind: regex
                       pattern: '\breprezentowan\w*\s+przez\s*:\s*(?:r\.\s*pr\.|adw\.)\s*([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)+)'
                       group: 1
+                      normalize: whitespace
                       flags: [IGNORECASE]
                 nazwa:
                   type: string
@@ -296,10 +298,12 @@ document_types:
                     - kind: regex
                       pattern: '\b(?:imię i nazwisko|imie i nazwisko)\s*[:.]?\s*([^\r\n]+)'
                       group: 1
+                      normalize: whitespace
                       flags: [IGNORECASE]
                     - kind: regex
                       pattern: '\b(?:Ja\s*,?\s*niżej\s+podpisany\w*|niżej\s+podpisany\w*)\s+([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)+)'
                       group: 1
+                      normalize: whitespace
                       flags: [IGNORECASE]
                 krs:
                   type: string
@@ -371,6 +375,7 @@ document_types:
                       - kind: regex
                         pattern: '([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)+)\s*$'
                         group: 1
+                        normalize: whitespace
                         flags: [MULTILINE]
       pelnomocnicy:
         type: array
@@ -386,10 +391,12 @@ document_types:
                 - kind: regex
                   pattern: '(?:r\.\s*pr\.|adw\.)\s*([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)+?)(?=\s*(?:nr\s+wpisu|PESEL|\())'
                   group: 1
+                  normalize: whitespace
                   flags: [IGNORECASE]
                 - kind: regex
                   pattern: '(?:r\.\s*pr\.|adw\.)\s*([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)+)'
                   group: 1
+                  normalize: whitespace
                   flags: [IGNORECASE]
             pesel:
               type: string
