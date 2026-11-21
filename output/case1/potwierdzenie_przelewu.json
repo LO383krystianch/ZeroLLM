@@ -1,0 +1,100 @@
+{
+  "source": "case1/potwierdzenie_przelewu.pdf",
+  "document_type": "odwolanie",
+  "data": {
+    "OdwolanieKIO": {
+      "value": {
+        "data": {
+          "value": null,
+          "source_text": "",
+          "rule_used": null
+        },
+        "czynnosc_dzien": {
+          "value": null,
+          "source_text": "",
+          "rule_used": null
+        },
+        "czynnosc_powod_id": {
+          "value": null,
+          "source_text": "",
+          "rule_used": null
+        },
+        "czynnosc_opis": {
+          "value": null,
+          "source_text": "",
+          "rule_used": null
+        },
+        "miejscowosc": {
+          "value": null,
+          "source_text": "",
+          "rule_used": null
+        }
+      },
+      "source_text": "",
+      "rule_used": null
+    },
+    "Odwolujacy": {
+      "value": [],
+      "source_text": "",
+      "rule_used": null
+    },
+    "Zamawiajacy": {
+      "value": [
+        {
+          "nazwa": {
+            "value": null,
+            "source_text": "",
+            "rule_used": null
+          },
+          "nip": {
+            "value": null,
+            "source_text": "",
+            "rule_used": null
+          },
+          "regon": {
+            "value": null,
+            "source_text": "",
+            "rule_used": null
+          },
+          "adres": {
+            "value": "Kolejowa 61, 87-178 Toruń",
+            "source_text": "ul. Kolejowa 61, 87-178 Toruń",
+            "rule_used": "regex:\\b(?:adres|ul\\.)[ \\t]*[:.]?[ \\t]*([^\\r\\n]+)"
+          }
+        }
+      ],
+      "source_text": "",
+      "rule_used": null
+    },
+    "ZamowieniePubliczne": {
+      "value": {
+        "numer_postepowania": {
+          "value": "referencyjny",
+          "source_text": "Numer referencyjny",
+          "rule_used": "regex:\\b(?:numer|nr|znak)\\s+(?:postępowania|sprawy|zamówienia)?[ \\t]*[:.]?[ \\t]*([A-Za-z0-9/.\\-]+)"
+        },
+        "nazwa": {
+          "value": null,
+          "source_text": "",
+          "rule_used": null
+        },
+        "tryb": {
+          "value": null,
+          "source_text": "",
+          "rule_used": null
+        },
+        "data_ogloszenia": {
+          "value": null,
+          "source_text": "",
+          "rule_used": null
+        }
+      },
+      "source_text": "",
+      "rule_used": null
+    }
+  },
+  "transparency": {
+    "extracted_text_length": 831,
+    "text_preview": "POTWIERDZENIE WYKONANIA PRZELEWU\n Bank Handlowy Centrum S.A. · wygenerowano 02.07.2026\nZleceniodawca\nAltrona Farmacja sp.k.\nul. Kolejowa 61, 87-178 Toruń\nRachunek zleceniodawcy\nPL87 7679 9852 8637 3571 5675 1729\nOdbiorca\nSamodzielny Publiczny Zakład Opieki Zdrowotnej w Kamionnej\nul. Krótka 2, 26-804 Kamionna\nRachunek odbiorcy\nPL29 9154 0002 3241 7143 7253 4330\nKwota\n50,00 PLN\nData operacji\n01.07.2026\nTytuł przelewu\nopłata skarbowa od pełnomocnictwa dla Cezary Sikorski i Igor Majewski w postępowa"
+  }
+}

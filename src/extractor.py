@@ -4,9 +4,11 @@ Wczytuje reguły z ``config/document_rules.yaml`` i dynamicznie parsuje tekst
 (wyekstrahowany np. z PDF przez pypdf) do zagnieżdżonych struktur JSON.
 
 Zasady (AGENTS.md):
-- **Zero hardcodowania** — typy dokumentów, pola i reguły pochodzą wyłącznie z YAML.
+- **Zero hardcodowania** — typy dokumentów, pola, sekcje i reguły pochodzą wyłącznie z YAML.
 - **Registry** — handler dla danego ``kind`` reguły rejestruje się dekoratorem
   ``register``; dodanie nowego ``kind`` nie wymaga zmian w reszcie kodu.
+- **Segmentacja kontekstowa** — tekst jest najpierw dzielony na bloki (``sections``),
+  a reguły pola są aplikowane wyłącznie do wskazanego bloku (``section``).
 - **Transparentność** — każde pole zwraca obiekt ``{value, source_text, rule_used}``.
 """
 
@@ -55,9 +57,9 @@ def register(kind: str) -> Callable[[RuleHandler], RuleHandler]:
     return decorator
 
 
-def _resolve_flags(rule: dict[str, Any]) -> int:
+def _resolve_flags(spec: dict[str, Any]) -> int:
     """Zamienia wpis ``flags`` (str lub lista nazw) na wartość bitową ``re``."""
-    raw = rule.get("flags", 0)
+    raw = spec.get("flags", 0)
     if isinstance(raw, str):
         raw = [raw]
     if isinstance(raw, (list, tuple)):
@@ -89,11 +91,13 @@ def _regex_handler(rule: dict[str, Any], text: str) -> tuple[Any, str, str]:
         value = match.group(group)
     except IndexError:
         value = match.group(0)
+    if rule.get("normalize") == "whitespace":
+        value = " ".join(str(value).split())
     return value, match.group(0), rule_used
 
 
 # ---------------------------------------------------------------------------
-# Ładowanie reguł i ekstraktor
+# Ładowanie reguł i segmentacja tekstu
 # ---------------------------------------------------------------------------
 
 
@@ -119,13 +123,51 @@ def extract_text_from_pdf(path: Path) -> str:
     return "\n".join(page.extract_text() or "" for page in reader.pages)
 
 
+def segment_text(text: str, sections: list[dict[str, Any]] | None) -> dict[str, str]:
+    """Dzieli tekst na bloki kontekstowe wg markerów ``start`` (pierwsza sekcja = od początku).
+
+    Każda sekcja to ``{name, start, flags?}``. Blok sekcji rozciąga się od pozycji
+    jej markera do pozycji markera kolejnej sekcji (albo do końca tekstu).
+    """
+    blocks: dict[str, str] = {}
+    if not sections:
+        return blocks
+
+    # Znajdź pozycję startową każdej sekcji.
+    named_positions: list[tuple[str, int]] = []
+    for spec in sections:
+        name = spec.get("name")
+        start = spec.get("start")
+        if not start:
+            pos = 0
+        else:
+            match = re.search(str(start), text, _resolve_flags(spec))
+            pos = match.start() if match else -1
+        named_positions.append((name, pos))
+
+    # Uporządkuj wg pozycji (sekcje bez trafienia pomijane w cięciu).
+    found = [(name, pos) for name, pos in named_positions if pos >= 0]
+    found.sort(key=lambda item: item[1])
+
+    for idx, (name, pos) in enumerate(found):
+        end = found[idx + 1][1] if idx + 1 < len(found) else len(text)
+        blocks[name] = text[pos:end]
+
+    # Sekcje, których marker nie wystąpił, są puste (reguły na nich zwrócą null).
+    for name, pos in named_positions:
+        if pos < 0:
+            blocks.setdefault(name, "")
+
+    return blocks
+
+
 def _field(value: Any, source_text: str = "", rule_used: str | None = None) -> dict[str, Any]:
     """Buduje obiekt transparentności pojedynczego pola."""
     return {"value": value, "source_text": source_text, "rule_used": rule_used}
 
 
 class DocumentExtractor:
-    """Parsuje tekst zgodnie ze strukturą i regułami z config/document_rules.yaml."""
+    """Parsuje tekst zgodnie ze strukturą, sekcjami i regułami z config/document_rules.yaml."""
 
     def __init__(self, rules: dict[str, Any]):
         self.rules: dict[str, Any] = rules or {}
@@ -153,39 +195,96 @@ class DocumentExtractor:
         doc_type = document_type or self.detect(text)
         if doc_type not in self.document_types:
             return {}
-        structure = self.document_types[doc_type].get("structure", {})
-        return self._extract_structure(structure, text)
+        spec = self.document_types[doc_type]
+        structure = spec.get("structure", {})
+        blocks = segment_text(text, spec.get("sections"))
+        return self._extract_structure(structure, text, blocks)
 
     # -- wewnętrzna, rekurencyjna ekstrakcja ----------------------------------
 
-    def _extract_structure(self, structure: dict[str, Any], text: str) -> dict[str, Any]:
+    def _extract_structure(
+        self,
+        structure: dict[str, Any],
+        text: str,
+        blocks: dict[str, str],
+        default_section: str | None = None,
+    ) -> dict[str, Any]:
         result: dict[str, Any] = {}
         for name, spec in structure.items():
-            result[name] = self._extract_field(spec, text)
+            result[name] = self._extract_field(spec, text, blocks, default_section)
         return result
 
-    def _extract_field(self, spec: dict[str, Any], text: str) -> dict[str, Any]:
+    def _extract_field(
+        self,
+        spec: dict[str, Any],
+        text: str,
+        blocks: dict[str, str],
+        default_section: str | None = None,
+    ) -> dict[str, Any]:
+        section = spec.get("section", default_section)
         ftype = spec.get("type", "string")
         if ftype == "object":
-            return _field(self._extract_structure(spec.get("fields", {}), text))
+            value = self._extract_structure(spec.get("fields", {}), text, blocks, section)
+            return _field(value)
         if ftype == "array":
-            return _field(self._extract_items(spec.get("items", {}), text))
-        return self._extract_scalar(spec, text)
+            value = self._extract_items(spec.get("items", {}), text, blocks, section)
+            return _field(value)
+        return self._extract_scalar(spec, text, blocks, section)
 
-    def _extract_items(self, item_spec: dict[str, Any], text: str) -> list[dict[str, Any]]:
+    def _extract_items(
+        self,
+        item_spec: dict[str, Any],
+        text: str,
+        blocks: dict[str, str],
+        default_section: str | None = None,
+    ) -> list[dict[str, Any]]:
         """Ekstrahuje elementy tablicy (na razie jeden; format pozwala rozszerzyć)."""
-        item = self._extract_structure(item_spec.get("fields", {}), text)
+        item = self._extract_structure(item_spec.get("fields", {}), text, blocks, default_section)
         has_value = any(
             v.get("value") not in (None, "", False, []) for v in item.values()
         )
         return [item] if has_value else []
 
-    def _extract_scalar(self, spec: dict[str, Any], text: str) -> dict[str, Any]:
+    def _extract_scalar(
+        self,
+        spec: dict[str, Any],
+        text: str,
+        blocks: dict[str, str],
+        section: str | None = None,
+    ) -> dict[str, Any]:
+        source = self._resolve_source(section, text, blocks)
         for rule in spec.get("rules", []):
             handler = _REGISTRY.get(rule.get("kind"))
             if handler is None:
                 continue
-            value, source, rule_used = handler(rule, text)
+            value, src, rule_used = handler(rule, source)
             if value not in (None, "", False):
-                return _field(value, source, rule_used)
+                return _field(self._cast(value, spec.get("type")), src, rule_used)
         return _field(None)
+
+    def _resolve_source(
+        self,
+        section: str | None,
+        text: str,
+        blocks: dict[str, str],
+    ) -> str:
+        """Wybiera tekst źródłowy: wskazany blok sekcji albo cały tekst."""
+        if not section:
+            return text
+        if isinstance(section, str):
+            return blocks.get(section, "")
+        if isinstance(section, (list, tuple)):
+            return "\n".join(blocks.get(s, "") for s in section)
+        return text
+
+    @staticmethod
+    def _cast(value: Any, ftype: str | None) -> Any:
+        """Rzutuje wartość na typ docelowy (np. ``integer`` -> int)."""
+        if value is None:
+            return None
+        if ftype == "integer":
+            try:
+                return int(str(value).strip())
+            except (TypeError, ValueError):
+                return value
+        return value
