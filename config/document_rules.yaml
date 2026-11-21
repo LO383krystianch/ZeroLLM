@@ -1,0 +1,4 @@
+# Reguły klasyfikacji i ekstrakcji dokumentów.
+# Ten plik jest docelowym źródłem konfiguracji (wzorzec Registry).
+# Dodanie nowego typu dokumentu lub pola wymaga wyłącznie edycji tego pliku,
+# bez żadnych zmian w kodzie Pythona.

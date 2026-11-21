@@ -18,3 +18,8 @@
 - **Sterowanie konfiguracja:** Dodanie nowego typu dokumentu lub pola ma wymagac wylacznie edycji pliku np. config/document_types.yaml. 
 - **Interfejsy:** Kod glowny ma dynamicznie ladowac reguly z konfiguracji (wzorzec Registry). 
 - **Transparentnosc:** Kazde pole musi zwracac obiekt: value, source_text, rule_used, aby mozna to bylo wyswietlic w UI. 
+## Wymagania Wejścia/Wyjścia (KRYTYCZNE DLA OCENY)
+- Aplikacja musi czytać pliki PDF z głównego folderu `./input/` (który może zawierać podfoldery, np. `./input/case1/`).
+- Aplikacja musi zapisywać wynikowe pliki JSON do folderu `./output/`, odtwarzając strukturę podfolderów z `input/` (np. zapisując do `./output/case1/odwolanie_nr_1.json`).
+- Nazwa pliku JSON musi być identyczna jak pliku PDF (zmienione tylko rozszerzenie).
+- Skrypt uruchomieniowy pod automatyczną ocenę to `start.bat` w głównym katalogu, który uruchamia przetwarzanie całego folderu `input/` i generuje wyniki w `output/`.
