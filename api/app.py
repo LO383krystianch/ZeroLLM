@@ -59,6 +59,12 @@ def _extract_from_pdf(pdf_bytes: bytes, filename: str) -> dict[str, Any]:
         tmp_path.unlink(missing_ok=True)
 
 
+@app.get("/health")
+async def health() -> dict[str, str]:
+    """Prosty healthcheck dla Dockera/load balancera."""
+    return {"status": "ok"}
+
+
 @app.post("/api/extract")
 async def extract_pdf(file: UploadFile = File(...)) -> dict[str, Any]:
     """Przyjmuje plik PDF i zwraca wyekstrahowane dane w formacie JSON."""
