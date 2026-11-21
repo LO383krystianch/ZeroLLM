@@ -215,6 +215,11 @@ function buildCleanResult(res) {
   if (res.error) {
     return { error: res.error };
   }
+  // Dokument nierozpoznany (obcy) — zwróć sam pusty obiekt {},
+  // zgodnie z wymogiem jury (brak klasyfikacji -> pusty JSON).
+  if (!res.document_type) {
+    return {};
+  }
   return {
     filename: res.filename,
     document_type: res.document_type,
