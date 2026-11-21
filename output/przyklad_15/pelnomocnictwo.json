@@ -4,15 +4,21 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9993682204",
-        "nazwa": "Belmoria Systemy sp. j.",
+        "nazwa": "Poznań",
         "nip": "9999142626",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Marek Nowakowicz"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

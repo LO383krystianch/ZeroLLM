@@ -54,11 +54,18 @@ def flatten_paths(obj: Any, prefix: str = "") -> dict[str, Any]:
 
 
 def similarity(a: Any, b: Any) -> float:
-    """Podobieństwo dwóch wartości (0.0–1.0) za pomocą difflib."""
+    """Podobieństwo dwóch wartości (0.0–1.0).
+
+    - None vs None -> 1.0 (zgodne), None vs wartość -> 0.0,
+    - liczby porównywane numerycznie (dokładnie),
+    - pozostałe porównywane tekstowo przez difflib.
+    """
     if a is None and b is None:
         return 1.0
     if a is None or b is None:
         return 0.0
+    if isinstance(a, (int, float)) and isinstance(b, (int, float)):
+        return 1.0 if a == b else 0.0
     return difflib.SequenceMatcher(None, str(a), str(b)).ratio()
 
 

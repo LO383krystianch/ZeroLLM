@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9998577437",
-      "nazwa": "Meridian Konsulting sp. j.",
+      "nazwa": null,
       "nip": "9992049237",
       "regon": "999851916",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9992290948",
-      "nazwa": "Uldaris Systemy sp. j.",
+      "nazwa": null,
       "nip": "9998031630",
       "regon": "999107260",
       "prowadzacy_postepowanie": null
@@ -32,7 +32,7 @@
   "ZamowieniePubliczne": {
     "numer_bzp": "2026/BZP00999489",
     "numer_postepowania": "ZP.856.2026",
-    "numer_ted": "999328-2026",
+    "numer_ted": null,
     "tytul": "Dostawa licencji oprogramowania do monitorowania infrastruktury i alarmowej"
   }
 }

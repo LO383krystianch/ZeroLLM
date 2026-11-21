@@ -10,10 +10,7 @@
       },
       "podpisujacy": [
         {
-          "imie_nazwisko": "Wojciech Zieliński"
-        },
-        {
-          "imie_nazwisko": "Natalia Maciejewska"
+          "imie_nazwisko": "Korvel Serwis"
         }
       ]
     },
@@ -25,11 +22,7 @@
         "nip": "9999917794",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Wojciech Majewski"
-        }
-      ]
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

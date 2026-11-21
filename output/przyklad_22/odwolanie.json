@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": null,
+    "data": "2019-09-11",
     "czynnosc_dzien": "2026-01-07",
     "czynnosc_powod_id": 9,
     "czynnosc_opis": "Decyzja o unieważnieniu postępowania",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9994097527",
-      "nazwa": "Zorina Systemy sp. z o.o.",
+      "nazwa": null,
       "nip": "9992726100",
       "regon": "999205547",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9995571982",
-      "nazwa": "Quantis Serwis sp. j.",
+      "nazwa": null,
       "nip": "9990877668",
       "regon": "999132305",
       "prowadzacy_postepowanie": null
@@ -32,7 +32,7 @@
   "ZamowieniePubliczne": {
     "numer_bzp": "2026/BZP00999327",
     "numer_postepowania": "ZP.246.2026",
-    "numer_ted": "999985-2026",
+    "numer_ted": null,
     "tytul": "Dostawa licencji oprogramowania do monitorowania infrastruktury i alarmowej"
   }
 }

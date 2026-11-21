@@ -4,18 +4,31 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9994387983",
-        "nazwa": "Xenonix Technologie S.A.",
+        "nazwa": "Wrocław",
         "nip": "9995704079",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Weronika Sikorski"
-        },
-        {
-          "imie_nazwisko": "Grzegorz Borkowski"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [
@@ -24,7 +37,7 @@
       "pesel": null
     },
     {
-      "imie_nazwisko": "Halina Różański",
+      "imie_nazwisko": "Halina\nRóżański",
       "pesel": null
     }
   ]

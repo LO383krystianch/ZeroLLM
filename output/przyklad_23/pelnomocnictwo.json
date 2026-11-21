@@ -4,27 +4,20 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9996325136",
-        "nazwa": "Wexford Systemy sp. z o.o.",
+        "nazwa": "MOCODAWCA Wexford Systemy sp. z o.o. ul. Zaczarowana 21",
         "nip": "9991432253",
         "typ": "osoba_prawna"
       },
       "podpisujacy": [
         {
-          "imie_nazwisko": "Ryszard Dobrowolski"
-        },
-        {
-          "imie_nazwisko": "Norbert Chalupowicz"
+          "imie_nazwisko": "Halina Walczak"
         }
       ]
     }
   ],
   "pelnomocnicy": [
     {
-      "imie_nazwisko": "Halina Walczak",
-      "pesel": null
-    },
-    {
-      "imie_nazwisko": "Bartosz Bartoszewicz",
+      "imie_nazwisko": "Halina Walczak\nnr wpisu WA",
       "pesel": null
     }
   ]

@@ -4,15 +4,21 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9991877493",
-        "nazwa": "Silvatica Automatyka sp. k.",
+        "nazwa": "Bydgoszcz",
         "nip": "9995501241",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Sławomir Jabłoński"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

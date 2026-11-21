@@ -8,11 +8,7 @@
         "nip": "9995558958",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Teresa Sadowska"
-        }
-      ]
+      "podpisujacy": []
     },
     {
       "data": {
@@ -22,11 +18,7 @@
         "nip": "9996504966",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Paweł Wieczorek"
-        }
-      ]
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

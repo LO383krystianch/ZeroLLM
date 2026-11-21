@@ -9,12 +9,12 @@
   "Odwolujacy": [
     {
       "krs": "9997854723",
-      "nazwa": "Corvella Serwis sp. k.",
+      "nazwa": null,
       "nip": "9995776771",
       "regon": "999851129",
       "przez-pelnomocnika": 1,
       "pelnomocnik": {
-        "imie_nazwisko": "Ewa Chalupowicz",
+        "imie_nazwisko": "Ewa Chalupowicz\nadres do korespondencji",
         "nazwa": "Kancelaria Prawna i Partnerzy",
         "mail": "biuro@sekretariat.example"
       }
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9997685689",
-      "nazwa": "Rubiconis Wyposażenie sp. z o.o.",
+      "nazwa": null,
       "nip": "9994374540",
       "regon": "999032294",
       "prowadzacy_postepowanie": null

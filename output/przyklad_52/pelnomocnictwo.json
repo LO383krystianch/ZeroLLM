@@ -2,17 +2,23 @@
   "mocodawca": [
     {
       "data": {
-        "imie_nazwisko": "Maciej Jaworski",
+        "imie_nazwisko": null,
         "krs": null,
-        "nazwa": "BRONTEX-BUD Maciej Jaworski",
+        "nazwa": "Rzeszów",
         "nip": "9993140838",
-        "typ": "osoba_fizyczna"
+        "typ": null
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Maciej Jaworski"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": null,
+    "data": "2019-09-11",
     "czynnosc_dzien": "2026-05-06",
     "czynnosc_powod_id": 6,
     "czynnosc_opis": "Odpowiedzi i wyjaśnienia do SWZ",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9996527940",
-      "nazwa": "Holdex Dystrybucja Medyczna sp. z o.o.",
+      "nazwa": null,
       "nip": "9998884068",
       "regon": "999881092",
       "przez-pelnomocnika": 1,
@@ -23,16 +23,16 @@
   "Zamawiajacy": [
     {
       "krs": "9994890373",
-      "nazwa": "Szpital Specjalistyczny im. Jana Pawła II w Brzozówce",
+      "nazwa": null,
       "nip": "9994537600",
       "regon": "999255628",
       "prowadzacy_postepowanie": null
     }
   ],
   "ZamowieniePubliczne": {
-    "numer_bzp": "2026/BZP00999283",
+    "numer_bzp": null,
     "numer_postepowania": "IR.271-35/2026",
-    "numer_ted": "999493-2026",
+    "numer_ted": null,
     "tytul": "Sukcesywna dostawa produktów leczniczych w podziale na 12 pakietów"
   }
 }

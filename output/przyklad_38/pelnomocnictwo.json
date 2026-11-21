@@ -4,9 +4,49 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9992992231",
-        "nazwa": "Granitix Usługi S.A.",
+        "nazwa": "PEŁNOMOCNICTWO PROCESOWE Mocodawca Granitix Usługi S.A. ul. Różana 6",
         "nip": "9993373158",
         "typ": "osoba_prawna"
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": "zastępowania Wykonawcy na posiedzeniu i w rozprawie przed Krajową Izbą Odwoławczą",
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": "wniesienia środków ochrony prawnej oraz składania skarg na orzeczenia Krajowej Izby Odwoławczej",
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": "składania oświadczeń o przystąpieniu do postępowań toczonych się w wyniku wniesienia środków ochrony prawnej",
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
       },
       "podpisujacy": [
         {

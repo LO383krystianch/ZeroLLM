@@ -4,9 +4,29 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9999405188",
-        "nazwa": "Belmoria Rozwiązania S.A.",
+        "nazwa": "PEŁNOMOCNICTWO Łódź",
         "nip": "9999284065",
         "typ": "osoba_prawna"
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": ". § 3. Postępowanie Pełnomocnictwo dotyczy postępowania „Zakup i dostawa sprzętu komputerowego wraz z oprogramowaniem oraz usługą wdrożenia”",
+        "nip": null,
+        "typ": null
       },
       "podpisujacy": [
         {
@@ -21,7 +41,11 @@
       "pesel": null
     },
     {
-      "imie_nazwisko": "Jolanta Zajkowski",
+      "imie_nazwisko": "Jolanta\nZajkowski",
+      "pesel": null
+    },
+    {
+      "imie_nazwisko": "Aleksandra Marciniak",
       "pesel": null
     }
   ]

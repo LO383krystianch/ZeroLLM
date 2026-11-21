@@ -60,6 +60,30 @@ _PL_DATE_RE = re.compile(
     re.IGNORECASE,
 )
 
+# Mapowanie przyczyn odwołania na oficjalne kody UZP (1-12) i opisy kanoniczne.
+# Kolejność ma znaczenie: bardziej szczegółowe wzorce (zaniechania) przed ogólnymi.
+REASON_CODES: list[tuple[str, int, str]] = [
+    (r"zaniechaniu\s+unieważn|zaniechał\s+unieważn|nie\s+unieważn", 10, "Zaniechanie unieważnienia postępowania"),
+    (r"unieważn", 9, "Decyzja o unieważnieniu postępowania"),
+    (r"zaniechaniu\s+odrzucen|zaniechanie\s+odrzucen|nie\s+odrzuc", 7, "Zaniechanie odrzucenia oferty"),
+    (r"odrzucen", 1, "Decyzja o odrzuceniu oferty"),
+    (r"zaniechaniu\s+wykluczen|nie\s+wyklucz", 8, "Zaniechanie wykluczenia wykonawcy"),
+    (r"wykluczen", 3, "Decyzja o wykluczeniu wykonawcy"),
+    (r"modyfikacj|zmodyfikowa", 5, "Modyfikacja treści SWZ"),
+    (r"udzieleni\w*\s+odpowiedzi|odpowiedzi\s+na\s+pytania|odpowiedzi\s+i\s+wyjaśnien|wyjaśnien\s+do\s+treści", 6, "Odpowiedzi i wyjaśnienia do SWZ"),
+    (r"ustaleni\w*\s+treści|opublikowa\w*\s+Specyfikacj", 4, "Publikacja specyfikacji warunków zamówienia (SWZ)"),
+    (r"opisani\w*\s+przedmiotu|Opis\s+Przedmiotu\s+Zamówienia|OPZ", 11, "Opis przedmiotu zamówienia (OPZ)"),
+    (r"wyb[oó]r", 2, "Ogłoszenie wyboru oferty"),
+]
+
+
+def _map_reason(text: str) -> tuple[int, str] | None:
+    """Dopasowuje tekst przyczyny do (kod, opis) na podstawie REASON_CODES."""
+    for pattern, code, description in REASON_CODES:
+        if re.search(pattern, text, re.IGNORECASE):
+            return code, description
+    return None
+
 
 def register(kind: str) -> Callable[[RuleHandler], RuleHandler]:
     """Dekorator rejestrujący handler dla rodzaju reguły ``kind``."""
@@ -236,6 +260,10 @@ class DocumentExtractor:
             "bool_to_int": self._normalize_bool_to_int,
             "iban_clean": self._normalize_iban_clean,
             "amount_float": self._normalize_amount_float,
+            "reason_code": self._normalize_reason_code,
+            "reason_opis": self._normalize_reason_opis,
+            "ted_number": self._normalize_ted_number,
+            "typ_podmiotu": self._normalize_typ_podmiotu,
         }
 
     @property
@@ -432,10 +460,14 @@ class DocumentExtractor:
         return normalizer(value) if normalizer else value
 
     def _normalize_iso_date(self, value: Any) -> Any:
-        """Zamienia polską nazwę miesiąca (np. ``3 lipca 2026``) na ISO ``2026-07-03``."""
+        """Normalizuje datę do ISO ``YYYY-MM-DD`` (obsługuje ``DD.MM.RRRR`` i nazwę miesiąca)."""
         if value is None:
             return None
-        match = _PL_DATE_RE.search(str(value).strip())
+        s = str(value).strip()
+        m = re.match(r"(\d{1,2})[./-](\d{1,2})[./-](\d{4})", s)
+        if m:
+            return f"{m.group(3)}-{int(m.group(2)):02d}-{int(m.group(1)):02d}"
+        match = _PL_DATE_RE.search(s)
         if not match:
             return value
         day = int(match.group(1))
@@ -479,3 +511,35 @@ class DocumentExtractor:
             return float(s)
         except (TypeError, ValueError):
             return value
+
+    def _normalize_reason_code(self, value: Any) -> Any:
+        """Mapuje tekst przyczyny na oficjalny kod UZP (1-12)."""
+        if value is None:
+            return None
+        mapped = _map_reason(str(value))
+        return mapped[0] if mapped else None
+
+    def _normalize_reason_opis(self, value: Any) -> Any:
+        """Mapuje tekst przyczyny na kanoniczny opis UZP."""
+        if value is None:
+            return None
+        mapped = _map_reason(str(value))
+        return mapped[1] if mapped else value
+
+    def _normalize_ted_number(self, value: Any) -> Any:
+        """Normalizuje numer TED: 'YYYY/S ###-NNNNNN' -> 'NNNNNN-YYYY'."""
+        if value is None:
+            return None
+        s = str(value).strip()
+        m = re.match(r"(\d{4})/S\d{3}-(\d{6})", s)
+        if m:
+            return f"{m.group(2)}-{m.group(1)}"
+        return s
+
+    def _normalize_typ_podmiotu(self, value: Any) -> Any:
+        """Określa typ mocodawcy: 'osoba_prawna' lub 'osoba_fizyczna'."""
+        if value is None:
+            return "osoba_fizyczna"
+        if re.search(r"KRS|sp\.\s*z\s*o\.o\.|S\.A\.|sp\.\s*k\.|sp\.\s*j\.|Sp\.\s*z\s*o\.o\.", str(value), re.IGNORECASE):
+            return "osoba_prawna"
+        return "osoba_fizyczna"

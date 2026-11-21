@@ -9,12 +9,12 @@
   "Odwolujacy": [
     {
       "krs": "9999145542",
-      "nazwa": "Kadmos Rozwiązania sp. k.",
+      "nazwa": null,
       "nip": "9991006421",
       "regon": "999692205",
       "przez-pelnomocnika": 1,
       "pelnomocnik": {
-        "imie_nazwisko": "Grzegorz Rutkiewicz",
+        "imie_nazwisko": "Grzegorz Rutkiewicz\nadres do korespondencji",
         "nazwa": "Kancelaria Prawna i Partnerzy",
         "mail": "biuro@poczta.example"
       }
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9995127514",
-      "nazwa": "Veltra Infrastruktura sp. z o.o.",
+      "nazwa": null,
       "nip": "9995031700",
       "regon": "999331996",
       "prowadzacy_postepowanie": null
@@ -32,7 +32,7 @@
   "ZamowieniePubliczne": {
     "numer_bzp": "2026/BZP00999748",
     "numer_postepowania": "DI.123.2026",
-    "numer_ted": "999486-2026",
+    "numer_ted": null,
     "tytul": "Świadczenie usług utrzymania infrastruktury sieciowej w budynkach administracyjnych"
   }
 }

@@ -8,11 +8,7 @@
         "nip": "9992284611",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Marek Domański"
-        }
-      ]
+      "podpisujacy": []
     },
     {
       "data": {
@@ -22,14 +18,7 @@
         "nip": "9994417025",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Agnieszka Kurek"
-        },
-        {
-          "imie_nazwisko": "Robert Kurek"
-        }
-      ]
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

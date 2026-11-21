@@ -4,24 +4,20 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9995695391",
-        "nazwa": "Rubiconis Automatyka sp. k.",
+        "nazwa": "MOCODAWCA Rubiconis Automatyka sp. k. ul. Jasionowa 44",
         "nip": "9997232058",
         "typ": "osoba_prawna"
       },
       "podpisujacy": [
         {
-          "imie_nazwisko": "Oliwia Lipowczyk"
+          "imie_nazwisko": "Klaudia Szymanski"
         }
       ]
     }
   ],
   "pelnomocnicy": [
     {
-      "imie_nazwisko": "Klaudia Szymanski",
-      "pesel": null
-    },
-    {
-      "imie_nazwisko": "Norbert Sadowski",
+      "imie_nazwisko": "Klaudia Szymanski\nnr wpisu WA",
       "pesel": null
     }
   ]

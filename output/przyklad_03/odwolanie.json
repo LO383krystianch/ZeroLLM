@@ -9,12 +9,12 @@
   "Odwolujacy": [
     {
       "krs": "9991877493",
-      "nazwa": "Silvatica Automatyka sp. k.",
+      "nazwa": null,
       "nip": "9995501241",
       "regon": "999302380",
       "przez-pelnomocnika": 1,
       "pelnomocnik": {
-        "imie_nazwisko": "Norbert Szulc",
+        "imie_nazwisko": "Norbert Szulc\nadres do korespondencji",
         "nazwa": "Kancelaria Adwokacka Spółka z ograniczoną odpowiedzialnością",
         "mail": "biuro@biuro.example"
       }
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9999176757",
-      "nazwa": "Lunareth Automatyka sp. z o.o.",
+      "nazwa": null,
       "nip": "9997945568",
       "regon": "999298856",
       "prowadzacy_postepowanie": null

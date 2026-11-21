@@ -38,6 +38,19 @@ def find_pdfs(input_dir: Path) -> list[Path]:
     return sorted(p for p in input_dir.rglob("*.pdf") if p.is_file())
 
 
+# Mapowanie nazw plików wejściowych na nazwy wyjściowe (zgodne z UZP).
+OUTPUT_NAME_MAP = {
+    "potwierdzenie_przelewu": "przelew",
+}
+
+
+def output_name(relative: Path) -> Path:
+    """Zwraca ścieżkę wyjściową JSON (z uwzględnieniem mapowania nazw UZP)."""
+    stem = relative.stem
+    mapped = OUTPUT_NAME_MAP.get(stem, stem)
+    return relative.with_name(mapped + ".json")
+
+
 def build_result(
     relative: Path,
     text: str,
@@ -57,7 +70,7 @@ def process(
     outputs: list[Path] = []
     for pdf in find_pdfs(input_dir):
         relative = pdf.relative_to(input_dir)
-        out = output_dir / relative.with_suffix(".json")
+        out = output_dir / output_name(relative)
 
         try:
             text = extractor.extract_text_from_pdf(pdf)

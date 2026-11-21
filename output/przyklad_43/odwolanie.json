@@ -9,13 +9,13 @@
   "Odwolujacy": [
     {
       "krs": "9992671408",
-      "nazwa": "Elmontex Energetyka sp. z o.o.",
+      "nazwa": null,
       "nip": "9996380214",
       "regon": "999528307",
       "przez-pelnomocnika": 1,
       "pelnomocnik": {
-        "imie_nazwisko": "Katarzyna Michalak",
-        "nazwa": "Michalak Legal Kancelaria Radcy Prawnego",
+        "imie_nazwisko": "Katarzyna Michalak\nadres do korespondencji",
+        "nazwa": null,
         "mail": "k.michalak@michalaklegal.example"
       }
     }
@@ -23,16 +23,16 @@
   "Zamawiajacy": [
     {
       "krs": "9990983326",
-      "nazwa": "Dolnośląskie Sieci Ciepłownicze S.A.",
+      "nazwa": null,
       "nip": "9993067418",
       "regon": "999140592",
       "prowadzacy_postepowanie": null
     }
   ],
   "ZamowieniePubliczne": {
-    "numer_bzp": "2026/BZP00999846",
+    "numer_bzp": null,
     "numer_postepowania": "DSC/PN/2026/011",
-    "numer_ted": "999408-2026",
+    "numer_ted": null,
     "tytul": "Modernizacja sieci ciepłowniczej wraz z budową węzłów cieplnych w rejonie ulic Hallera i Powstańców Śląskich we Wrocławiu"
   }
 }

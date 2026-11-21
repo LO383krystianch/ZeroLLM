@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9999669444",
-      "nazwa": "Hartica Serwis S.A.",
+      "nazwa": null,
       "nip": "9990678035",
       "regon": "999114017",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9993122884",
-      "nazwa": "Eurosept Infrastruktura S.A.",
+      "nazwa": null,
       "nip": "9996097888",
       "regon": "999725710",
       "prowadzacy_postepowanie": null

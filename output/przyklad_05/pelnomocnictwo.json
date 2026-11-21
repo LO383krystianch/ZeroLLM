@@ -4,20 +4,20 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9999511966",
-        "nazwa": "Corvantis Wyposażenie sp. z o.o.",
+        "nazwa": "MOCODAWCA Corvantis Wyposażenie sp. z o.o. ul. Orzechowa 31",
         "nip": "9997553319",
         "typ": "osoba_prawna"
       },
       "podpisujacy": [
         {
-          "imie_nazwisko": "Aleksandra Gajewski"
+          "imie_nazwisko": "Ignacy Sadowski"
         }
       ]
     }
   ],
   "pelnomocnicy": [
     {
-      "imie_nazwisko": "Ignacy Sadowski",
+      "imie_nazwisko": "Ignacy Sadowski\nnr wpisu WA",
       "pesel": null
     }
   ]

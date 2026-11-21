@@ -4,18 +4,31 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9995264890",
-        "nazwa": "Uldaris Automatyka S.A.",
+        "nazwa": "PEŁNOMOCNICTWO PROCESOWE Uldaris Automatyka S.A. z siedzibą w Gdańsk (KRS 9995264890",
         "nip": "9997683341",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Weronika Siedlecki"
-        },
-        {
-          "imie_nazwisko": "Cezary Lipowczyk"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

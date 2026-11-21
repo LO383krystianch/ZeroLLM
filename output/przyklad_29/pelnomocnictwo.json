@@ -4,23 +4,20 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9997854723",
-        "nazwa": "Corvella Serwis sp. k.",
+        "nazwa": "MOCODAWCA Corvella Serwis sp. k. ul. Różana 7",
         "nip": "9995776771",
         "typ": "osoba_prawna"
       },
       "podpisujacy": [
         {
-          "imie_nazwisko": "Aleksandra Chmielewski"
-        },
-        {
-          "imie_nazwisko": "Weronika Cieślak"
+          "imie_nazwisko": "Ewa Chalupowicz"
         }
       ]
     }
   ],
   "pelnomocnicy": [
     {
-      "imie_nazwisko": "Ewa Chalupowicz",
+      "imie_nazwisko": "Ewa Chalupowicz\nnr wpisu WA",
       "pesel": null
     }
   ]

@@ -1,15 +1,15 @@
 {
   "OdwolanieKIO": {
-    "data": "2026-03-07",
+    "data": "2019-09-11",
     "czynnosc_dzien": "2026-02-26",
     "czynnosc_powod_id": 1,
     "czynnosc_opis": "Decyzja o odrzuceniu oferty",
-    "miejscowosc": "Zielona Góra"
+    "miejscowosc": null
   },
   "Odwolujacy": [
     {
       "krs": null,
-      "nazwa": "BOMARK-BUD Olga Baran",
+      "nazwa": null,
       "nip": "9996203312",
       "regon": "999039007",
       "przez-pelnomocnika": 1,
@@ -22,24 +22,17 @@
   ],
   "Zamawiajacy": [
     {
-      "krs": null,
-      "nazwa": "Zarząd Transportu Miejskiego w Modrzewie",
+      "krs": "9992028336",
+      "nazwa": null,
       "nip": "9991117247",
       "regon": "999731997",
       "prowadzacy_postepowanie": 1
-    },
-    {
-      "krs": "9992028336",
-      "nazwa": "Miejskie Przedsiębiorstwo Komunikacyjne w Sosnowej Woli sp. z o.o.",
-      "nip": "9998400266",
-      "regon": "999862962",
-      "prowadzacy_postepowanie": 0
     }
   ],
   "ZamowieniePubliczne": {
-    "numer_bzp": "2026/BZP00999374",
+    "numer_bzp": null,
     "numer_postepowania": "IR.271.103.2026",
-    "numer_ted": "999682-2026",
+    "numer_ted": null,
     "tytul": "Świadczenie usług przewozu uczniów do szkół w roku szkolnym 2026/2027"
   }
 }

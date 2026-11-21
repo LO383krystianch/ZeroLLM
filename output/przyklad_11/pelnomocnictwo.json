@@ -4,20 +4,20 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9992008329",
-        "nazwa": "Quantis Serwis sp. k.",
+        "nazwa": "MOCODAWCA Quantis Serwis sp. k. ul. Orzechowa 56",
         "nip": "9992052831",
         "typ": "osoba_prawna"
       },
       "podpisujacy": [
         {
-          "imie_nazwisko": "Grzegorz Szulc"
+          "imie_nazwisko": "Cezary Bartoszewicz"
         }
       ]
     }
   ],
   "pelnomocnicy": [
     {
-      "imie_nazwisko": "Cezary Bartoszewicz",
+      "imie_nazwisko": "Cezary Bartoszewicz\nnr wpisu WA",
       "pesel": null
     }
   ]

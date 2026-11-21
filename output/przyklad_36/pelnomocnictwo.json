@@ -4,18 +4,41 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9995831483",
-        "nazwa": "Rubiconis Technologie S.A.",
+        "nazwa": "PEŁNOMOCNICTWO Rubiconis Technologie S.A. z siedzibą w Lublin (KRS 9995831483",
         "nip": "9998174794",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Zbigniew Mazurkiewicz"
-        },
-        {
-          "imie_nazwisko": "Patrycja Marciniak"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

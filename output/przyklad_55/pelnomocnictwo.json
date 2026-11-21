@@ -4,15 +4,31 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9996527940",
-        "nazwa": "Holdex Dystrybucja Medyczna sp. z o.o.",
+        "nazwa": "Olsztyn",
         "nip": "9998884068",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Natalia Mazur"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

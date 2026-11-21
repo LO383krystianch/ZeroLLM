@@ -9,12 +9,12 @@
   "Odwolujacy": [
     {
       "krs": "9999360925",
-      "nazwa": "Silvatica Technologie sp. z o.o.",
+      "nazwa": null,
       "nip": "9998966348",
       "regon": "999450212",
       "przez-pelnomocnika": 1,
       "pelnomocnik": {
-        "imie_nazwisko": "Jolanta Szulc",
+        "imie_nazwisko": "Jolanta Szulc\nadres do korespondencji",
         "nazwa": "Kancelaria Radców Prawnych Spółka z ograniczoną odpowiedzialnością",
         "mail": "biuro@biuro.example"
       }
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9995664683",
-      "nazwa": "Aurelink Sieci sp. k.",
+      "nazwa": null,
       "nip": "9993074480",
       "regon": "999279238",
       "prowadzacy_postepowanie": null

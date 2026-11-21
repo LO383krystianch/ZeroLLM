@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9995046546",
-      "nazwa": "Ilyrion Sieci sp. j.",
+      "nazwa": null,
       "nip": "9997585897",
       "regon": "999917510",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9992446832",
-      "nazwa": "Kadmos Systemy sp. k.",
+      "nazwa": null,
       "nip": "9998081160",
       "regon": "999915958",
       "prowadzacy_postepowanie": null
@@ -32,7 +32,7 @@
   "ZamowieniePubliczne": {
     "numer_bzp": null,
     "numer_postepowania": "SWZ.716.2026",
-    "numer_ted": "999918-2026",
+    "numer_ted": null,
     "tytul": "Modernizacja instalacji wentylacyjnej w obiekcie użyteczności publicznej"
   }
 }

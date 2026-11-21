@@ -4,18 +4,31 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9998339046",
-        "nazwa": "Gorlan Pojazdy sp. z o.o.",
+        "nazwa": "Szczecin",
         "nip": "9994387323",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Natalia Czerwińska"
-        },
-        {
-          "imie_nazwisko": "Norbert Olszewski"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

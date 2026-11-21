@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": null,
+    "data": "2019-09-11",
     "czynnosc_dzien": "2026-08-02",
     "czynnosc_powod_id": 9,
     "czynnosc_opis": "Decyzja o unieważnieniu postępowania",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9990430692",
-      "nazwa": "Prestal Dystrybucja Medyczna S.A.",
+      "nazwa": "Prestal Dystrybucja Medyczna S.A. ul. Krótka 22",
       "nip": "9990396494",
       "regon": "999666290",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9999408455",
-      "nazwa": "Szpital Specjalistyczny im. dr. Władysława Biegańskiego w Dąbrowie Leśnej",
+      "nazwa": null,
       "nip": "9994579741",
       "regon": "999479491",
       "prowadzacy_postepowanie": null

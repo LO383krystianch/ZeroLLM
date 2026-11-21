@@ -9,12 +9,12 @@
   "Odwolujacy": [
     {
       "krs": "9992008329",
-      "nazwa": "Quantis Serwis sp. k.",
+      "nazwa": null,
       "nip": "9992052831",
       "regon": "999795900",
       "przez-pelnomocnika": 1,
       "pelnomocnik": {
-        "imie_nazwisko": "Cezary Bartoszewicz",
+        "imie_nazwisko": "Cezary Bartoszewicz\nadres do korespondencji",
         "nazwa": "Kancelaria Adwokacka Spółka z ograniczoną odpowiedzialnością",
         "mail": "biuro@kontakt.example"
       }
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9990078038",
-      "nazwa": "Zorina Technologie sp. z o.o.",
+      "nazwa": null,
       "nip": "9995791492",
       "regon": "999387761",
       "prowadzacy_postepowanie": null

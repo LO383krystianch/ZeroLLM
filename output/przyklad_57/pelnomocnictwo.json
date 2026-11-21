@@ -4,15 +4,21 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9999271101",
-        "nazwa": "Lantis Aparatura Medyczna sp.j.",
+        "nazwa": "Warszawa",
         "nip": "9999915346",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Tadeusz Szymański"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

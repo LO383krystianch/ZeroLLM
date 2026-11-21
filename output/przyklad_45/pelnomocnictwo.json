@@ -4,15 +4,31 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9996254380",
-        "nazwa": "Baltorix Dostawy Medyczne sp. z o.o. sp.k.",
+        "nazwa": "Gdańsk",
         "nip": "9998701536",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Grzegorz Malinowski"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

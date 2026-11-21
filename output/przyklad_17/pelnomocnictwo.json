@@ -4,20 +4,20 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9999008184",
-        "nazwa": "Kavendis Infrastruktura sp. z o.o.",
+        "nazwa": "MOCODAWCA Kavendis Infrastruktura sp. z o.o. ul. Uliczna 39",
         "nip": "9999892540",
         "typ": "osoba_prawna"
       },
       "podpisujacy": [
         {
-          "imie_nazwisko": "Halina Bartoszewicz"
+          "imie_nazwisko": "Norbert Milewski"
         }
       ]
     }
   ],
   "pelnomocnicy": [
     {
-      "imie_nazwisko": "Norbert Milewski",
+      "imie_nazwisko": "Norbert Milewski\nnr wpisu WA",
       "pesel": null
     }
   ]

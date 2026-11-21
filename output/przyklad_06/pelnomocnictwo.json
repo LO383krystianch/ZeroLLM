@@ -4,18 +4,31 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9999360925",
-        "nazwa": "Silvatica Technologie sp. z o.o.",
+        "nazwa": "PEŁNOMOCNICTWO PROCESOWE Silvatica Technologie sp. z o.o. z siedzibą w Bydgoszcz (KRS 9999360925",
         "nip": "9998966348",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Bartosz Zajkowski"
-        },
-        {
-          "imie_nazwisko": "Oliwia Gajewski"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

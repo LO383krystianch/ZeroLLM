@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2026-09-29",
+    "data": "2019-09-11",
     "czynnosc_dzien": "2026-09-21",
     "czynnosc_powod_id": 11,
     "czynnosc_opis": "Opis przedmiotu zamówienia (OPZ)",
@@ -9,12 +9,12 @@
   "Odwolujacy": [
     {
       "krs": "9994245738",
-      "nazwa": "Norvia Ciepłownictwo sp. z o.o. sp.k.",
+      "nazwa": "Norvia Ciepłownictwo sp. z o.o. sp.k. ul. Kościuszki 91",
       "nip": "9990838738",
       "regon": "999328426",
       "przez-pelnomocnika": 1,
       "pelnomocnik": {
-        "imie_nazwisko": "Rafał Pawłowski",
+        "imie_nazwisko": "Rafał Pawłowski\nadres do korespondencji",
         "nazwa": "Kancelaria Adwokacka Pawłowski sp.p.",
         "mail": "pawlowski@pawlowskilegal.example"
       }
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9998376335",
-      "nazwa": "Przedsiębiorstwo Energetyki Cieplnej w Olszance Dolnej sp. z o.o.",
+      "nazwa": null,
       "nip": "9992187790",
       "regon": "999947717",
       "prowadzacy_postepowanie": null
@@ -32,7 +32,7 @@
   "ZamowieniePubliczne": {
     "numer_bzp": null,
     "numer_postepowania": "DAZ/131/2026",
-    "numer_ted": "999165-2026",
+    "numer_ted": null,
     "tytul": "Budowa instalacji fotowoltaicznych na budynkach użyteczności publicznej"
   }
 }

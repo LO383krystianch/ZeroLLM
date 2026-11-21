@@ -2,17 +2,33 @@
   "mocodawca": [
     {
       "data": {
-        "imie_nazwisko": "Sebastian Tomaszewski",
+        "imie_nazwisko": null,
         "krs": null,
-        "nazwa": "RAVELO-BUD Sebastian Tomaszewski",
+        "nazwa": "Szczecin",
         "nip": "9997975723",
-        "typ": "osoba_fizyczna"
+        "typ": null
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Sebastian Tomaszewski"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

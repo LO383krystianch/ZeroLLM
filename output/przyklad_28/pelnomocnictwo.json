@@ -4,18 +4,31 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9997060431",
-        "nazwa": "Yldenia Sieci S.A.",
+        "nazwa": "Yldenia Sieci S.A. ul. Grabowa 44",
         "nip": "9997550083",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Aleksandra Walczak"
-        },
-        {
-          "imie_nazwisko": "Weronika Pawlak"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

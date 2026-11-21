@@ -2,17 +2,33 @@
   "mocodawca": [
     {
       "data": {
-        "imie_nazwisko": "Jarosław Dudek",
+        "imie_nazwisko": null,
         "krs": null,
-        "nazwa": "DUDEK-TECH Jarosław Dudek",
+        "nazwa": "Lublin",
         "nip": "9994150873",
-        "typ": "osoba_fizyczna"
+        "typ": null
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Jarosław Dudek"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

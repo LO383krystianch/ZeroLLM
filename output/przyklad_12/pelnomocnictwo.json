@@ -4,15 +4,31 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9990299642",
-        "nazwa": "Wexford Usługi sp. j.",
+        "nazwa": "Pełnomocnictwo Wexford Usługi sp. j. z siedzibą w Bydgoszcz (KRS 9990299642",
         "nip": "9999988004",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Cezary Dudziewicz"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

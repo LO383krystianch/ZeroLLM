@@ -9,12 +9,12 @@
   "Odwolujacy": [
     {
       "krs": "9990299642",
-      "nazwa": "Wexford Usługi sp. j.",
+      "nazwa": null,
       "nip": "9999988004",
       "regon": "999132498",
       "przez-pelnomocnika": 1,
       "pelnomocnik": {
-        "imie_nazwisko": "Klaudia Dobrowolski",
+        "imie_nazwisko": "Klaudia Dobrowolski\nadres do korespondencji",
         "nazwa": "Kancelaria Adwokacka Spółka z ograniczoną odpowiedzialnością",
         "mail": "biuro@biuro.example"
       }
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9992132121",
-      "nazwa": "Lunareth Sieci S.A.",
+      "nazwa": null,
       "nip": "9997286918",
       "regon": "999839460",
       "prowadzacy_postepowanie": null

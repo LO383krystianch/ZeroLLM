@@ -4,15 +4,21 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9991500432",
-        "nazwa": "Corvella Rozwiązania S.A.",
+        "nazwa": "Kraków",
         "nip": "9990271196",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Zbigniew Lewandowski"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

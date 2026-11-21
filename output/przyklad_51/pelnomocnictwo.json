@@ -2,17 +2,33 @@
   "mocodawca": [
     {
       "data": {
-        "imie_nazwisko": "Olga Baran",
+        "imie_nazwisko": null,
         "krs": null,
-        "nazwa": "BOMARK-BUD Olga Baran",
+        "nazwa": "Radom",
         "nip": "9996203312",
-        "typ": "osoba_fizyczna"
+        "typ": null
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Olga Baran"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [
@@ -21,7 +37,7 @@
       "pesel": null
     },
     {
-      "imie_nazwisko": "Grażyna Zielińska",
+      "imie_nazwisko": "Grażyna\nZielińska",
       "pesel": null
     }
   ]

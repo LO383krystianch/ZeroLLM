@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9999035670",
-      "nazwa": "Uldaris Wyposażenie sp. j.",
+      "nazwa": null,
       "nip": "9997688539",
       "regon": "999200202",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9992686270",
-      "nazwa": "Orynte Konsulting sp. k.",
+      "nazwa": null,
       "nip": "9996050065",
       "regon": "999532157",
       "prowadzacy_postepowanie": null
@@ -32,7 +32,7 @@
   "ZamowieniePubliczne": {
     "numer_bzp": null,
     "numer_postepowania": "ZP.864.2026",
-    "numer_ted": "999222-2026",
+    "numer_ted": null,
     "tytul": "Świadczenie usług sprzątania pomieszczeń biurowych"
   }
 }

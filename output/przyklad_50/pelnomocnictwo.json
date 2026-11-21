@@ -8,11 +8,7 @@
         "nip": "9990838738",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Bartosz Urbański"
-        }
-      ]
+      "podpisujacy": []
     },
     {
       "data": {
@@ -22,14 +18,7 @@
         "nip": "9998343705",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Tadeusz Kucharski"
-        },
-        {
-          "imie_nazwisko": "Paweł Olszewski"
-        }
-      ]
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

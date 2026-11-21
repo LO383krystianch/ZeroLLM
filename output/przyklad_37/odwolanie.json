@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": null,
+    "data": "2019-09-11",
     "czynnosc_dzien": "2026-02-20",
     "czynnosc_powod_id": 9,
     "czynnosc_opis": "Decyzja o unieważnieniu postępowania",
@@ -9,12 +9,12 @@
   "Odwolujacy": [
     {
       "krs": "9994481774",
-      "nazwa": "Belmoria Technologie sp. j.",
+      "nazwa": null,
       "nip": "9998805059",
       "regon": "999647305",
       "przez-pelnomocnika": 1,
       "pelnomocnik": {
-        "imie_nazwisko": "Halina Niedźwiecki",
+        "imie_nazwisko": "Halina Niedźwiecki\nadres do korespondencji",
         "nazwa": "Kancelaria Adwokacka Spółka z ograniczoną odpowiedzialnością",
         "mail": "biuro@sekretariat.example"
       }
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9995815812",
-      "nazwa": "Corvantis Serwis sp. k.",
+      "nazwa": null,
       "nip": "9998984352",
       "regon": "999756827",
       "prowadzacy_postepowanie": null

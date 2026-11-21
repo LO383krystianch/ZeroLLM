@@ -9,12 +9,12 @@
   "Odwolujacy": [
     {
       "krs": "9993682204",
-      "nazwa": "Belmoria Systemy sp. j.",
+      "nazwa": null,
       "nip": "9999142626",
       "regon": "999173770",
       "przez-pelnomocnika": 1,
       "pelnomocnik": {
-        "imie_nazwisko": "Ryszard Lipowczyk",
+        "imie_nazwisko": "Ryszard Lipowczyk\nadres do korespondencji",
         "nazwa": "Kancelaria Adwokacka Spółka z ograniczoną odpowiedzialnością",
         "mail": "biuro@kontakt.example"
       }
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9995419681",
-      "nazwa": "Fjordlight Rozwiązania sp. k.",
+      "nazwa": null,
       "nip": "9999463425",
       "regon": "999846878",
       "prowadzacy_postepowanie": null

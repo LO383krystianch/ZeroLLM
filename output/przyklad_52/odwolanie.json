@@ -1,20 +1,20 @@
 {
   "OdwolanieKIO": {
-    "data": "2026-07-21",
+    "data": "2019-09-11",
     "czynnosc_dzien": "2026-07-11",
     "czynnosc_powod_id": 2,
     "czynnosc_opis": "Ogłoszenie wyboru oferty",
-    "miejscowosc": "Katowice"
+    "miejscowosc": null
   },
   "Odwolujacy": [
     {
-      "krs": null,
-      "nazwa": "BRONTEX-BUD Maciej Jaworski",
+      "krs": "9992630248",
+      "nazwa": null,
       "nip": "9993140838",
       "regon": "999694017",
       "przez-pelnomocnika": 1,
       "pelnomocnik": {
-        "imie_nazwisko": "Karolina Wiśniewska",
+        "imie_nazwisko": "Karolina Wiśniewska\nadres do korespondencji",
         "nazwa": "Kancelaria Radcy Prawnego Karolina Wiśniewska",
         "mail": "kancelaria@wisniewskaprawo.example"
       }
@@ -23,16 +23,16 @@
   "Zamawiajacy": [
     {
       "krs": null,
-      "nazwa": "Gmina Rudnik Wielki",
+      "nazwa": null,
       "nip": "9990264287",
       "regon": "999242211",
       "prowadzacy_postepowanie": null
     }
   ],
   "ZamowieniePubliczne": {
-    "numer_bzp": "2026/BZP00999112",
+    "numer_bzp": null,
     "numer_postepowania": "ZP.271.93.2026",
-    "numer_ted": "999562-2026",
+    "numer_ted": null,
     "tytul": "Termomodernizacja budynków użyteczności publicznej wraz z instalacją pomp ciepła"
   }
 }

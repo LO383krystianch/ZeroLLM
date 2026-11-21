@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": null,
+    "data": "2019-09-11",
     "czynnosc_dzien": "2026-09-08",
     "czynnosc_powod_id": 2,
     "czynnosc_opis": "Ogłoszenie wyboru oferty",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9992842505",
-      "nazwa": "Galdaris Technologie sp. k.",
+      "nazwa": null,
       "nip": "9993885533",
       "regon": "999308916",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9996808116",
-      "nazwa": "Wexoria Systemy sp. z o.o.",
+      "nazwa": null,
       "nip": "9998978660",
       "regon": "999331453",
       "prowadzacy_postepowanie": null

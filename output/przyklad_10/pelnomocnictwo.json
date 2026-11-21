@@ -4,18 +4,41 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9998577437",
-        "nazwa": "Meridian Konsulting sp. j.",
+        "nazwa": "Meridian Konsulting sp. j. ul. Huta 80",
         "nip": "9992049237",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Halina Przybylski"
-        },
-        {
-          "imie_nazwisko": "Ignacy Milewski"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

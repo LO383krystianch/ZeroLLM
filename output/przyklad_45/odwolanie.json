@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2026-11-06",
+    "data": "2019-09-11",
     "czynnosc_dzien": "2026-10-27",
     "czynnosc_powod_id": 7,
     "czynnosc_opis": "Zaniechanie odrzucenia oferty",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9996254380",
-      "nazwa": "Baltorix Dostawy Medyczne sp. z o.o. sp.k.",
+      "nazwa": null,
       "nip": "9998701536",
       "regon": "999352940",
       "przez-pelnomocnika": 1,
@@ -23,16 +23,16 @@
   "Zamawiajacy": [
     {
       "krs": "9997462015",
-      "nazwa": "Pomorskie Centrum Zaopatrzenia Szpitali S.A.",
+      "nazwa": null,
       "nip": "9990829364",
       "regon": "999618427",
       "prowadzacy_postepowanie": null
     }
   ],
   "ZamowieniePubliczne": {
-    "numer_bzp": "2026/BZP00999518",
+    "numer_bzp": null,
     "numer_postepowania": "PCZS/D/112/2026",
-    "numer_ted": "999065-2026",
+    "numer_ted": null,
     "tytul": "Sukcesywna dostawa jednorazowych wyrobów medycznych do zabiegów endoskopowych w podziale na 6 pakietów"
   }
 }

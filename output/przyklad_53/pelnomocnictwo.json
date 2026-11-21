@@ -4,15 +4,31 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9996858325",
-        "nazwa": "Vellum Facility sp. z o.o. sp.k.",
+        "nazwa": "Tarnów",
         "nip": "9999762610",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Norbert Kubiak"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

@@ -1,10 +1,10 @@
 {
   "przelew_bankowy": {
-    "data_operacji": "2026-08-12",
+    "data_operacji": null,
     "kwota": 17.0,
-    "na_rachunek": "91363778606394934264547691",
+    "na_rachunek": null,
     "numer_transakcji": "CEN2608246932582",
-    "tytul": "opłata skarbowa od pełnomocnictwa dla Patrycja Furman i Sławomir Ostrowczyk w postępowaniu przed KIO w przetargu ZP.447.2026 CEN2608246932582",
+    "tytul": null,
     "z_rachunku": "43046337661291756811869204"
   }
 }

@@ -4,18 +4,31 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9998213547",
-        "nazwa": "Valtrix Systemy Informatyczne sp. z o.o.",
+        "nazwa": "Poznań",
         "nip": "9993380162",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Krzysztof Nowicki"
-        },
-        {
-          "imie_nazwisko": "Ewa Lis"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [
@@ -24,7 +37,7 @@
       "pesel": null
     },
     {
-      "imie_nazwisko": "Tomasz Kędzierski",
+      "imie_nazwisko": "Tomasz\nKędzierski",
       "pesel": null
     }
   ]

@@ -4,18 +4,41 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9995891101",
-        "nazwa": "Umbria Serwis S.A.",
+        "nazwa": "Umbria Serwis S.A. ul. Wiśniowa 86",
         "nip": "9994524790",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Marek Dobrowolski"
-        },
-        {
-          "imie_nazwisko": "Ryszard Biernacki"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

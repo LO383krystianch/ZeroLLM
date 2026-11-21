@@ -4,9 +4,29 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9997648224",
-        "nazwa": "Zorina Rozwiązania S.A.",
+        "nazwa": "Pełnomocnictwo Kraków",
         "nip": "9996669445",
         "typ": "osoba_prawna"
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": ". § 3. Postępowanie Pełnomocnictwo dotyczy postępowania „Świadczenie usług pocztowych i kurierskich na potrzeby urzędu”",
+        "nip": null,
+        "typ": null
       },
       "podpisujacy": [
         {
@@ -21,7 +41,11 @@
       "pesel": null
     },
     {
-      "imie_nazwisko": "Grzegorz Dudek",
+      "imie_nazwisko": "Grzegorz\nDudek",
+      "pesel": null
+    },
+    {
+      "imie_nazwisko": "Halina Ostrowczyk",
       "pesel": null
     }
   ]

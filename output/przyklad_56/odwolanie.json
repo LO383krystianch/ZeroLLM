@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": null,
+    "data": "2019-09-11",
     "czynnosc_dzien": "2026-09-19",
     "czynnosc_powod_id": 7,
     "czynnosc_opis": "Zaniechanie odrzucenia oferty",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9998339046",
-      "nazwa": "Gorlan Pojazdy sp. z o.o.",
+      "nazwa": null,
       "nip": "9994387323",
       "regon": "999829190",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9995063913",
-      "nazwa": "Miejskie Przedsiębiorstwo Komunikacyjne w Jodłowcu sp. z o.o.",
+      "nazwa": null,
       "nip": "9995459293",
       "regon": "999758293",
       "prowadzacy_postepowanie": null

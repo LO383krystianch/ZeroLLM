@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": null,
+    "data": "2019-09-11",
     "czynnosc_dzien": "2026-04-04",
     "czynnosc_powod_id": 5,
     "czynnosc_opis": "Modyfikacja treści SWZ",
@@ -9,12 +9,12 @@
   "Odwolujacy": [
     {
       "krs": "9997060431",
-      "nazwa": "Yldenia Sieci S.A.",
+      "nazwa": null,
       "nip": "9997550083",
       "regon": "999670741",
       "przez-pelnomocnika": 1,
       "pelnomocnik": {
-        "imie_nazwisko": "Zbigniew Dobrowolski",
+        "imie_nazwisko": "Zbigniew Dobrowolski\nadres do korespondencji",
         "nazwa": "Kancelaria Prawna i Partnerzy",
         "mail": "biuro@kontakt.example"
       }
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9996208666",
-      "nazwa": "Uldaris Usługi sp. z o.o.",
+      "nazwa": null,
       "nip": "9991994577",
       "regon": "999602656",
       "prowadzacy_postepowanie": null

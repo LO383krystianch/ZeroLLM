@@ -4,23 +4,30 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9992671408",
-        "nazwa": "Elmontex Energetyka sp. z o.o.",
+        "nazwa": "Wrocław",
         "nip": "9996380214",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Andrzej Wawrzyniak"
-        },
-        {
-          "imie_nazwisko": "Beata Sobczak"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [
     {
       "imie_nazwisko": "Katarzyna Michalak",
+      "pesel": null
+    },
+    {
+      "imie_nazwisko": null,
       "pesel": "85071204278"
     }
   ]

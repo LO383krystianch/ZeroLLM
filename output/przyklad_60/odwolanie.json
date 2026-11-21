@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9999233530",
-      "nazwa": "Helvix Eko-Serwis sp.k.",
+      "nazwa": "Helvix Eko-Serwis sp.k. ul. Jagiellońska 48",
       "nip": "9995558958",
       "regon": "999054443",
       "przez-pelnomocnika": 1,
@@ -23,16 +23,16 @@
   "Zamawiajacy": [
     {
       "krs": "9999865519",
-      "nazwa": "Zakład Gospodarki Komunalnej w Wrzosowie sp. z o.o.",
+      "nazwa": null,
       "nip": "9992432443",
       "regon": "999221683",
       "prowadzacy_postepowanie": null
     }
   ],
   "ZamowieniePubliczne": {
-    "numer_bzp": "2026/BZP00999740",
+    "numer_bzp": null,
     "numer_postepowania": "SZP-46/2026",
-    "numer_ted": "999599-2026",
+    "numer_ted": null,
     "tytul": "Prowadzenie Punktu Selektywnej Zbiórki Odpadów Komunalnych w latach 2027–2029"
   }
 }

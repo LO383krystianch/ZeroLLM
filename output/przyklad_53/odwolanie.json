@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9996858325",
-      "nazwa": "Vellum Facility sp. z o.o. sp.k.",
+      "nazwa": null,
       "nip": "9999762610",
       "regon": "999467718",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9995350331",
-      "nazwa": "Zakład Usług Komunalnych w Zalesiu Królewskim sp. z o.o.",
+      "nazwa": null,
       "nip": "9991216707",
       "regon": "999633654",
       "prowadzacy_postepowanie": null
@@ -32,7 +32,7 @@
   "ZamowieniePubliczne": {
     "numer_bzp": null,
     "numer_postepowania": "ZP.26.2026",
-    "numer_ted": "999337-2026",
+    "numer_ted": null,
     "tytul": "Usługa ochrony osób i mienia w obiektach Zamawiającego w latach 2026–2028"
   }
 }

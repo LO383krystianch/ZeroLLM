@@ -4,18 +4,31 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9999448354",
-        "nazwa": "Calvero Gospodarka Odpadami sp.k.",
+        "nazwa": "Opole",
         "nip": "9995986745",
         "typ": "osoba_prawna"
       },
-      "podpisujacy": [
-        {
-          "imie_nazwisko": "Natalia Kowalczyk"
-        },
-        {
-          "imie_nazwisko": "Leszek Piotrowski"
-        }
-      ]
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
+    },
+    {
+      "data": {
+        "imie_nazwisko": null,
+        "krs": null,
+        "nazwa": null,
+        "nip": null,
+        "typ": null
+      },
+      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [
