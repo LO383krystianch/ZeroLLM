@@ -75,9 +75,8 @@ Otwórz <http://localhost:8000/>.
 8. [Format wyniku i transparentność](#format-wyniku-i-transparentność)
 9. [Konfiguracja — config/document_rules.yaml](#konfiguracja--configdocument_rulesyaml)
 10. [Dodawanie nowej klasy dokumentów](#dodawanie-nowej-klasy-dokumentów)
-11. [Ewaluacja (F1)](#ewaluacja-f1)
-12. [Zasady projektowe](#zasady-projektowe)
-13. [Rozwiązywanie problemów](#rozwiązywanie-problemów)
+11. [Zasady projektowe](#zasady-projektowe)
+12. [Rozwiązywanie problemów](#rozwiązywanie-problemów)
 
 ---
 
@@ -429,27 +428,6 @@ document_types:
 
 Gotowe — silnik automatycznie rozpozna typ `faktura` i wyodrębni `numer` oraz
 `kwota`. W ten sam sposób dodaje się nowe pola i reguły.
-
----
-
-## Ewaluacja (F1)
-
-Lokalny skrypt `evaluate.py` porównuje wygenerowane `output/` z plikami
-referencyjnymi (ground truth) w `data/uzp_materialy/dane/` i liczy F1.
-
-```bash
-python evaluate.py
-```
-
-Oczekiwany układ danych testowych:
-
-```
-input/<sprawa>/*.pdf                  # dokumenty wejściowe
-data/uzp_materialy/dane/<sprawa>/*.json  # wzorce (ground truth)
-```
-
-Nazwy folderów muszą się zgadzać, a pliki wzorcowe nazywać się
-`odwolanie.json`, `pelnomocnictwo.json`, `przelew.json`.
 
 ---
 
