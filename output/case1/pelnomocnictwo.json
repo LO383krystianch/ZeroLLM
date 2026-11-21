@@ -4,35 +4,53 @@
   "data": {
     "mocodawca": {
       "value": {
-        "dane_osoby": {
-          "value": {
-            "imie_nazwisko": {
-              "value": null,
-              "source_text": "",
-              "rule_used": null
+        "data": {
+          "value": [
+            {
+              "nazwa": {
+                "value": "Altrona Farmacja sp.k.",
+                "source_text": "Altrona Farmacja\nsp.k.",
+                "rule_used": "regex:^\\s*([\\s\\S]*?)(?=\\s*,)"
+              },
+              "krs": {
+                "value": "9998920417",
+                "source_text": "KRS 9998920417",
+                "rule_used": "regex:\\bKRS\\s*[:.]?\\s*(\\d{10})"
+              },
+              "nip": {
+                "value": "9994895854",
+                "source_text": "NIP 9994895854",
+                "rule_used": "regex:\\bNIP\\s*[:.]?\\s*(\\d{3}[- ]?\\d{3}[- ]?\\d{2}[- ]?\\d{2})"
+              },
+              "regon": {
+                "value": "999640601",
+                "source_text": "REGON 999640601",
+                "rule_used": "regex:\\bREGON\\s*[:.]?\\s*(\\d{9}(?:\\d{5})?)"
+              }
             },
-            "pesel": {
-              "value": null,
-              "source_text": "",
-              "rule_used": null
-            },
-            "adres": {
-              "value": null,
-              "source_text": "",
-              "rule_used": null
+            {
+              "nazwa": {
+                "value": "Polvent Aparatura Medyczna sp. z o.o.",
+                "source_text": "Polvent Aparatura Medyczna sp. z o.o.",
+                "rule_used": "regex:^\\s*([\\s\\S]*?)(?=\\s*,)"
+              },
+              "krs": {
+                "value": "9996965616",
+                "source_text": "KRS\n9996965616",
+                "rule_used": "regex:\\bKRS\\s*[:.]?\\s*(\\d{10})"
+              },
+              "nip": {
+                "value": "9994023484",
+                "source_text": "NIP 9994023484",
+                "rule_used": "regex:\\bNIP\\s*[:.]?\\s*(\\d{3}[- ]?\\d{3}[- ]?\\d{2}[- ]?\\d{2})"
+              },
+              "regon": {
+                "value": "999445554",
+                "source_text": "REGON 999445554",
+                "rule_used": "regex:\\bREGON\\s*[:.]?\\s*(\\d{9}(?:\\d{5})?)"
+              }
             }
-          },
-          "source_text": "",
-          "rule_used": null
-        },
-        "podpisujacy": {
-          "value": {
-            "imie_nazwisko": {
-              "value": null,
-              "source_text": "",
-              "rule_used": null
-            }
-          },
+          ],
           "source_text": "",
           "rule_used": null
         }
@@ -41,7 +59,22 @@
       "rule_used": null
     },
     "pelnomocnicy": {
-      "value": [],
+      "value": [
+        {
+          "imie_nazwisko": {
+            "value": "Cezary Sikorski",
+            "source_text": "r. pr. Cezary Sikorski",
+            "rule_used": "regex:(?:r\\.\\s*pr\\.|adw\\.)\\s*([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)+)"
+          }
+        },
+        {
+          "imie_nazwisko": {
+            "value": "Igor Majewski",
+            "source_text": "adw. Igor Majewski",
+            "rule_used": "regex:(?:r\\.\\s*pr\\.|adw\\.)\\s*([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)+)"
+          }
+        }
+      ],
       "source_text": "",
       "rule_used": null
     }

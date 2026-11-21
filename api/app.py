@@ -62,7 +62,7 @@ def _extract_from_pdf(pdf_bytes: bytes, filename: str) -> dict[str, Any]:
 
     try:
         text = extractor.extract_text_from_pdf(tmp_path)
-        document_type = _extractor.detect(text)
+        document_type = _extractor.detect(text, filename)
         data = _extractor.extract(text, document_type)
         return {
             "filename": filename,

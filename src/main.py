@@ -44,7 +44,7 @@ def build_result(
     ex: extractor.DocumentExtractor,
 ) -> dict[str, Any]:
     """Buduje wynik JSON z transparentnością dla pojedynczego dokumentu."""
-    document_type = ex.detect(text)
+    document_type = ex.detect(text, relative.name)
     data = ex.extract(text, document_type)
     return {
         "source": relative.as_posix(),

@@ -128,6 +128,16 @@ def _regex_handler(rule: dict[str, Any], text: str) -> tuple[Any, str, str]:
     return value, match.group(0), rule_used
 
 
+@register("filename")
+def _filename_handler(rule: dict[str, Any], filename: str) -> tuple[Any, str, str]:
+    """Reguła klasyfikacji po nazwie pliku (dopasowanie wzorca do nazwy)."""
+    pattern = str(rule.get("pattern", ""))
+    rule_used = f"filename:{pattern}"
+    if pattern and re.search(pattern, filename, _resolve_flags(rule)):
+        return filename, filename, rule_used
+    return None, "", rule_used
+
+
 # ---------------------------------------------------------------------------
 # Ładowanie reguł i segmentacja tekstu
 # ---------------------------------------------------------------------------
@@ -208,23 +218,49 @@ class DocumentExtractor:
         self._normalizers: dict[str, Callable[[Any], Any]] = {
             "iso_date": self._normalize_iso_date,
             "bool_to_int": self._normalize_bool_to_int,
+            "iban_clean": self._normalize_iban_clean,
         }
 
     @property
     def names(self) -> list[str]:
         return list(self.document_types.keys())
 
-    def detect(self, text: str) -> str | None:
-        """Wykrywa typ dokumentu (pierwsza reguła ``classification`` z dopasowaniem)."""
+    def detect(self, text: str, filename: str | None = None) -> str | None:
+        """Wykrywa typ dokumentu.
+
+        Kolejność: najpierw reguły klasyfikacji oparte o nazwę pliku (``kind: filename``),
+        potem reguły tekstowe (``kind: regex``).
+        """
+        if filename:
+            doc_type = self._classify(filename, kind="filename")
+            if doc_type is not None:
+                return doc_type
+        doc_type = self._classify(text, skip_kind="filename")
+        if doc_type is not None:
+            return doc_type
+        return self.default_document_type
+
+    def _classify(
+        self,
+        against: str,
+        kind: str | None = None,
+        skip_kind: str | None = None,
+    ) -> str | None:
+        """Stosuje reguły klasyfikacji (określonego ``kind``) względem ``against``."""
         for name, spec in self.document_types.items():
             for rule in spec.get("classification", []):
-                handler = _REGISTRY.get(rule.get("kind"))
+                rule_kind = rule.get("kind")
+                if kind is not None and rule_kind != kind:
+                    continue
+                if skip_kind is not None and rule_kind == skip_kind:
+                    continue
+                handler = _REGISTRY.get(rule_kind)
                 if handler is None:
                     continue
-                value, _, _ = handler(rule, text)
+                value, _, _ = handler(rule, against)
                 if value:
                     return name
-        return self.default_document_type
+        return None
 
     def extract(self, text: str, document_type: str | None = None) -> dict[str, Any]:
         """Ekstrahuje pola dla danego (lub wykrytego) typu dokumentu."""
@@ -258,28 +294,60 @@ class DocumentExtractor:
         default_section: str | None = None,
     ) -> dict[str, Any]:
         section = spec.get("section", default_section)
-        ftype = spec.get("type", "string")
-        if ftype == "object":
+        # Obecność `fields`/`items` decyduje o strukturze (umożliwia typy jak
+        # `object`, `array`, ale też własne etykiety, np. `osoba_prawna`).
+        if "fields" in spec:
             value = self._extract_structure(spec.get("fields", {}), text, blocks, section)
             return _field(value)
-        if ftype == "array":
-            value = self._extract_items(spec.get("items", {}), text, blocks, section)
+        if "items" in spec:
+            value = self._extract_items(spec, text, blocks, section)
             return _field(value)
         return self._extract_scalar(spec, text, blocks, section)
 
     def _extract_items(
         self,
-        item_spec: dict[str, Any],
+        spec: dict[str, Any],
         text: str,
         blocks: dict[str, str],
         default_section: str | None = None,
     ) -> list[dict[str, Any]]:
-        """Ekstrahuje elementy tablicy (na razie jeden; format pozwala rozszerzyć)."""
-        item = self._extract_structure(item_spec.get("fields", {}), text, blocks, default_section)
-        has_value = any(
-            v.get("value") not in (None, "", False, []) for v in item.values()
-        )
-        return [item] if has_value else []
+        """Ekstrahuje elementy tablicy (jedno- lub wieloelementowej).
+
+        Opcje na poziomie tablicy:
+        - ``after`` / ``until`` — zawężenie zakresu źródła,
+        - ``separator`` — regex dzielący tekst na pojedyncze elementy.
+        """
+        section = spec.get("section", default_section)
+        source = self._resolve_source(section, text, blocks)
+        item_spec = spec.get("items", {})
+        items: list[dict[str, Any]] = []
+        for part in self._split_items(source, spec):
+            item = self._extract_structure(item_spec.get("fields", {}), part, {})
+            has_value = any(
+                v.get("value") not in (None, "", False, []) for v in item.values()
+            )
+            if has_value:
+                items.append(item)
+        return items
+
+    @staticmethod
+    def _split_items(source: str, spec: dict[str, Any]) -> list[str]:
+        """Dzieli źródło tablicy na fragmenty (bloki elementów)."""
+        flags = _resolve_flags(spec)
+        after = spec.get("after")
+        if after:
+            anchor = re.search(str(after), source, flags)
+            if anchor is not None:
+                source = source[anchor.end():]
+        until = spec.get("until")
+        if until:
+            stop = re.search(str(until), source, flags)
+            if stop is not None:
+                source = source[:stop.start()]
+        separator = spec.get("separator")
+        if not separator:
+            return [source]
+        return [part for part in re.split(str(separator), source, flags) if part.strip()]
 
     def _extract_scalar(
         self,
@@ -370,3 +438,12 @@ class DocumentExtractor:
         if s in ("false", "0", "nie", "no"):
             return 0
         return value
+
+    def _normalize_iban_clean(self, value: Any) -> Any:
+        """Usuwa prefiks ``PL`` oraz spacje z numeru konta bankowego."""
+        if value is None:
+            return None
+        s = str(value).strip()
+        if s[:2].upper() == "PL":
+            s = s[2:]
+        return re.sub(r"\s+", "", s)

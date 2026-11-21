@@ -5,12 +5,12 @@
     "OdwolanieKIO": {
       "value": {
         "data": {
-          "value": "3 lipca 2026",
+          "value": "2026-07-03",
           "source_text": "3 lipca 2026",
           "rule_used": "regex:\\b(\\d{1,2}\\s+(?:stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|września|października|listopada|grudnia)\\s+\\d{4})"
         },
         "czynnosc_dzien": {
-          "value": "28 czerwca 2026",
+          "value": "2026-06-28",
           "source_text": "w dniu 28 czerwca 2026",
           "rule_used": "regex:\\bw dniu\\s+(\\d{1,2}\\s+(?:stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|września|października|listopada|grudnia)\\s+\\d{4})"
         },
@@ -57,7 +57,7 @@
             "rule_used": "regex:\\bREGON[ \\t]*[:.]?[ \\t]*(\\d{9}(?:\\d{5})?)"
           },
           "przez-pelnomocnika": {
-            "value": true,
+            "value": 1,
             "source_text": "reprezentowany przez",
             "rule_used": "regex:\\b(?:reprezentowan\\w*\\s+przez|przez\\s+pełnomocnika)\\b"
           },

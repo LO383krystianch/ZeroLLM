@@ -1,69 +1,38 @@
 {
   "source": "case1/potwierdzenie_przelewu.pdf",
-  "document_type": "odwolanie",
+  "document_type": "przelew",
   "data": {
-    "OdwolanieKIO": {
+    "przelew_bankowy": {
       "value": {
-        "data": {
+        "data_operacji": {
           "value": null,
           "source_text": "",
           "rule_used": null
         },
-        "czynnosc_dzien": {
+        "kwota": {
+          "value": "\n50,00",
+          "source_text": "Kwota\n50,00 PLN",
+          "rule_used": "regex:\\bkwota[ \\t]*[:.]?[ \\t]*([\\d\\s]+[.,]\\d{2})\\s*(?:PLN|zł)?"
+        },
+        "na_rachunek": {
+          "value": "29915400023241714372534330",
+          "source_text": "Rachunek odbiorcy\nPL29 9154 0002 3241 7143 7253 4330",
+          "rule_used": "regex:\\b(?:rachunek\\s+odbiorcy|na\\s+rachunek)\\s*[:.]?\\s*([A-Z]{2}\\s*\\d{2}(?:\\s*\\d{4}){6})"
+        },
+        "numer_transakcji": {
           "value": null,
           "source_text": "",
           "rule_used": null
         },
-        "czynnosc_powod_id": {
-          "value": null,
-          "source_text": "",
-          "rule_used": null
+        "tytul": {
+          "value": "przelewu",
+          "source_text": "Tytuł przelewu",
+          "rule_used": "regex:\\btytuł(?:em|u)?[ \\t]*[:.]?[ \\t]*([^\\r\\n]+)"
         },
-        "czynnosc_opis": {
-          "value": null,
-          "source_text": "",
-          "rule_used": null
-        },
-        "miejscowosc": {
-          "value": null,
-          "source_text": "",
-          "rule_used": null
-        }
-      },
-      "source_text": "",
-      "rule_used": null
-    },
-    "Odwolujacy": {
-      "value": [],
-      "source_text": "",
-      "rule_used": null
-    },
-    "Zamawiajacy": {
-      "value": [],
-      "source_text": "",
-      "rule_used": null
-    },
-    "ZamowieniePubliczne": {
-      "value": {
-        "numer_postepowania": {
-          "value": null,
-          "source_text": "",
-          "rule_used": null
-        },
-        "nazwa": {
-          "value": null,
-          "source_text": "",
-          "rule_used": null
-        },
-        "tryb": {
-          "value": null,
-          "source_text": "",
-          "rule_used": null
-        },
-        "data_ogloszenia": {
-          "value": null,
-          "source_text": "",
-          "rule_used": null
+        "z_rachunku": {
+          "value": "87767998528637357156751729",
+          "source_text": "Rachunek zleceniodawcy\nPL87 7679 9852 8637 3571 5675 1729",
+          "rule_used": "regex:\\b(?:rachunek\\s+zleceniodawcy|z\\s+rachunku|rachunek\\s+nadawcy)\\s*[:.]?\\s*([A-Z]{2}\\s*\\d{2}(?:\\s*\\d{4}){6})"
         }
       },
       "source_text": "",

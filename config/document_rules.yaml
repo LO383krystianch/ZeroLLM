@@ -22,10 +22,17 @@
 #            require: wzorzec, który musi wystąpić w tekście (inaczej reguła pominięta),
 #            after: marker — dopasowanie szukane dopiero po jego wystąpieniu,
 #            normalize: whitespace — zbicie białych znaków w wartości
+#   filename -> pattern dopasowywany do nazwy pliku (tylko w `classification`;
+#               klasyfikacja po nazwie pliku ma pierwszeństwo przed tekstową)
+#
+# Tablice (type array lub typ z `items`) — obsługa wielu elementów:
+#   after / until — zawężenie zakresu źródła (markery startu i końca),
+#   separator — regex dzielący tekst na osobne elementy
 #
 # Normalizacja wartości (na poziomie pola, po ekstrakcji):
 #   normalize: iso_date    — '3 lipca 2026' -> '2026-07-03'
 #   normalize: bool_to_int — true/True -> 1, false/False -> 0
+#   normalize: iban_clean  — 'PL87 7679 ...' -> '877679...' (usuwa prefiks PL i spacje)
 #
 # Każde wyekstrahowane pole zwraca obiekt: {value, source_text, rule_used}.
 
@@ -39,7 +46,7 @@ document_types:
     label: "Odwołanie do KIO"
     classification:
       - kind: regex
-        pattern: '\b(?:odwołanie|odwołuj|KIO|Krajowa Izba Odwoławcza)\b'
+        pattern: '\b(?:odwołanie|odwołuj|Krajowa\s+Izba\s+Odwoławcza)\b'
         flags: [IGNORECASE]
     sections:
       - name: Naglowek
@@ -256,63 +263,55 @@ document_types:
       mocodawca:
         type: object
         fields:
-          dane_osoby:
-            type: object
-            fields:
-              imie_nazwisko:
-                type: string
-                rules:
-                  - kind: regex
-                    pattern: '\b(?:imię i nazwisko|imie i nazwisko)[ \t]*[:.]?[ \t]*([^\r\n]+)'
-                    group: 1
-                    flags: [IGNORECASE]
-              pesel:
-                type: string
-                rules:
-                  - kind: regex
-                    pattern: '\bPESEL[ \t]*[:.]?[ \t]*(\d{11})'
-                    group: 1
-                    flags: [IGNORECASE]
-              adres:
-                type: string
-                rules:
-                  - kind: regex
-                    pattern: '\b(?:adres|zamieszkał\w*|zamieszkal\w*)[ \t]*[:.]?[ \t]*([^\r\n]+)'
-                    group: 1
-                    flags: [IGNORECASE]
-          podpisujacy:
-            type: object
-            fields:
-              imie_nazwisko:
-                type: string
-                rules:
-                  - kind: regex
-                    pattern: '\bpodpisując\w*[ \t]*[:.]?[ \t]*([^\r\n]+)'
-                    group: 1
-                    flags: [IGNORECASE]
+          data:
+            type: osoba_prawna
+            after: '\(Konsorcjum\)\s*:'
+            until: '\(dalej\s+łącznie'
+            separator: '\d+\)\s*'
+            flags: [IGNORECASE]
+            items:
+              fields:
+                nazwa:
+                  type: string
+                  rules:
+                    - kind: regex
+                      pattern: '^\s*([\s\S]*?)(?=\s*,)'
+                      group: 1
+                      normalize: whitespace
+                krs:
+                  type: string
+                  rules:
+                    - kind: regex
+                      pattern: '\bKRS\s*[:.]?\s*(\d{10})'
+                      group: 1
+                      flags: [IGNORECASE]
+                nip:
+                  type: string
+                  rules:
+                    - kind: regex
+                      pattern: '\bNIP\s*[:.]?\s*(\d{3}[- ]?\d{3}[- ]?\d{2}[- ]?\d{2})'
+                      group: 1
+                      flags: [IGNORECASE]
+                regon:
+                  type: string
+                  rules:
+                    - kind: regex
+                      pattern: '\bREGON\s*[:.]?\s*(\d{9}(?:\d{5})?)'
+                      group: 1
+                      flags: [IGNORECASE]
       pelnomocnicy:
         type: array
+        after: 'udzielają\s+pełnomocnictwa\s*:'
+        until: 'Pełnomocnictwo\s+udzielone'
+        separator: ',\s*'
+        flags: [IGNORECASE]
         items:
           fields:
             imie_nazwisko:
               type: string
               rules:
                 - kind: regex
-                  pattern: '\bpełnomocnik\w*[ \t]*[:.]?[ \t]*([^\r\n]+)'
-                  group: 1
-                  flags: [IGNORECASE]
-            pesel:
-              type: string
-              rules:
-                - kind: regex
-                  pattern: '\bPESEL[ \t]*[:.]?[ \t]*(\d{11})'
-                  group: 1
-                  flags: [IGNORECASE]
-            adres:
-              type: string
-              rules:
-                - kind: regex
-                  pattern: '\b(?:adres|zamieszkał\w*|zamieszkal\w*)[ \t]*[:.]?[ \t]*([^\r\n]+)'
+                  pattern: '(?:r\.\s*pr\.|adw\.)\s*([A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s+[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)+)'
                   group: 1
                   flags: [IGNORECASE]
 
@@ -322,8 +321,11 @@ document_types:
   przelew:
     label: "Przelew bankowy"
     classification:
+      - kind: filename
+        pattern: 'przelew'
+        flags: [IGNORECASE]
       - kind: regex
-        pattern: '\b(?:przelew|potwierdzenie przelewu|dowód wpłaty)\b'
+        pattern: '\b(?:przelew\w*|potwierdzenie\s+wykonania\s+przelewu|dowód\s+wpłaty)\b'
         flags: [IGNORECASE]
     structure:
       przelew_bankowy:
@@ -345,9 +347,10 @@ document_types:
                 flags: [IGNORECASE]
           na_rachunek:
             type: string
+            normalize: iban_clean
             rules:
               - kind: regex
-                pattern: '\b(?:na\s+rachunek|rachunek\s+odbiorcy|odbiorca)[ \t]*[:.]?[ \t]*([A-Z]{2}[0-9\s]{18,30})'
+                pattern: '\b(?:rachunek\s+odbiorcy|na\s+rachunek)\s*[:.]?\s*([A-Z]{2}\s*\d{2}(?:\s*\d{4}){6})'
                 group: 1
                 flags: [IGNORECASE]
           numer_transakcji:
@@ -366,8 +369,9 @@ document_types:
                 flags: [IGNORECASE]
           z_rachunku:
             type: string
+            normalize: iban_clean
             rules:
               - kind: regex
-                pattern: '\b(?:z\s+rachunku|rachunek\s+nadawcy)[ \t]*[:.]?[ \t]*([A-Z]{2}[0-9\s]{18,30})'
+                pattern: '\b(?:rachunek\s+zleceniodawcy|z\s+rachunku|rachunek\s+nadawcy)\s*[:.]?\s*([A-Z]{2}\s*\d{2}(?:\s*\d{4}){6})'
                 group: 1
                 flags: [IGNORECASE]
