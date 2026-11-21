@@ -312,19 +312,65 @@ wsadowym, jak i przez API/UI.
 
 ## Obsługa skanów (OCR)
 
-Dokumenty **bez warstwy tekstowej** (zeskanowane) są rozpoznawane automatycznie:
+### Czy Tesseract jest wymagany? **Nie — ale bez niego nie ma OCR.**
 
-1. `pypdf` próbuje wyciągnąć tekst.
-2. Jeśli tekst jest pusty/prawie pusty (< 40 znaków) — uruchamiany jest OCR.
+Aplikacja działa w pełni **bez Tesseract**. Wymaga go tylko jedna rzecz:
+odczyt **skanów**, czyli PDF-ów będących zdjęciami bez warstwy tekstowej.
 
-OCR realizowany jest przez **Tesseract** (język polski):
+| Typ dokumentu | Bez Tesseract | Z Tesseract |
+| --- | --- | --- |
+| zwykły PDF (tekst) | ✅ działa w 100% | ✅ działa |
+| skan (brak tekstu) | ⚠️ wynik `{}` | ✅ odczytywany przez OCR |
 
-| Silnik | Instalacja |
-| --- | --- |
-| **Tesseract** (polski) | binarka systemowa — Docker instaluje automatycznie (`apt-get`); Windows: instalator UB Mannheim (zaznaczyć język Polish) |
+Dlatego Tesseract to **opcjonalne** rozszerzenie — nie zepsuje nic, jeśli go
+nie ma; po prostu skany nie zostaną odczytane (zwrócą `{}`).
 
-- **Docker**: Tesseract + polski instalowany w obrazie (`Dockerfile`) — OCR działa od razu.
-- **Lokalnie (Windows)**: zainstaluj Tesseract (jeden raz, ~50 MB) i dodaj go do `PATH`.
+### Jak działa rozpoznawanie
+
+1. `pypdf` próbuje wyciągnąć tekst z PDF-a.
+2. Jeśli tekst jest pusty/prawie pusty (< 40 znaków) — uruchamiany jest OCR (Tesseract).
+
+### `tesseract` vs `pytesseract` — żeby nie mylić
+
+- **`tesseract`** — właściwy silnik OCR (program binarny w C++), instalowany systemowo.
+- **`pytesseract`** — tylko nakładka w Pythonie (jest w `requirements.txt`), która **woła** binarkę `tesseract`.
+
+Sama `pytesseract` **nie robi OCR** — bez binarki `tesseract` wyrzuci błąd,
+dlatego w `start.bat`/`start.sh` pojawia się ostrzeżenie o braku Tesseract.
+
+### Instalacja Tesseract (z językiem polskim)
+
+**Docker** — nic nie musisz robić, `Dockerfile` instaluje Tesseract + polski automatycznie:
+
+```bash
+docker compose up --build
+```
+
+**Windows** — pobierz i zainstaluj raz (~50 MB), przy instalacji zaznacz **Polish**:
+
+1. Wejdź na <https://github.com/UB-Mannheim/tesseract/wiki> i pobierz
+   instalator `tesseract-ocr-w64-setup-*.exe`.
+2. W instalatorze zaznacz: **Additional language data → Polish**.
+3. Po instalacji upewnij się, że `tesseract` jest w `PATH` (domyślnie:
+   `C:\Program Files\Tesseract-OCR\`).
+
+**Linux (Debian/Ubuntu)** — jedną komendą:
+
+```bash
+sudo apt-get install tesseract-ocr tesseract-ocr-pol
+```
+
+**macOS** — przez Homebrew:
+
+```bash
+brew install tesseract tesseract-lang
+```
+
+### Weryfikacja
+
+```bash
+tesseract --list-langs   # na liście powinien być "pol"
+```
 
 Degradacja jest łagodna: gdy Tesseract nie jest dostępny, skan zwraca
 pusty tekst (bez błędu), a wynik to `{}`.
