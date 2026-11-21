@@ -406,7 +406,7 @@ document_types:
     label: "Przelew bankowy"
     classification:
       - kind: regex
-        pattern: '\b(?:polecenie\s+przelewu|potwierdzenie\s+(?:przelewu(?:\s+krajowego)?|transakcji|realizacji(?:\s+(?:polecenia\s+)?przelewu)?|wykonania\s+przelewu)|przelew\s+(?:krajowy|bankowy|natychmiastowy)|dowód\s+wpłaty|rachunek\s+(?:obciążany|odbiorcy|beneficjenta|nadawcy|zleceniodawcy|uznawany)|adresat\s+przelewu|płatnik|beneficjent|dane\s+(?:nadawcy|odbiorcy)|kwota\s+(?:operacji|przelewu))\b'
+        pattern: '\b(?:rachunek\s+(?:obciążany|odbiorcy|beneficjenta|nadawcy|zleceniodawcy|uznawany)|płatnik|beneficjent|adresat\s+przelewu|dane\s+(?:nadawcy|odbiorcy)|kwota\s+(?:operacji|przelewu)|przelew\s+(?:krajowy|bankowy|natychmiastowy)|z\s+rachunku)\b'
         flags: [IGNORECASE]
     structure:
       przelew_bankowy:
