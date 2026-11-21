@@ -615,13 +615,18 @@ class DocumentExtractor:
         return re.sub(r"\s+", "", s)
 
     def _normalize_amount_float(self, value: Any) -> Any:
-        """Usuwa spacje/nowe linie, zamienia przecinek na kropkę i rzutuje na float."""
+        """Normalizuje kwotę do tekstu z dwoma miejscami po przecinku (grosze).
+
+        Np. ``"17,00"`` / ``"17.00"`` -> ``"17.00"``. Zwracamy tekst, a nie
+        ``float``, żeby grosze nie zniknęły w JSON (JS zrzutuje ``17.0`` na
+        ``17`` i straci część ułamkową).
+        """
         if value is None:
             return None
         s = re.sub(r"\s+", "", str(value))
         s = s.replace(",", ".")
         try:
-            return float(s)
+            return f"{float(s):.2f}"
         except (TypeError, ValueError):
             return value
 
