@@ -208,19 +208,6 @@ def extract_text_from_pdf(path: Path) -> str:
     return text
 
 
-def _ocr_pdf(path: Path) -> str:
-    """OCR zeskanowanego PDF-a.
-
-    Kolejność silników:
-    1. Tesseract (szybki, dokładny) — wymaga binarki (apt / instalator),
-    2. easyocr (pip-only, bez zależności systemowych) — fallback.
-    """
-    text = _ocr_tesseract(path)
-    if text.strip():
-        return text
-    return _ocr_easyocr(path)
-
-
 def _render_pages(path: Path) -> list | None:
     """Renderuje strony PDF-a do obrazów PIL (300 DPI). Zwraca listę lub None."""
     try:
@@ -247,8 +234,8 @@ def _render_pages(path: Path) -> list | None:
     return images or None
 
 
-def _ocr_tesseract(path: Path) -> str:
-    """OCR przez Tesseract (język polski). Brak binarki -> pusty tekst."""
+def _ocr_pdf(path: Path) -> str:
+    """OCR zeskanowanego PDF-a przez Tesseract (język polski). Brak binarki -> pusty tekst."""
     try:
         import pytesseract
     except ImportError:
@@ -263,46 +250,6 @@ def _ocr_tesseract(path: Path) -> str:
         except Exception:
             # Brak binarki Tesseract / brak języka polskiego.
             return ""
-    return "\n".join(pages)
-
-
-_easyocr_reader: Any = None
-
-
-def _get_easyocr_reader() -> Any:
-    """Leniwa inicjalizacja modelu easyocr (singleton — inicjalizacja jest wolna)."""
-    global _easyocr_reader
-    if _easyocr_reader is None:
-        try:
-            import easyocr
-        except ImportError:
-            return None
-        try:
-            _easyocr_reader = easyocr.Reader(["pl"], gpu=False, verbose=False)
-        except Exception:
-            return None
-    return _easyocr_reader
-
-
-def _ocr_easyocr(path: Path) -> str:
-    """OCR przez easyocr (pip-only, polski). Brak pakietu/modelu -> pusty tekst."""
-    reader = _get_easyocr_reader()
-    if reader is None:
-        return ""
-    try:
-        import numpy as np
-    except ImportError:
-        return ""
-    images = _render_pages(path)
-    if not images:
-        return ""
-    pages: list[str] = []
-    for img in images:
-        arr = np.asarray(img.convert("RGB"))
-        try:
-            pages.append("\n".join(reader.readtext(arr, detail=0, paragraph=True)))
-        except Exception:
-            pass
     return "\n".join(pages)
 
 

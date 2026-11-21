@@ -18,7 +18,7 @@ Projekt zbudowany w całości w oparciu o **Python 3.13+**, działa lokalnie na
   (np. odwołujący → pełnomocnik, zamawiający → prowadzący postępowanie).
 - **Zgodność ze schematem** — wynikowy JSON zgodny z oficjalnymi schematami UZP.
 - **OCR skanów** — dokumenty bez warstwy tekstowej są czytane przez Tesseract
-  (z fallbackiem na `easyocr`).
+  (język polski).
 - **Transparentność** — każde pole zwraca `{value, source_text, rule_used}`,
   więc wiadomo, skąd pochodzi wartość i jaka reguła ją wyłowiła.
 - **Rozszerzalność bez kodu** — nowe typy dokumentów i pola dodaje się wyłącznie
@@ -203,7 +203,6 @@ Zależności Pythona (patrz `requirements.txt`):
 | `PyYAML` | wczytywanie konfiguracji |
 | `PyMuPDF` + `Pillow` | renderowanie stron PDF do obrazów (OCR) |
 | `pytesseract` | OCR — Tesseract (binarka systemowa) |
-| `easyocr` | OCR — fallback w pełni pip-instalowalny |
 
 Instalacja:
 
@@ -299,19 +298,16 @@ Dokumenty **bez warstwy tekstowej** (zeskanowane) są rozpoznawane automatycznie
 1. `pypdf` próbuje wyciągnąć tekst.
 2. Jeśli tekst jest pusty/prawie pusty (< 40 znaków) — uruchamiany jest OCR.
 
-Kolejność silników OCR:
+OCR realizowany jest przez **Tesseract** (język polski):
 
-| Silnik | Instalacja | Kiedy używany |
-| --- | --- | --- |
-| **Tesseract** (polski) | binarka systemowa (Docker instaluje automatycznie; Windows — instalator) | pierwszy wybór — szybki i dokładny |
-| **easyocr** (polski) | `pip install easyocr` (w `requirements.txt`) | fallback, gdy brak binarki Tesseract |
+| Silnik | Instalacja |
+| --- | --- |
+| **Tesseract** (polski) | binarka systemowa — Docker instaluje automatycznie (`apt-get`); Windows: instalator UB Mannheim (zaznaczyć język Polish) |
 
 - **Docker**: Tesseract + polski instalowany w obrazie (`Dockerfile`) — OCR działa od razu.
-- **Lokalnie (Windows)**: jeśli nie masz binarki Tesseract, działa `easyocr`
-  (w pełni pip). Uwaga: `easyocr` przy pierwszym uruchomieniu **pobiera modele**
-  (potrzebny internet) i jest wolniejszy na CPU.
+- **Lokalnie (Windows)**: zainstaluj Tesseract (jeden raz, ~50 MB) i dodaj go do `PATH`.
 
-Degradacja jest łagodna: gdy żaden silnik OCR nie jest dostępny, skan zwraca
+Degradacja jest łagodna: gdy Tesseract nie jest dostępny, skan zwraca
 pusty tekst (bez błędu), a wynik to `{}`.
 
 ---
@@ -452,7 +448,7 @@ Nazwy folderów muszą się zgadzać, a pliki wzorcowe nazywać się
 
 | Objaw | Przyczyna / rozwiązanie |
 | --- | --- |
-| Skan daje `{}` | brak OCR. Docker: przebuduj obraz. Lokalnie: zainstaluj Tesseract (`tesseract-ocr` + `tesseract-ocr-pol`) albo upewnij się, że `easyocr` jest zainstalowany i ma internet do pobrania modeli. |
+| Skan daje `{}` | brak OCR. Docker: przebuduj obraz (instaluje Tesseract). Lokalnie: zainstaluj Tesseract (wraz z językiem polskim) i dodaj go do `PATH`. |
 | `start.bat` nie znajduje Pythona | użyj `py -3.13` albo dodaj Pythona do PATH (skrypt ma fallback `python`). |
 | Obcy plik dostaje strukturę z `null` | upewnij się, że reguły klasyfikacji w `document_rules.yaml` są precyzyjne (pliki obce → `{}`). |
 | Wynik w UI ma wrapper `{filename, …}` | pobierz przez przycisk „Pobierz .json" — zapisuje czysty JSON (same dane). |
