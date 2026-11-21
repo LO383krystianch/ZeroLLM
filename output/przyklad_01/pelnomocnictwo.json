@@ -4,7 +4,7 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9999405188",
-        "nazwa": "PEŁNOMOCNICTWO Łódź",
+        "nazwa": "Łódź",
         "nip": "9999284065",
         "typ": "osoba_prawna"
       },
@@ -13,26 +13,6 @@
           "imie_nazwisko": "Oliwia Kaczmarek"
         }
       ]
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": null,
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": ". § 3. Postępowanie Pełnomocnictwo dotyczy postępowania „Zakup i dostawa sprzętu komputerowego wraz z oprogramowaniem oraz usługą wdrożenia”",
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

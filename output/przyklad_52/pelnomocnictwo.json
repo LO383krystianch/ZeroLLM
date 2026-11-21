@@ -13,16 +13,6 @@
           "imie_nazwisko": "Maciej Jaworski"
         }
       ]
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": null,
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

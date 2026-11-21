@@ -16,26 +16,6 @@
           "imie_nazwisko": "Leszek Piotrowski"
         }
       ]
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": null,
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": null,
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

@@ -30,7 +30,7 @@ document_types:
     label: "Odwołanie do KIO"
     classification:
       - kind: regex
-        pattern: '\b(?:odwołanie|odwołuj|Krajowa\s+Izba\s+Odwoławcza)\b'
+        pattern: '\b(?:Odwołując\w*|O\s*D\s*W\s*O\s*Ł\s*A\s*N\s*I\s*E)\b'
         flags: [IGNORECASE]
     structure:
       OdwolanieKIO:
@@ -41,9 +41,9 @@ document_types:
             normalize: iso_date
             rules:
               - kind: regex
-                pattern: '\bdnia\s*(\d{1,2}\s+(?:stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|września|października|listopada|grudnia)\s+\d{4})'
+                pattern: '^\s*[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+\s*,\s*dnia\s*(\d{1,2}\s+(?:stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|września|października|listopada|grudnia)\s+\d{4})'
                 group: 1
-                flags: [IGNORECASE]
+                flags: [IGNORECASE, MULTILINE]
           czynnosc_dzien:
             type: date
             normalize: iso_date
@@ -116,9 +116,9 @@ document_types:
                   normalize: whitespace
                   flags: [MULTILINE]
                 - kind: regex
-                  pattern: '\bOdwołując\w*\s*:\s*([^\r\n]+)'
+                  pattern: '^\s*([^\r\n]+)'
                   group: 1
-                  flags: [IGNORECASE]
+                  flags: [MULTILINE]
             nip:
               type: string
               rules:
@@ -197,9 +197,9 @@ document_types:
               type: string
               rules:
                 - kind: regex
-                  pattern: '\bZamawiając\w*\s*:\s*([^\r\n]+)'
+                  pattern: '^\s*([^\r\n]+)'
                   group: 1
-                  flags: [IGNORECASE]
+                  flags: [MULTILINE]
             nip:
               type: string
               rules:
@@ -265,11 +265,12 @@ document_types:
     label: "Pełnomocnictwo"
     classification:
       - kind: regex
-        pattern: '\b(?:pełnomocnictwo|pełnomocnik|mocodawca)\b'
+        pattern: '\b(?:P\s*E\s*Ł\s*N\s*O\s*M\s*O\s*C\s*N\s*I\s*C\s*T\s*W\s*O|mocodawc\w*|pełnomocnik\w*)\b'
         flags: [IGNORECASE]
     structure:
       mocodawca:
         type: array
+        require: 'Konsorcjum'
         after: '\(Konsorcjum\)\s*:'
         until: '\(dalej\s+łącznie|reprezentowani'
         separator: '\d+\)\s*'
@@ -297,9 +298,10 @@ document_types:
                   type: string
                   rules:
                     - kind: regex
-                      pattern: '^\s*([\s\S]*?)(?=\s*,)'
+                      pattern: '^\s*(?:P\s*E\s*Ł\s*N\s*O\s*M\s*O\s*C\s*N\s*I\s*C\s*T\s*W\s*O(?:\s+PROCESOWE)?\s*\n\s*)?([\s\S]*?)(?=\s+z\s+siedzibą|\s*\(KRS|\s*,|\s+\bul\.|\s*\n\s*(?:KRS|NIP|ul\.))'
                       group: 1
                       normalize: whitespace
+                      flags: [IGNORECASE]
                 nip:
                   type: string
                   rules:

@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2019-09-11",
+    "data": null,
     "czynnosc_dzien": "2026-03-09",
     "czynnosc_powod_id": 6,
     "czynnosc_opis": "Odpowiedzi i wyjaśnienia do SWZ",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": null,
-      "nazwa": null,
+      "nazwa": "DUDEK-TECH Jarosław Dudek",
       "nip": "9994150873",
       "regon": "999603218",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9995721046",
-      "nazwa": null,
+      "nazwa": "Lubelskie Przedsiębiorstwo Wodociągów i Kanalizacji sp. z o.o.",
       "nip": "9991184529",
       "regon": "999437085",
       "prowadzacy_postepowanie": null

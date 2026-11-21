@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2019-09-11",
+    "data": null,
     "czynnosc_dzien": "2026-04-04",
     "czynnosc_powod_id": 5,
     "czynnosc_opis": "Modyfikacja treści SWZ",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9997060431",
-      "nazwa": null,
+      "nazwa": "Yldenia Sieci S.A.",
       "nip": "9997550083",
       "regon": "999670741",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9996208666",
-      "nazwa": null,
+      "nazwa": "Uldaris Usługi sp. z o.o.",
       "nip": "9991994577",
       "regon": "999602656",
       "prowadzacy_postepowanie": null

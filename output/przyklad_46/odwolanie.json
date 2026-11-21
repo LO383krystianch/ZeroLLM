@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2019-09-11",
+    "data": null,
     "czynnosc_dzien": "2026-06-12",
     "czynnosc_powod_id": 5,
     "czynnosc_opis": "Modyfikacja treści SWZ",
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": null,
-      "nazwa": null,
+      "nazwa": "Centrum Kultury i Sportu w Grabowie Nadrzecznym",
       "nip": "9998783346",
       "regon": "999193092",
       "prowadzacy_postepowanie": null

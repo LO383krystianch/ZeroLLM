@@ -4,7 +4,7 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9999145542",
-        "nazwa": "PEŁNOMOCNICTWO Kadmos Rozwiązania sp. k. z siedzibą w Łódź (KRS 9999145542",
+        "nazwa": "Kadmos Rozwiązania sp. k.",
         "nip": "9991006421",
         "typ": "osoba_prawna"
       },
@@ -13,26 +13,6 @@
           "imie_nazwisko": "Sławomir Wierzbicki"
         }
       ]
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": null,
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": null,
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

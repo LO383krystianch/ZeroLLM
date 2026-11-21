@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2019-09-11",
+    "data": null,
     "czynnosc_dzien": "2026-09-21",
     "czynnosc_powod_id": 11,
     "czynnosc_opis": "Opis przedmiotu zamówienia (OPZ)",
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9998376335",
-      "nazwa": null,
+      "nazwa": "Przedsiębiorstwo Energetyki Cieplnej w Olszance Dolnej sp. z o.o.",
       "nip": "9992187790",
       "regon": "999947717",
       "prowadzacy_postepowanie": null

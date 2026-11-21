@@ -4,7 +4,7 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9997939273",
-        "nazwa": "P E Ł N O M O C N I C T W O Wrocław",
+        "nazwa": "Wrocław",
         "nip": "9995584735",
         "typ": "osoba_prawna"
       },
@@ -16,16 +16,6 @@
           "imie_nazwisko": "Ewa Dudziewicz"
         }
       ]
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": ". § 3. Postępowanie Pełnomocnictwo dotyczy postępowania „Zakup i dostawa systemów telematycznych do obsługi zgłoszeń obywateli”",
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

@@ -4,7 +4,7 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9994097527",
-        "nazwa": "Zorina Systemy sp. z o.o. ul. Piwna 79",
+        "nazwa": "Zorina Systemy sp. z o.o.",
         "nip": "9992726100",
         "typ": "osoba_prawna"
       },
@@ -13,36 +13,6 @@
           "imie_nazwisko": "Cezary Bartoszewicz"
         }
       ]
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": null,
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": null,
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": null,
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

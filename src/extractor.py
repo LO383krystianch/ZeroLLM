@@ -386,7 +386,12 @@ class DocumentExtractor:
         source = self._resolve_source(section, base, blocks)
         item_spec = spec.get("items", {})
 
-        parts = self._split_items(source, spec)
+        # ``require``: jeśli wzorzec nie występuje, nie dziel tablicy (jeden element).
+        require = spec.get("require")
+        if require and re.search(str(require), source, _resolve_flags(spec)) is None:
+            parts = [source]
+        else:
+            parts = self._split_items(source, spec)
         if spec.get("select_parent_block") and parent_index is not None:
             parts = [parts[parent_index]] if 0 <= parent_index < len(parts) else []
 

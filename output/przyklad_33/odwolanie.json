@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2019-09-11",
+    "data": null,
     "czynnosc_dzien": "2026-01-12",
     "czynnosc_powod_id": 2,
     "czynnosc_opis": "Ogłoszenie wyboru oferty",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9998008097",
-      "nazwa": null,
+      "nazwa": "Fenrix Technologie S.A.",
       "nip": "9991582308",
       "regon": "999759441",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9994294850",
-      "nazwa": null,
+      "nazwa": "Centaur Wyposażenie S.A.",
       "nip": "9998503335",
       "regon": "999187460",
       "prowadzacy_postepowanie": null

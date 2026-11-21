@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2019-09-11",
+    "data": null,
     "czynnosc_dzien": "2026-06-28",
     "czynnosc_powod_id": 10,
     "czynnosc_opis": "Zaniechanie unieważnienia postępowania",
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9997131107",
-      "nazwa": null,
+      "nazwa": "Samodzielny Publiczny Zakład Opieki Zdrowotnej w Kamionnej",
       "nip": "9994615677",
       "regon": "999520961",
       "prowadzacy_postepowanie": null

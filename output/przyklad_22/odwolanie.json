@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2019-09-11",
+    "data": null,
     "czynnosc_dzien": "2026-01-07",
     "czynnosc_powod_id": 9,
     "czynnosc_opis": "Decyzja o unieważnieniu postępowania",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9994097527",
-      "nazwa": null,
+      "nazwa": "Zorina Systemy sp. z o.o.",
       "nip": "9992726100",
       "regon": "999205547",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9995571982",
-      "nazwa": null,
+      "nazwa": "Quantis Serwis sp. j.",
       "nip": "9990877668",
       "regon": "999132305",
       "prowadzacy_postepowanie": null

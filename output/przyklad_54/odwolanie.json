@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2019-09-11",
+    "data": null,
     "czynnosc_dzien": "2026-05-06",
     "czynnosc_powod_id": 4,
     "czynnosc_opis": "Publikacja specyfikacji warunków zamówienia (SWZ)",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9999448354",
-      "nazwa": null,
+      "nazwa": "Calvero Gospodarka Odpadami sp.k.",
       "nip": "9995986745",
       "regon": "999796504",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9997393941",
-      "nazwa": null,
+      "nazwa": "Zakład Gospodarki Komunalnej w Lasowicach Wielkich sp. z o.o.",
       "nip": "9997925835",
       "regon": "999966377",
       "prowadzacy_postepowanie": null

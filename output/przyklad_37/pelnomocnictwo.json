@@ -4,7 +4,7 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9994481774",
-        "nazwa": "PEŁNOMOCNICTWO Lublin",
+        "nazwa": "Lublin",
         "nip": "9998805059",
         "typ": "osoba_prawna"
       },
@@ -16,46 +16,6 @@
           "imie_nazwisko": "Ignacy Cieślak"
         }
       ]
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": ". § 3. Postępowanie Pełnomocnictwo dotyczy postępowania „Dostawa licencji oprogramowania do monitorowania infrastruktury i alarmowej”",
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": "wniesienia środków ochrony prawnej oraz składania skarg na orzeczenia Krajowej Izby Odwoławczej",
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": "składania oświadczeń o przystąpieniu do postępowań toczonych się w wyniku wniesienia środków ochrony prawnej",
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": "odbioru dokumentów i korespondencji kierowanej do Wykonawcy w postępowaniu. § 5. Czas obowiązywania Pełnomocnictwo obowiązuje do zakończenia postępowania odwoławczego",
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

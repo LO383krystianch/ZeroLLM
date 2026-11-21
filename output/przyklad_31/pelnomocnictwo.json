@@ -4,7 +4,7 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9997648224",
-        "nazwa": "Pełnomocnictwo Kraków",
+        "nazwa": "Kraków",
         "nip": "9996669445",
         "typ": "osoba_prawna"
       },
@@ -13,26 +13,6 @@
           "imie_nazwisko": "Patrycja Bartoszewicz"
         }
       ]
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": null,
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": ". § 3. Postępowanie Pełnomocnictwo dotyczy postępowania „Świadczenie usług pocztowych i kurierskich na potrzeby urzędu”",
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

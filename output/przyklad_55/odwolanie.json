@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2019-09-11",
+    "data": null,
     "czynnosc_dzien": "2026-05-06",
     "czynnosc_powod_id": 6,
     "czynnosc_opis": "Odpowiedzi i wyjaśnienia do SWZ",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9996527940",
-      "nazwa": null,
+      "nazwa": "Holdex Dystrybucja Medyczna sp. z o.o.",
       "nip": "9998884068",
       "regon": "999881092",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9994890373",
-      "nazwa": null,
+      "nazwa": "Szpital Specjalistyczny im. Jana Pawła II w Brzozówce",
       "nip": "9994537600",
       "regon": "999255628",
       "prowadzacy_postepowanie": null

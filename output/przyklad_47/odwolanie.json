@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2019-09-11",
+    "data": null,
     "czynnosc_dzien": "2026-08-23",
     "czynnosc_powod_id": 8,
     "czynnosc_opis": "Zaniechanie wykluczenia wykonawcy",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": null,
-      "nazwa": null,
+      "nazwa": "RAVELO-BUD Sebastian Tomaszewski",
       "nip": "9997975723",
       "regon": "999544334",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9998553316",
-      "nazwa": null,
+      "nazwa": "Miejskie Przedsiębiorstwo Komunikacyjne w Pogorzeli Wielkiej sp. z o.o.",
       "nip": "9994443606",
       "regon": "999257689",
       "prowadzacy_postepowanie": null

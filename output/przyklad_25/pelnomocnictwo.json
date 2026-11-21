@@ -4,7 +4,7 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9991240860",
-        "nazwa": "Pełnomocnictwo Warszawa",
+        "nazwa": "Warszawa",
         "nip": "9992160970",
         "typ": "osoba_prawna"
       },
@@ -16,26 +16,6 @@
           "imie_nazwisko": "Oliwia Jabłończyk"
         }
       ]
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": null,
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": ". § 3. Postępowanie Pełnomocnictwo dotyczy postępowania „Dostawa materiałów eksploatacyjnych do urządzeń biurowych”",
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

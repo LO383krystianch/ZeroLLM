@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2019-09-11",
+    "data": null,
     "czynnosc_dzien": "2026-08-04",
     "czynnosc_powod_id": 1,
     "czynnosc_opis": "Decyzja o odrzuceniu oferty",
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": null,
-      "nazwa": null,
+      "nazwa": "Gmina Brzozowo Pomorskie",
       "nip": "9995062817",
       "regon": "999871350",
       "prowadzacy_postepowanie": null

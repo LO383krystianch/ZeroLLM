@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2019-09-11",
+    "data": null,
     "czynnosc_dzien": "2026-02-20",
     "czynnosc_powod_id": 9,
     "czynnosc_opis": "Decyzja o unieważnieniu postępowania",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9994481774",
-      "nazwa": null,
+      "nazwa": "Belmoria Technologie sp. j.",
       "nip": "9998805059",
       "regon": "999647305",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9995815812",
-      "nazwa": null,
+      "nazwa": "Corvantis Serwis sp. k.",
       "nip": "9998984352",
       "regon": "999756827",
       "prowadzacy_postepowanie": null

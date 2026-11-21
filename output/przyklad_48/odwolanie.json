@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2019-09-11",
+    "data": null,
     "czynnosc_dzien": "2026-08-02",
     "czynnosc_powod_id": 9,
     "czynnosc_opis": "Decyzja o unieważnieniu postępowania",
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9999408455",
-      "nazwa": null,
+      "nazwa": "Szpital Specjalistyczny im. dr. Władysława Biegańskiego w Dąbrowie Leśnej",
       "nip": "9994579741",
       "regon": "999479491",
       "prowadzacy_postepowanie": null

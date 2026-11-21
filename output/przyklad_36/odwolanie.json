@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2019-09-11",
+    "data": null,
     "czynnosc_dzien": "2026-01-23",
     "czynnosc_powod_id": 11,
     "czynnosc_opis": "Opis przedmiotu zamówienia (OPZ)",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9995831483",
-      "nazwa": null,
+      "nazwa": "Rubiconis Technologie S.A.",
       "nip": "9998174794",
       "regon": "999481460",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9991219631",
-      "nazwa": null,
+      "nazwa": "Rubiconis Technologie sp. z o.o.",
       "nip": "9997495013",
       "regon": "999604307",
       "prowadzacy_postepowanie": null

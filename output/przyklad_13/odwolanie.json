@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2019-09-11",
+    "data": null,
     "czynnosc_dzien": "2025-12-21",
     "czynnosc_powod_id": 1,
     "czynnosc_opis": "Decyzja o odrzuceniu oferty",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9990929624",
-      "nazwa": null,
+      "nazwa": "Deltawing Usługi sp. j.",
       "nip": "9994888947",
       "regon": "999788508",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9999087092",
-      "nazwa": null,
+      "nazwa": "Wexoria Serwis sp. z o.o.",
       "nip": "9990199346",
       "regon": "999007965",
       "prowadzacy_postepowanie": null

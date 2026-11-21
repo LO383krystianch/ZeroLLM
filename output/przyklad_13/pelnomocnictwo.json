@@ -4,7 +4,7 @@
       "data": {
         "imie_nazwisko": null,
         "krs": "9990929624",
-        "nazwa": "P E Ł N O M O C N I C T W O Warszawa",
+        "nazwa": "Warszawa",
         "nip": "9994888947",
         "typ": "osoba_prawna"
       },
@@ -16,56 +16,6 @@
           "imie_nazwisko": "Jolanta Kaczmarek"
         }
       ]
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": null,
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": ". § 3. Postępowanie Pełnomocnictwo dotyczy postępowania „Modernizacja instalacji wentylacyjnej w obiekcie użyteczności publicznej”",
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": null,
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": "udzielania dalszych pełnomocnictw radcom prawnym i adwokatom",
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
-    },
-    {
-      "data": {
-        "imie_nazwisko": null,
-        "krs": null,
-        "nazwa": "odbioru dokumentów i korespondencji kierowanej do Wykonawcy w postępowaniu. § 5. Czas obowiązywania Pełnomocnictwo obowiązuje do zakończenia postępowania odwoławczego",
-        "nip": null,
-        "typ": null
-      },
-      "podpisujacy": []
     }
   ],
   "pelnomocnicy": [

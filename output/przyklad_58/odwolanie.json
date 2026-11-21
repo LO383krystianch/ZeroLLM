@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2019-09-11",
+    "data": null,
     "czynnosc_dzien": "2026-10-06",
     "czynnosc_powod_id": 10,
     "czynnosc_opis": "Zaniechanie unieważnienia postępowania",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9995522683",
-      "nazwa": null,
+      "nazwa": "Imperon Serwis sp. z o.o.",
       "nip": "9993124780",
       "regon": "999513156",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": null,
-      "nazwa": null,
+      "nazwa": "Państwowa Akademia Nauk Stosowanych w Krzemienicy",
       "nip": "9996334986",
       "regon": "999412535",
       "prowadzacy_postepowanie": null

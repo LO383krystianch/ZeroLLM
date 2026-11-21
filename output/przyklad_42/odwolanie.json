@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2019-09-11",
+    "data": null,
     "czynnosc_dzien": "2026-06-23",
     "czynnosc_powod_id": 4,
     "czynnosc_opis": "Publikacja specyfikacji warunków zamówienia (SWZ)",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9993307745",
-      "nazwa": null,
+      "nazwa": "Nordelia Facility Services S.A.",
       "nip": "9995519382",
       "regon": "999284670",
       "przez-pelnomocnika": 1,
@@ -20,7 +20,15 @@
       }
     }
   ],
-  "Zamawiajacy": [],
+  "Zamawiajacy": [
+    {
+      "krs": null,
+      "nazwa": "Kraków, 02.07.2026",
+      "nip": null,
+      "regon": null,
+      "prowadzacy_postepowanie": null
+    }
+  ],
   "ZamowieniePubliczne": {
     "numer_bzp": null,
     "numer_postepowania": "MCLM/ZP/07/2026",

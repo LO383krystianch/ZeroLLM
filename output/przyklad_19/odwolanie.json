@@ -1,6 +1,6 @@
 {
   "OdwolanieKIO": {
-    "data": "2019-09-11",
+    "data": null,
     "czynnosc_dzien": "2026-04-25",
     "czynnosc_powod_id": 6,
     "czynnosc_opis": "Odpowiedzi i wyjaśnienia do SWZ",
@@ -9,7 +9,7 @@
   "Odwolujacy": [
     {
       "krs": "9997939273",
-      "nazwa": null,
+      "nazwa": "Corvantis Sieci sp. z o.o.",
       "nip": "9995584735",
       "regon": "999992367",
       "przez-pelnomocnika": 1,
@@ -23,7 +23,7 @@
   "Zamawiajacy": [
     {
       "krs": "9991132786",
-      "nazwa": null,
+      "nazwa": "Danevia Automatyka sp. j.",
       "nip": "9990166660",
       "regon": "999032816",
       "prowadzacy_postepowanie": null
