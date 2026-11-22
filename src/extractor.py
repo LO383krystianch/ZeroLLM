@@ -2,14 +2,6 @@
 
 Wczytuje reguły z ``config/document_rules.yaml`` i dynamicznie parsuje tekst
 (wyekstrahowany np. z PDF przez pypdf) do zagnieżdżonych struktur JSON.
-
-Zasady (AGENTS.md):
-- **Zero hardcodowania** — typy dokumentów, pola, sekcje i reguły pochodzą wyłącznie z YAML.
-- **Registry** — handler dla danego ``kind`` reguły rejestruje się dekoratorem
-  ``register``; dodanie nowego ``kind`` nie wymaga zmian w reszcie kodu.
-- **Segmentacja kontekstowa** — tekst jest najpierw dzielony na bloki (``sections``),
-  a reguły pola są aplikowane wyłącznie do wskazanego bloku (``section``).
-- **Transparentność** — każde pole zwraca obiekt ``{value, source_text, rule_used}``.
 """
 
 from __future__ import annotations
