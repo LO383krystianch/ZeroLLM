@@ -3,14 +3,11 @@
 Przetwarza wszystkie pliki `*.pdf` z katalogu `input/` (rekurencyjnie, także
 z podfolderów) i zapisuje wyniki JSON do katalogu `output/`.
 
-Komenda uruchamiana z katalogu `/opt/solution`:
+Komenda (jednorazowa, kończy się sama, bez interakcji):
 
 ```
-cd /opt/solution && .venv/bin/python src/main.py --input input --output output
+/opt/solution/.venv/bin/python /opt/solution/src/main.py --input /opt/solution/input --output /opt/solution/output
 ```
-
-Komenda jest jednorazowa (batch) — kończy się sama po przetworzeniu wszystkich
-plików, nie wymaga interakcji.
 
 Wymagania (zainstalowane wcześniej na serwerze):
 
